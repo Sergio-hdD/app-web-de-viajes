@@ -6,11 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.system.Sistemadeviajes.entities.Empleado;
 import com.system.Sistemadeviajes.helpers.ViewRouteHelpers;
+import com.system.Sistemadeviajes.models.EmpleadoModel;
 import com.system.Sistemadeviajes.services.IEmpleadoService;
 
 @Controller
@@ -26,6 +30,7 @@ public class EmpleadoController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.EMPLOYEE_INDEX);
 		mAV.addObject("empleados", empleadoService.getAll());
 		
+		
 		return mAV;
 	}
 	
@@ -35,5 +40,26 @@ public class EmpleadoController {
 		
 		return new RedirectView(ViewRouteHelpers.EMPLOYEE_ROOT);
 	}
+	
+	@PostMapping("/add")
+	public RedirectView create(EmpleadoModel empleadoModel) {
+		empleadoService.insertOrUpdate(empleadoModel);
+		
+		return new RedirectView(ViewRouteHelpers.EMPLOYEE_ROOT);
+	}
+	
+	@PostMapping("/update")
+	public RedirectView update(EmpleadoModel empleadoModel) {
+		empleadoService.insertOrUpdate(empleadoModel);
+		
+		return new RedirectView(ViewRouteHelpers.EMPLOYEE_ROOT);
+	}
+	
+	@GetMapping("/{id}")
+	@ResponseBody
+	public Empleado get(@PathVariable("id") @RequestBody long idPersona) {
+		return empleadoService.findByIdPersona(idPersona);
+	}
+	
 
 }

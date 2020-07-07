@@ -9,5 +9,7 @@ import com.system.Sistemadeviajes.entities.Empleado;
 
 @Repository("empleadoRepository")
 public interface IEmpleadoRepository extends JpaRepository<Empleado, Serializable>{
+	
+	public abstract Empleado findByIdPersona(long idPersona);
 
 }

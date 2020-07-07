@@ -7,8 +7,6 @@ import com.system.Sistemadeviajes.entities.Cliente;
 import com.system.Sistemadeviajes.models.ClienteModel;
 
 
-
-
 @Component("clienteConverter")
 public class ClienteConverter {
 	
