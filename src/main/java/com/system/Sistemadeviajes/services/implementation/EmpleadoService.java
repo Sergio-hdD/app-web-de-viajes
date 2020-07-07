@@ -23,4 +23,10 @@ public class EmpleadoService implements IEmpleadoService{
 		return empleadoRepository.findAll();
 	}
 
+	@Override
+	public void remove(long idPersona) {
+		// TODO Auto-generated method stub
+		empleadoRepository.deleteById(idPersona);
+	}
+
 }

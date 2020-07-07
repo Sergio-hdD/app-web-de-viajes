@@ -3,7 +3,8 @@ package com.system.Sistemadeviajes.helpers;
 public class ViewRouteHelpers {
 	//redirects	
 	public final static String ROUTE_INDEX = "/index";
-	public final static String CLIENT_ROOT = "/clientes";	
+	public final static String CLIENT_ROOT = "/clientes";
+	public final static String EMPLOYEE_ROOT = "/empleados";
 
 	//Cliente
 	public final static String CLIENT_UPDATE = "cliente/update";

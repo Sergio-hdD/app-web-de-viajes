@@ -3,8 +3,12 @@ package com.system.Sistemadeviajes.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.system.Sistemadeviajes.helpers.ViewRouteHelpers;
 import com.system.Sistemadeviajes.services.IEmpleadoService;
@@ -17,10 +21,19 @@ public class EmpleadoController {
 	@Qualifier("empleadoService")
 	private IEmpleadoService empleadoService;
 	
+	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.EMPLOYEE_INDEX);
+		mAV.addObject("empleados", empleadoService.getAll());
 		
 		return mAV;
+	}
+	
+	@PostMapping("/delete/{id}")
+	public RedirectView delete(@PathVariable ("id") long idPersona) {
+		empleadoService.remove(idPersona);
+		
+		return new RedirectView(ViewRouteHelpers.EMPLOYEE_ROOT);
 	}
 
 }

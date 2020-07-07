@@ -23,7 +23,7 @@ public class Empleado extends Persona{
 		super();
 	}
 
-	public Empleado(int idPersona, String direccion, String telCel, String nombre, String apellido,
+	public Empleado(long idPersona, String direccion, String telCel, String nombre, String apellido,
 			String tipoDocumento, long nroDocumento) {
 		super(idPersona, direccion, telCel);
 		this.nombre = nombre;

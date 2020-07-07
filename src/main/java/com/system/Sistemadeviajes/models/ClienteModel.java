@@ -10,7 +10,7 @@ public class ClienteModel extends PersonaModel{
 
     
     
-	public ClienteModel(int idPersona, String direccion, String telCel, String cuit, String razonSocial) {
+	public ClienteModel(long idPersona, String direccion, String telCel, String cuit, String razonSocial) {
 		super(idPersona, direccion, telCel);
 		this.cuit = cuit;
 		this.razonSocial = razonSocial;

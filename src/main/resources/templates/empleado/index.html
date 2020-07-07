@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <title>Document</title>
+</head>
+
+<body>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Tipo Documento</th>
+                <th scope="col">Nro Documento</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr th:each="e : ${empleados}">
+                <th scope="row" th:text="${e.idPersona}"></th>
+                <td th:text="${e.nombre}" ></td>
+                <td th:text="${e.apellido}"></td>
+                <td th:text="${e.tipoDocumento}"></td>
+                <td th:text="${e.nroDocumento}"></td>
+                <td > <form th:action="@{/empleados/delete/{id}(id=${e.idPersona})}" method="post" ><input class="btn btn-primary" type="submit" value="Eliminar" ></form></td>
+                
+            </tr>
+            
+        </tbody>
+    </table>
+
+</body>
+
+</html>

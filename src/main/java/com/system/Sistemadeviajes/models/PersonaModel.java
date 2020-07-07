@@ -2,20 +2,20 @@ package com.system.Sistemadeviajes.models;
 
 public abstract class PersonaModel {
 	
-protected int idPersona;
+protected long idPersona;
 protected String direccion;
 protected String telCel;
 
 public PersonaModel() {}
 
-public PersonaModel(int idPersona, String direccion, String telCel) {
+public PersonaModel(long idPersona, String direccion, String telCel) {
 	super();
 	this.idPersona = idPersona;
 	this.direccion = direccion;
 	this.telCel = telCel;
 }
 
-public int getIdPersona() {
+public long getIdPersona() {
 	return idPersona;
 }
 
