@@ -9,5 +9,11 @@ public class ViewRouteHelpers {
 	public final static String CLIENT_UPDATE = "cliente/update";
 	public final static String CLIENT_ADD = "cliente/new";
 	public final static String CLIENT_INDEX = "cliente/index";
+	
+	//Empleado
+	public final static String EMPLOYEE_UPDATE = "empleado/update";
+	public final static String EMPLOYEE_ADD = "empleado/new";
+	public final static String EMPLOYEE_INDEX = "empleado/index";
+	
 
 }//Fin class
