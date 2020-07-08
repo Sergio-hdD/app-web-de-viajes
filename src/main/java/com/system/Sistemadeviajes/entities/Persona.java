@@ -14,19 +14,19 @@ public class Persona {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected int idPersona;
+	protected long idPersona;
 	
 	@Column(name = "direccion")
 	protected String direccion;
 	
-	@Column(name = "apellido")
+	@Column(name = "telCel")
 	protected String telCel;
 	
 	
 	Persona(){}
 
 
-	public Persona(int idPersona, String direccion, String telCel) {
+	public Persona(long idPersona, String direccion, String telCel) {
 		super();
 		this.idPersona = idPersona;
 		this.direccion = direccion;
@@ -34,7 +34,7 @@ public class Persona {
 	}
 
 
-	public int getIdPersona() {
+	public long getIdPersona() {
 		return idPersona;
 	}
 

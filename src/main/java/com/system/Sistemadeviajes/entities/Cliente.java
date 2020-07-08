@@ -17,7 +17,7 @@ public class Cliente extends Persona{
 	public Cliente() {}
 
 
-	public Cliente(int idPersona, String direccion, String telCel, String cuit, String razonSocial) {
+	public Cliente(long idPersona, String direccion, String telCel, String cuit, String razonSocial) {
 		super(idPersona, direccion, telCel);
 		this.cuit = cuit;
 		this.razonSocial = razonSocial;
