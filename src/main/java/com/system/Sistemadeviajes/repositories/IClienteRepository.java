@@ -9,6 +9,6 @@ import com.system.Sistemadeviajes.entities.Cliente;
 
 @Repository("clienteRepository")
 public interface IClienteRepository extends JpaRepository<Cliente, Serializable>{
-	public abstract Cliente findByIdPersona(int id);
+	public abstract Cliente findByIdPersona(long id);
 
 }//Fin class

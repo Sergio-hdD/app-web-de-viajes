@@ -34,12 +34,12 @@ public class ClienteService implements IClienteService{
 	}
 	
 	@Override
-	public ClienteModel findByIdPersona(int id) {
-		return clienteConverter.entityToModel(clienteRepository.findByIdPersona(id));
+	public Cliente findByIdPersona(long id) {
+		return clienteRepository.findByIdPersona(id);
 	}
  
 	@Override
-	public boolean remove(int id) {
+	public boolean remove(long id) {
 		try {
 			clienteRepository.deleteById(id);
 			return true;

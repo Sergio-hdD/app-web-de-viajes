@@ -39,7 +39,7 @@ public class Persona {
 	}
 
 
-	public void setIdPersona(int idPersona) {
+	public void setIdPersona(long idPersona) {
 		this.idPersona = idPersona;
 	}
 
@@ -69,4 +69,4 @@ public class Persona {
 		return "Persona [idPersona=" + idPersona + ", direccion=" + direccion + ", telCel=" + telCel + "]";
 	}
 
-}
+}//fin class

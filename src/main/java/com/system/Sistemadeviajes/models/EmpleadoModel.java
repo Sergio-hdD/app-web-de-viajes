@@ -1,5 +1,10 @@
 package com.system.Sistemadeviajes.models;
 
+import java.util.Set;
+
+import org.springframework.lang.Nullable;
+
+import com.system.Sistemadeviajes.entities.Viaje;
 
 public class EmpleadoModel extends PersonaModel{
 	
@@ -11,6 +16,8 @@ public class EmpleadoModel extends PersonaModel{
 	
 	private long nroDocumento;
 	
+    @Nullable
+    private Set<Viaje> viajes;
 	
 	public EmpleadoModel() {
 		super();
@@ -56,6 +63,14 @@ public class EmpleadoModel extends PersonaModel{
 
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
+	}
+	
+	public Set<Viaje> getViajes() {
+		return viajes;
+	}
+
+	public void setViajes(Set<Viaje> viajes) {
+		this.viajes = viajes;
 	}
 
 	@Override

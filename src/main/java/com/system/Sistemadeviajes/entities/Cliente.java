@@ -2,10 +2,9 @@ package com.system.Sistemadeviajes.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="cliente")//esto ahora si va, para que en la BD haga una tabla aparte de la de persona
+//@Table(name="cliente")//esto no hace falta si la tabla va a llevar el mismo nombre que la clase
 public class Cliente extends Persona{
 
 	@Column(name = "cuit")

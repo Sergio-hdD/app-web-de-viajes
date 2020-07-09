@@ -9,7 +9,7 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 
-    <title>Document</title>
+    <title>Cliente</title>
 </head>
 
 <body>
@@ -20,41 +20,29 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Tipo Documento</th>
-                    <th scope="col">Nro Documento</th>
+                    <th scope="col">Razon social</th>
+                    <th scope="col">Cuit</th>
                     <th scope="col">Direccion</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
 
-                <tr th:each="e : ${empleados}">
-                    <th scope="row" th:text="${e.idPersona}"></th>
-                    <td th:text="${e.nombre}"></td>
-                    <td th:text="${e.apellido}"></td>
-                    <td th:text="${e.tipoDocumento}"></td>
-                    <td th:text="${e.nroDocumento}"></td>
-                    <td th:text="${e.direccion}"></td>
-                    <td th:text="${e.telCel}"></td>
+                <tr th:each="c : ${clientes}">
+                    <th scope="row" th:text="${c.idPersona}"></th>
+                    <td th:text="${c.razonSocial}"></td>
+                    <td th:text="${c.cuit}"></td>
+                    <td th:text="${c.direccion}"></td>
+                    <td th:text="${c.telCel}"></td>
                     <td>
                         <div class="form-inline">
 
-                            <!--
-
-                            <form action="#" th:action="@{/empleados/{id}(id=${e.idPersona})}" method="get"
-                                style="padding-right: 5px;"><input class="btn btn-warning" type="submit" value="Editar">
-                            </form>
-
-                            -->
-
-                            <a class="btn btn-warning btn-edit" href="#" th:href="@{/empleados/{id}(id=${e.idPersona})}" style="margin-right: 5px">Editar</a>
+                            <a class="btn btn-warning btn-edit" href="#" th:href="@{/clientes/{id}(id=${c.idPersona})}" style="margin-right: 5px">Editar</a>
 
 
-                            <form action="#" th:action="@{/empleados/delete/{id}(id=${e.idPersona})}" method="post">
-                               <input class="btn btn-danger" type="submit" value="Eliminar"></form>
+                            <form action="#" th:action="@{/clientes/delete/{id}(id=${c.idPersona})}" method="post">
+                                <input class="btn btn-danger" type="submit" value="Eliminar"></form>
+
 
                         </div>
                     </td>
@@ -65,13 +53,13 @@
         </table>
 
         <div class="form-add">
-            <form action="#" method="post" th:action="@{empleados/add}" novalidate class="formulario">
+            <form action="#" method="post" th:action="@{clientes/create}" novalidate class="formulario">
                 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add"
                     role="dialog" tabindex="-1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Agregar Empleado
+                                <h5 class="modal-title" id="exampleModalLabel">Agregar cliente
                                 </h5>
                                 <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                     <span aria-hidden="true">&times;</span>
@@ -80,35 +68,15 @@
                             <div class="modal-body">
 
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre"
-                                        placeholder="Ingrese nombre">
+                                    <label for="formGroupExampleInput">Razon social</label>
+                                    <input type="text" class="form-control" id="razonSocial" name="razonSocial"
+                                        placeholder="Ingrese la razon social">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput2">Apellido</label>
-                                    <input type="text" class="form-control" id="apellido" name="apellido"
-                                        placeholder="Ingrese apellido">
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label class="col-form-label" for="name">Tipo Documento</label>
-
-
-                                    <select class="form-control " name="tipoDocumento" id="tipoDocumento" required>
-                                        <option value="DNI">DNI</option>
-                                        <option value="CI">CI</option>
-                                        <option value="LE">LE</option>
-                                        <option value="LC">LC</option>
-                                    </select>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput2">DNI</label>
-                                    <input type="number" class="form-control" id="nroDocumento" name="nroDocumento"
-                                        placeholder="Ingrese numero de documento">
+                                    <label for="formGroupExampleInput2">Cuit</label>
+                                    <input type="text" class="form-control" id="Cuit" name="Cuit"
+                                        placeholder="Ingrese el nro de cuit">
                                 </div>
 
                                 <div class="form-group">
@@ -139,13 +107,13 @@
         </div>
 
         <div class="form-update">
-            <form action="#" method="post" th:action="@{empleados/update}" novalidate class="formulario">
+            <form action="#" method="post" th:action="@{clientes/update}" novalidate class="formulario">
                 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
                     role="dialog" tabindex="-1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Editar Empleado
+                                <h5 class="modal-title" id="exampleModalLabel">Editar Cliente
                                 </h5>
                                 <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                     <span aria-hidden="true">&times;</span>
@@ -157,34 +125,14 @@
 
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre"
-                                        placeholder="Ingrese nombre">
+                                    <input type="text" class="form-control" id="razonSocial" name="razonSocial"
+                                        placeholder="Ingrese la razon social">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput2">Apellido</label>
-                                    <input type="text" class="form-control" id="apellido" name="apellido"
-                                        placeholder="Ingrese apellido">
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label class="col-form-label" for="name">Tipo Documento</label>
-
-
-                                    <select class="form-control " name="tipoDocumento" id="tipoDocumento" required>
-                                        <option value="DNI">DNI</option>
-                                        <option value="CI">CI</option>
-                                        <option value="LE">LE</option>
-                                        <option value="LC">LC</option>
-                                    </select>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput2">DNI</label>
-                                    <input type="number" class="form-control" id="nroDocumento" name="nroDocumento"
-                                        placeholder="Ingrese numero de documento">
+                                    <label for="formGroupExampleInput2">Cuit</label>
+                                    <input type="text" class="form-control" id="Cuit" name="Cuit"
+                                        placeholder="Ingrese el nro de cuit">
                                 </div>
 
                                 <div class="form-group">
@@ -217,7 +165,7 @@
 
 
         <a href="#" class="btn btn-success btn-icon-split btn-add">
-            <span class="text ">Agregar Empleado</span>
+            <span class="text ">Agregar Cliente</span>
         </a>
 
     </div>
@@ -248,11 +196,9 @@
                
                 $.get(href, function (empleado, status) {
                     $('.form-update #idPersona').val(empleado.idPersona);
-                    $('.form-update #nombre').val(empleado.nombre);
-                    $('.form-update #apellido').val(empleado.apellido);
+                    $('.form-update #razonSocial').val(empleado.nombre);
+                    $('.form-update #Cuit').val(empleado.apellido);
                     $('.form-update #telCel').val(empleado.telCel);
-                    $('.form-update #tipoDocumento').val(empleado.tipoDocumento);
-                    $('.form-update #nroDocumento').val(empleado.nroDocumento);
                     $('.form-update #direccion').val(empleado.direccion);
 
                 });

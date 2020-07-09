@@ -1,7 +1,15 @@
 package com.system.Sistemadeviajes.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
+import org.springframework.lang.Nullable;
+
 
 @Entity
 public class Empleado extends Persona{
@@ -18,6 +26,10 @@ public class Empleado extends Persona{
 	@Column(name="nroDocumento")
 	private long nroDocumento;
 	
+	
+	@Nullable
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="viaje")
+	private Set<Viaje> viajes=new HashSet<Viaje>();
 	
 	public Empleado() {
 		super();
@@ -63,6 +75,14 @@ public class Empleado extends Persona{
 
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
+	}
+
+	public Set<Viaje> getViajes() {
+		return viajes;
+	}
+
+	public void setViajes(Set<Viaje> viajes) {
+		this.viajes = viajes;
 	}
 
 	@Override
