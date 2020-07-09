@@ -19,7 +19,7 @@ public long getIdPersona() {
 	return idPersona;
 }
 
-public void setIdPersona(int idPersona) {
+public void setIdPersona(long idPersona) {
 	this.idPersona = idPersona;
 }
 

@@ -5,11 +5,13 @@ public class ViewRouteHelpers {
 	public final static String ROUTE_INDEX = "/index";
 	public final static String CLIENT_ROOT = "/clientes";
 	public final static String EMPLOYEE_ROOT = "/empleados";
+	public final static String TRAVEL_ROOT = "/viajes";
 
 	//Cliente
-	public final static String CLIENT_UPDATE = "cliente/update";
-	public final static String CLIENT_ADD = "cliente/new";
 	public final static String CLIENT_INDEX = "cliente/index";
+	
+	//Viajes
+	public final static String TRAVEL_INDEX = "viaje/index";
 	
 	//Empleado
 	public final static String EMPLOYEE_UPDATE = "empleado/update";

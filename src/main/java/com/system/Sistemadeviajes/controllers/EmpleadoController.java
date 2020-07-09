@@ -29,8 +29,7 @@ public class EmpleadoController {
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.EMPLOYEE_INDEX);
 		mAV.addObject("empleados", empleadoService.getAll());
-		
-		
+
 		return mAV;
 	}
 	
