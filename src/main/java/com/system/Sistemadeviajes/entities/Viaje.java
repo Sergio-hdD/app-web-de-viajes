@@ -17,7 +17,6 @@ import org.springframework.lang.Nullable;
 @Entity
 public class Viaje {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idViaje;

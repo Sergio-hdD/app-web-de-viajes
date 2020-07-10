@@ -45,8 +45,14 @@ public class ViajeService implements IViajeService{
 
 	@Override
 	public boolean remove(long idViaje) {
-
-		return false;
+		try {
+			viajeRepository.deleteById(idViaje);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+			
 	}
 	
 
