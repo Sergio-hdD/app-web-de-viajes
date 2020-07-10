@@ -44,9 +44,9 @@ public class EmpleadoService implements IEmpleadoService{
 	}
 
 	@Override
-	public Empleado findByIdPersona(long idPersona) {
+	public EmpleadoModel findByIdPersona(long idPersona) {
 		// TODO Auto-generated method stub
-		return empleadoRepository.findByIdPersona(idPersona);
+		return empleadoConverter.entityToModel(empleadoRepository.findByIdPersona(idPersona)) ;
 	}
 
 }

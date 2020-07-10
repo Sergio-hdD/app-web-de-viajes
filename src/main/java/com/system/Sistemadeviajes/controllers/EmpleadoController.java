@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.system.Sistemadeviajes.entities.Empleado;
 import com.system.Sistemadeviajes.helpers.ViewRouteHelpers;
 import com.system.Sistemadeviajes.models.EmpleadoModel;
 import com.system.Sistemadeviajes.services.IEmpleadoService;
@@ -56,7 +55,7 @@ public class EmpleadoController {
 	
 	@GetMapping("/{id}")
 	@ResponseBody
-	public Empleado get(@PathVariable("id") @RequestBody long idPersona) {
+	public EmpleadoModel get(@PathVariable("id") @RequestBody long idPersona) {
 		return empleadoService.findByIdPersona(idPersona);
 	}
 	

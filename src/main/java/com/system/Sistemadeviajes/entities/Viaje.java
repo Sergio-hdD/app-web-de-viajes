@@ -11,12 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.lang.Nullable;
 
 
 @Entity
 public class Viaje {
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,17 +39,15 @@ public class Viaje {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Cliente cliente;
     
-	@Nullable
 	@Column(name = "detalle")
 	private String detalle;
-	
 	
 	
 	public Viaje() { }
 
 
 	public Viaje(long idViaje, Date fecha, String direccion, String localidad, double importe, Empleado empleado,
-			Cliente cliente) {
+			Cliente cliente,String detalle) {
 		super();
 		this.idViaje = idViaje;
 		this.fecha = fecha;
@@ -60,6 +56,7 @@ public class Viaje {
 		this.importe = importe;
 		this.empleado = empleado;
 		this.cliente = cliente;
+		this.detalle = detalle;
 	}
 
 

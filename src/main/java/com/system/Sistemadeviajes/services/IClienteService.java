@@ -10,7 +10,7 @@ public interface IClienteService {
 
 	public ClienteModel insertOrUpdate(ClienteModel clienteModel);
 
-	public Cliente findByIdPersona(long id);
+	public ClienteModel findByIdPersona(long id);
 
 	public boolean remove(long id);
 

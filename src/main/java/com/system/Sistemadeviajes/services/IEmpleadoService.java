@@ -13,7 +13,7 @@ public interface IEmpleadoService {
 	
 	public EmpleadoModel insertOrUpdate(EmpleadoModel empleadoModel);
 	
-	public Empleado findByIdPersona(long idPersona);
+	public EmpleadoModel findByIdPersona(long idPersona);
 
 	
 

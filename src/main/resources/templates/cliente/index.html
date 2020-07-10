@@ -24,6 +24,7 @@
                     <th scope="col">Cuit</th>
                     <th scope="col">Direccion</th>
                     <th scope="col">Telefono</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -124,14 +125,14 @@
                             	<input type="hidden" name="idPersona" id="idPersona">
 
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Nombre</label>
+                                    <label for="formGroupExampleInput">Razon Social</label>
                                     <input type="text" class="form-control" id="razonSocial" name="razonSocial"
                                         placeholder="Ingrese la razon social">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="formGroupExampleInput2">Cuit</label>
-                                    <input type="text" class="form-control" id="Cuit" name="Cuit"
+                                    <input type="text" class="form-control" id="cuit" name="cuit"
                                         placeholder="Ingrese el nro de cuit">
                                 </div>
 
@@ -194,12 +195,12 @@
                 var href = $(this).attr('href');
                 
                
-                $.get(href, function (empleado, status) {
-                    $('.form-update #idPersona').val(empleado.idPersona);
-                    $('.form-update #razonSocial').val(empleado.nombre);
-                    $('.form-update #Cuit').val(empleado.apellido);
-                    $('.form-update #telCel').val(empleado.telCel);
-                    $('.form-update #direccion').val(empleado.direccion);
+                $.get(href, function (cliente, status) {
+                    $('.form-update #idPersona').val(cliente.idPersona);
+                    $('.form-update #razonSocial').val(cliente.razonSocial);
+                    $('.form-update #cuit').val(cliente.cuit);
+                    $('.form-update #telCel').val(cliente.telCel);
+                    $('.form-update #direccion').val(cliente.direccion);
 
                 });
 

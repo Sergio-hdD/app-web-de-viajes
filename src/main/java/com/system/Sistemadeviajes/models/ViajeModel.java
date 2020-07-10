@@ -6,40 +6,40 @@ import org.springframework.lang.Nullable;
 
 public class ViajeModel {
 
-	private long idViajes;
+	private long idViaje;
 	private Date fecha;
 	private String direccion;
 	private String localidad;
 	private double importe;
 	private EmpleadoModel empleado;
 	private ClienteModel cliente;
-	@Nullable
-	private String detalles;
+	private String detalle;
 	
 	
 	public ViajeModel() { }
 
 
-	public ViajeModel(long idViajes, Date fecha, String direccion, String localidad, double importe,
-			EmpleadoModel empleado, ClienteModel cliente) {
+	public ViajeModel(long idViaje, Date fecha, String direccion, String localidad, double importe,
+			EmpleadoModel empleado, ClienteModel cliente, String detalle) {
 		super();
-		this.idViajes = idViajes;
+		this.idViaje = idViaje;
 		this.fecha = fecha;
 		this.direccion = direccion;
 		this.localidad = localidad;
 		this.importe = importe;
 		this.empleado = empleado;
 		this.cliente = cliente;
+		this.detalle = detalle;
 	}
 
 
 	public long getIdViajes() {
-		return idViajes;
+		return idViaje;
 	}
 
 
 	public void setIdViajes(long idViajes) {
-		this.idViajes = idViajes;
+		this.idViaje = idViajes;
 	}
 
 
@@ -103,20 +103,20 @@ public class ViajeModel {
 	}
 
 
-	public String getDetalles() {
-		return detalles;
+	public String getDetalle() {
+		return detalle;
 	}
 
 
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ViajeModel [idViajes=" + idViajes + ", fecha=" + fecha + ", direccion=" + direccion + ", localidad="
-				+ localidad + ", importe=" + importe + ", cliente=" + cliente + ", detalles="+ detalles + "]";
+		return "ViajeModel [idViajes=" + idViaje + ", fecha=" + fecha + ", direccion=" + direccion + ", localidad="
+				+ localidad + ", importe=" + importe + ", cliente=" + cliente + ", detalle="+ detalle + "]";
 	}
 	
 	

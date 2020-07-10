@@ -27,10 +27,6 @@ public class Empleado extends Persona{
 	private long nroDocumento;
 	
 	
-	@Nullable
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="viaje")
-	private Set<Viaje> viajes=new HashSet<Viaje>();
-	
 	public Empleado() {
 		super();
 	}
@@ -76,15 +72,7 @@ public class Empleado extends Persona{
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
-
-	public Set<Viaje> getViajes() {
-		return viajes;
-	}
-
-	public void setViajes(Set<Viaje> viajes) {
-		this.viajes = viajes;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Empleado [nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento=" + tipoDocumento

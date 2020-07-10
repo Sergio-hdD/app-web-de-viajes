@@ -34,8 +34,8 @@ public class ClienteService implements IClienteService{
 	}
 	
 	@Override
-	public Cliente findByIdPersona(long id) {
-		return clienteRepository.findByIdPersona(id);
+	public ClienteModel findByIdPersona(long id) {
+		return clienteConverter.entityToModel(clienteRepository.findByIdPersona(id));
 	}
  
 	@Override
