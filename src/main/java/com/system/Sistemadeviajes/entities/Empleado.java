@@ -72,7 +72,7 @@ public class Empleado extends Persona{
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Empleado [nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento=" + tipoDocumento

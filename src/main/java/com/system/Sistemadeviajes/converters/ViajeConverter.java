@@ -23,7 +23,7 @@ public class ViajeConverter {
 	}
 	
 	public Viaje modelToEntity(ViajeModel viajeModel) {
-		return new Viaje(viajeModel.getIdViajes(),viajeModel.getFecha(),viajeModel.getDireccion(),viajeModel.getLocalidad(),viajeModel.getImporte(),empleadoConverter.modelToEntity(viajeModel.getEmpleado()),clienteConverter.modelToEntity(viajeModel.getCliente()),viajeModel.getDetalles());
+		return new Viaje(viajeModel.getIdViajes(),viajeModel.getFecha(),viajeModel.getDireccion(),viajeModel.getLocalidad(),viajeModel.getImporte(),empleadoConverter.modelToEntity(viajeModel.getEmpleado()),clienteConverter.modelToEntity(viajeModel.getCliente()),viajeModel.getDetalle());
 	}
 
 }

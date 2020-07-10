@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.lang.Nullable;
 
 
 @Entity
@@ -40,10 +39,8 @@ public class Viaje {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Cliente cliente;
     
-	@Nullable
 	@Column(name = "detalle")
 	private String detalle;
-	
 	
 	
 	public Viaje() { }

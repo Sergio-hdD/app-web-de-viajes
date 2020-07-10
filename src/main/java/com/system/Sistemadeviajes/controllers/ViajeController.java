@@ -47,6 +47,7 @@ public class ViajeController {
 
 	@PostMapping("/delete/{id}")
 	public RedirectView delete(@PathVariable("id") long idViaje) {
+		viajeService.remove(idViaje);
 				
 		return new RedirectView(ViewRouteHelpers.TRAVEL_ROOT);
 	}

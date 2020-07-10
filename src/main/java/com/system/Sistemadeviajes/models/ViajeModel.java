@@ -103,20 +103,20 @@ public class ViajeModel {
 	}
 
 
-	public String getDetalles() {
+	public String getDetalle() {
 		return detalle;
 	}
 
 
-	public void setDetalles(String detalles) {
-		this.detalle = detalles;
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
 	}
 
 
 	@Override
 	public String toString() {
 		return "ViajeModel [idViajes=" + idViaje + ", fecha=" + fecha + ", direccion=" + direccion + ", localidad="
-				+ localidad + ", importe=" + importe + ", cliente=" + cliente + ", detalles="+ detalle + "]";
+				+ localidad + ", importe=" + importe + ", cliente=" + cliente + ", detalle="+ detalle + "]";
 	}
 	
 	
