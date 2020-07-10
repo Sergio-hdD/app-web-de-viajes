@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.system.Sistemadeviajes.entities.Cliente;
 import com.system.Sistemadeviajes.helpers.ViewRouteHelpers;
 import com.system.Sistemadeviajes.models.ClienteModel;
 import com.system.Sistemadeviajes.services.IClienteService;
@@ -60,7 +59,7 @@ public class ClienteController {
 	
 	@GetMapping("/{id}")
 	@ResponseBody
-	public Cliente get(@PathVariable("id") @RequestBody long idPersona) {
+	public ClienteModel get(@PathVariable("id") @RequestBody long idPersona) {
 		return clienteService.findByIdPersona(idPersona);
 	}
 	

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.system.Sistemadeviajes.entities.Viaje;
 import com.system.Sistemadeviajes.helpers.ViewRouteHelpers;
 import com.system.Sistemadeviajes.models.ViajeModel;
+import com.system.Sistemadeviajes.services.IClienteService;
+import com.system.Sistemadeviajes.services.IEmpleadoService;
 import com.system.Sistemadeviajes.services.IViajeService;
 
 @Controller
@@ -24,21 +26,28 @@ public class ViajeController {
 	@Autowired
 	@Qualifier("viajeService")
 	private IViajeService viajeService;
+	
+	@Autowired
+	@Qualifier("empleadoService")
+	private IEmpleadoService empleadoService;
+	
+	@Autowired
+	@Qualifier("clienteService")
+	private IClienteService clienteService;
 
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_INDEX);
 		mAV.addObject("viajes", viajeService.getAll());
+		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
 		
 		return mAV;
 	}
 
 	@PostMapping("/delete/{id}")
 	public RedirectView delete(@PathVariable("id") long idViaje) {
-		System.out.println(idViaje);
-		
-		viajeService.remove(idViaje);
-		
+				
 		return new RedirectView(ViewRouteHelpers.TRAVEL_ROOT);
 	}
 	
@@ -51,6 +60,10 @@ public class ViajeController {
 
 	@PostMapping("/update")
 	public RedirectView update(ViajeModel viajeModel) {
+		
+		viajeModel.setCliente(clienteService.findByIdPersona(viajeModel.getCliente().getIdPersona()));
+		viajeModel.setEmpleado(empleadoService.findByIdPersona(viajeModel.getEmpleado().getIdPersona()));
+		
 		viajeService.insertOrUpdate(viajeModel);
 
 		return new RedirectView(ViewRouteHelpers.TRAVEL_ROOT);

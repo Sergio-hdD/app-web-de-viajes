@@ -61,11 +61,163 @@
 
 
 
+<div class="form-add">
+            <form action="#" method="post" th:action="@{viajes/add}" novalidate class="formulario">
+                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add"
+                    role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Agregar Viaje
+                                </h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Direccion</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion"
+                                        placeholder="Ingrese direccion">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Localidad</label>
+                                    <input type="text" class="form-control" id="localidad" name="localidad"
+                                        placeholder="Ingrese localidad">
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-form-label" for="name">Empleado</label>
+
+
+                                    <select class="form-control " id="empleado" name="empleado.idPersona"   required>
+                                        <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+                                    </select>
+
+                                </div>
+                                
+                                <div class="form-group">
+
+                                    <label class="col-form-label" for="name">Cliente</label>
+
+                                    <select class="form-control " id="cliente" name="cliente.idPersona"   required>
+                                        <option th:each="c : ${clientes}" th:value="${c.idPersona}"  th:text="${c.razonSocial}"></option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Importe</label>
+                                    <input type="number" class="form-control" id="importe" name="importe"
+                                        placeholder="Ingrese importe">
+                                </div>
+
+								<div class="form-group">
+                                    <label for="formGroupExampleInput">Detalle</label>
+                                    <input type="text" class="form-control" id="detalle" name="detalle"
+                                        placeholder="Ingrese detalle">
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                <input class="btn btn-success" type="submit" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        
+<div class="form-update">
+            <form action="#" method="post" th:action="@{viajes/update}" novalidate class="formulario">
+                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+                    role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Editar Viaje
+                                </h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            
+                            	  <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
+
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Direccion</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion"
+                                        placeholder="Ingrese direccion">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Localidad</label>
+                                    <input type="text" class="form-control" id="localidad" name="localidad"
+                                        placeholder="Ingrese localidad">
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-form-label" for="name">Empleado</label>
+
+
+                                    <select class="form-control " id="empleado" name="empleado.idPersona"   required>
+                                        <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+                                    </select>
+
+                                </div>
+                                
+                                <div class="form-group">
+
+                                    <label class="col-form-label" for="name">Cliente</label>
+
+                                    <select class="form-control " id="cliente" name="cliente.idPersona"   required>
+                                        <option th:each="c : ${clientes}" th:value="${c.idPersona}"  th:text="${c.razonSocial}"></option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput2">Importe</label>
+                                    <input type="number" class="form-control" id="importe" name="importe"
+                                        placeholder="Ingrese importe">
+                                </div>
+
+								<div class="form-group">
+                                    <label for="formGroupExampleInput">Detalle</label>
+                                    <input type="text" class="form-control" id="detalle" name="detalle"
+                                        placeholder="Ingrese detalle">
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                <input class="btn btn-success" type="submit" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>        
 
 
 
-
-
+ <a href="#" class="btn btn-success btn-icon-split btn-add">
+            <span class="text ">Agregar Viaje</span>
+        </a>
 
 
 
@@ -81,35 +233,37 @@
         crossorigin="anonymous"></script>
 
 
-    <script type="text/javascript">/*
+    <script type="text/javascript">
         $(document).ready(function () {
 
             $('.btn-add').on('click', function (event) {
                 event.preventDefault();
                 $('.form-add #exampleModal-add').modal();
             });
-
+            
             $('.btn-edit').on('click', function (event) {
                 event.preventDefault();
                 var href = $(this).attr('href');
                 
                
-                $.get(href, function (empleado, status) {
-                    $('.form-update #idPersona').val(empleado.idPersona);
-                    $('.form-update #nombre').val(empleado.nombre);
-                    $('.form-update #apellido').val(empleado.apellido);
-                    $('.form-update #telCel').val(empleado.telCel);
-                    $('.form-update #tipoDocumento').val(empleado.tipoDocumento);
-                    $('.form-update #nroDocumento').val(empleado.nroDocumento);
-                    $('.form-update #direccion').val(empleado.direccion);
+                $.get(href, function (viaje, status) {                	
+                	
+                    $('.form-update #id').val(viaje.idViaje);
+                    $('.form-update #direccion').val(viaje.direccion);
+                    $('.form-update #localidad').val(viaje.localidad);
+                    $('.form-update #empleado').val(viaje.empleado.idPersona);
+                    $('.form-update #cliente').val(viaje.cliente.idPersona);
+                    $('.form-update #importe').val(viaje.importe);
+                    $('.form-update #detalle').val(viaje.detalle);
 
+					
                 });
 
                 $('.form-update #exampleModal').modal();
 
             });
-
-        });*/
+				
+        });
     </script>
 
 </body>
