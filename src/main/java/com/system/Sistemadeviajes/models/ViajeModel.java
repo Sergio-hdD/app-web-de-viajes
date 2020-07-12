@@ -2,8 +2,6 @@ package com.system.Sistemadeviajes.models;
 
 import java.util.Date;
 
-import org.springframework.lang.Nullable;
-
 public class ViajeModel {
 
 	private long idViaje;
