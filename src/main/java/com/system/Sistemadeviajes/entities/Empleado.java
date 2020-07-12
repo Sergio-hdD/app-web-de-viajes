@@ -1,15 +1,7 @@
 package com.system.Sistemadeviajes.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-
-import org.springframework.lang.Nullable;
-
 
 @Entity
 public class Empleado extends Persona{
@@ -78,10 +70,6 @@ public class Empleado extends Persona{
 		return "Empleado [nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento=" + tipoDocumento
 				+ ", nroDocumento=" + nroDocumento + ", idPersona=" + idPersona + ", direccion=" + direccion
 				+ ", telCel=" + telCel + "]";
-	}
-	
-	
-	
-	
+	}	
 
 }

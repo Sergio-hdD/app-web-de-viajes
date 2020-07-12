@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Viajes/Cadetes entre fechas
+  </title>
+  
+  
+  
+  
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/demo/demo.css" rel="stylesheet" />
+	</head>
+	<!-- DATA TABLE -->
+	
+
+<body class="">
+    <div class="sidebar" data-color="yellow">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+
+      <div class="sidebar-wrapper" id="sidebar-wrapper" style='margin: 20% 0px 0px 0px'>
+        <ul class="nav">
+          <li>
+            <a href="/home">
+             <i class="now-ui-icons shopping_shop"></i>
+              <p>Volver a home</p>
+            </a>
+          </li> 
+          <li class="active ">
+            <a href="/viajes" class="full-width">
+              <i class="now-ui-icons shopping_delivery-fast"></i>
+              <p>Viajes</p>
+            </a>
+          </li>
+           <li>
+            <a href="/empleados">
+             <i class="now-ui-icons users_single-02"></i>
+              <p>Cadetes</p>
+            </a>
+          </li>
+          <li>
+            <a href="/clientes/indexEmpleado">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>Clientes</p>
+            </a>
+          </li>
+          <li>
+            <a href="/viajes/empleadoYFechas">
+              <i class="now-ui-icons travel_info"></i>
+              <p>volver A consultar</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+         	
+   <div class="card text-white bg-primary mb-3">  
+   		   <div class="a"> 
+   			<h4> DANY - MOTOS</h4>
+        </div> 
+    </div>
+           
+    <div class="container" id=notificacionNegativa>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert"> 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>NO HAY VIAJES DEL CADETE EN EL RANGO DE FECHAS INGRESADAS!!! </strong> 
+		</div>
+	</div>
+		
+	<div class="container" id="viajesDelEmpleado">
+		<div class="mx-auto col-sm-16 main-section" id="myTab" role="tablist">
+		
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="list" role="tabpanel"
+					aria-labelledby="list-tab">
+					
+					
+					<div class="card text-white bg-primary mb-3" >
+							<div class="card-header">
+							<h4 class="card-title">Resultado de la consulta <b>VIAJES DEL CADETE ENTRE FECHAS</b></h4>
+							</div>
+							<div class="card-body">
+							
+							<div class="card-body">
+				  				<h5 style='color:black'><b>El cadete: </b> <td><span th:text="${empleado.nombre}+' '+${empleado.apellido}" /></td> <b> ,    entre las fechas:</b> <td><span th:text="${fecha1}" /></td> y <td><span th:text="${fecha2}" /></td></h5>
+				    		</div>
+				    		<div class="card-body">
+				  				<h5 style='color:black'><b>HIZO UN TOTAL DE  <b style='color:red'><td><span th:text="${cantidad}" /></td></b>  VIAJES</b></h5>
+				    		</div>
+						
+							<div class="table-responsive" id="list2">
+								<table id="userList" class="table table-bordered table-hover table-striped">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">Fecha</th>
+											<th scope="col">Direccion</th>
+											<th scope="col">Localidad</th>		
+											<th scope="col">Cliente</th>
+							 				<th scope="col">Importe ($)</th> 
+							 				<th scope="col">Detalle</th> 
+										</tr>
+							
+									</thead>
+									<tbody>
+										<tr  th:each="viaje : ${viajes}">
+											<td><span th:text="${viaje.fecha}" /></td>
+											<td><span id="viajeConDatos" th:text="${viaje.direccion}" /></td>
+										    <td><span th:text="${viaje.localidad}" /></td>
+											<td><span th:text="${viaje.cliente.razonSocial}" /></td>
+							 			    <td><span th:text="${viaje.importe}" /></td>
+							 			    <td><span th:text="${viaje.detalle}" /></td>      	
+										</tr>
+									</tbody>
+								</table>
+								<br/>
+															 	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="form" role="tabpanel"
+					aria-labelledby="form-tab"></div>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	
+	
+	
+	
+	<script>
+		
+	$(document).ready(function() {
+		
+		
+		var element = document.getElementById("viajeConDatos");
+
+		if(typeof(element) != 'undefined' && element != null){//si tengo viajes
+			$("#notificacionNegativa").hide();//se esconde la notificación de que no hay viajes del empleado entre las fechas
+		}else{//si NO tengo viajes
+			$("#viajesDelEmpleado").hide();//se esconde la tabla que es para mostrar los viajes
+		}
+		
+	});
+	
+	</script>
+
+
+
+
+</body>
+</html>
+

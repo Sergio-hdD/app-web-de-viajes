@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,6 +24,7 @@ public class Viaje {
 	
 	@Column(name = "fecha")
 	@CreationTimestamp
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
 	@Column(name = "direccion")
