@@ -128,14 +128,6 @@
             <div class="panel-header panel-header-sm">
             </div>
 
-            <!--
-
-            <div class="card text-white bg-primary mb-3">
-                <h4> DANY - MOTOS (lista de viajes)</h4>
-            </div>
-
-            -->
-
             <!-- -------------------------------------------------------------------------------------------------------------------  -->
             <div>
                 <!-- -------------------------------------------------------------------------------------------------------------------  -->
@@ -159,7 +151,7 @@
 
                             <tr th:each="v : ${viajes}">
                                 <th scope="row" th:text="${v.idViaje}"></th>
-                                <td th:text="${v.fecha}"></td>
+                                <td th:text="${#dates.format(v.fecha,'dd MMMM yyyy')}"></td>
                                 <td th:text="${v.direccion}"></td>
                                 <td th:text="${v.localidad}"></td>
                                 <td th:text="'$' + ${v.importe}"></td>
@@ -200,6 +192,27 @@
                                 </button>
                                         </div>
                                         <div class="modal-body">
+
+                                            <div class="form-group">
+
+                                                <label for="formGroupExampleInput">Fecha de realizacion del viaje</label>
+
+                                                <select class="form-control " id="selectFecha" required>
+                                                    <option selected value="fecha Actual">fecha Actual</option>
+                                                    <option  value="Ingresar Fecha distinta a la actual">Ingresar Fecha distinta a la actual</option>
+
+                                                    
+
+                                                </select>
+
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha">
+
+                                            </div>
 
                                             <div class="form-group">
                                                 <label for="formGroupExampleInput">Direccion</label>
@@ -274,6 +287,17 @@
 
                                             <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
 
+                                            <div class="form-group">
+
+                                                <label for="formGroupExampleInput">Fecha de realizacion del viaje</label>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha">
+
+                                            </div>
 
                                             <div class="form-group">
                                                 <label for="formGroupExampleInput">Direccion</label>
@@ -357,6 +381,14 @@
 
             $('.btn-add').on('click', function(event) {
                 event.preventDefault();
+
+                $('.form-add #fecha').hide();
+
+                $('.form-add #selectFecha').val("fecha Actual");
+
+                //Seteo la fecha actual al campo input date
+                $('#fecha').val(getCurrentDate());
+
                 $('.form-add #exampleModal-add').modal();
             });
 
@@ -368,6 +400,7 @@
                 $.get(href, function(viaje, status) {
 
                     $('.form-update #id').val(viaje.idViaje);
+                    $('.form-update #fecha').val(viaje.fecha);
                     $('.form-update #direccion').val(viaje.direccion);
                     $('.form-update #localidad').val(viaje.localidad);
                     $('.form-update #empleado').val(viaje.empleado.idPersona);
@@ -381,6 +414,20 @@
                 $('.form-update #exampleModal').modal();
 
             });
+
+            $('#selectFecha').on('change', function() {
+                //Seteo la fecha actual al campo input date
+                $('#fecha').val(getCurrentDate());
+
+                $('#fecha').toggle();
+
+
+            });
+
+            function getCurrentDate() {
+                var d = new Date();
+                return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+            }
 
         });
     </script>
