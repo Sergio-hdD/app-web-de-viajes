@@ -2,9 +2,13 @@ package com.system.Sistemadeviajes.models;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ViajeModel {
 
 	private long idViaje;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
 	private String direccion;
 	private String localidad;

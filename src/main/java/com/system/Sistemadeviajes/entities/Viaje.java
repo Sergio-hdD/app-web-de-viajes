@@ -9,10 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -22,9 +20,8 @@ public class Viaje {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idViaje;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fecha")
-	@CreationTimestamp
-	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
 	@Column(name = "direccion")
