@@ -77,6 +77,8 @@ public class ViajeController {
 	@PostMapping("/update")
 	public RedirectView update(ViajeModel viajeModel) {
 		
+		System.out.println(viajeModel.isContado());
+		
 		viajeModel.setCliente(clienteService.findByIdPersona(viajeModel.getCliente().getIdPersona()));
 		viajeModel.setEmpleado(empleadoService.findByIdPersona(viajeModel.getEmpleado().getIdPersona()));
 		

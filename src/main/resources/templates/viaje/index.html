@@ -144,6 +144,7 @@
                                 <th scope="col">Cadete</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Detalle</th>
+                                <th scope="col">Contado?</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -158,7 +159,8 @@
                                 <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
                                 <td th:text="${v.Cliente.razonSocial}"></td>
                                 <td th:text="${v.detalle}"></td>
-
+                                <td th:text="${v.contado}"></td>
+                                
 
                                 <td>
                                     <div class="form-inline">
@@ -256,8 +258,12 @@
                                                 <label for="formGroupExampleInput">Detalle</label>
                                                 <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
                                             </div>
-
-
+											
+											<div class="form-group">
+                                            	<input type="checkbox" name="contado" id="contado">
+											    <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+											</div>
+	
 
                                         </div>
                                         <div class="modal-footer">
@@ -341,8 +347,12 @@
                                                 <label for="formGroupExampleInput">Detalle</label>
                                                 <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
                                             </div>
-
-
+                                            
+                                            <div class="form-group">
+                                            	<input type="checkbox" id="contado" name="contado" >
+											    <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+											</div>
+                                            
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
@@ -361,7 +371,7 @@
                         <span class="p">Agregar Viaje</span>
 
                     </a>
-
+                                     
                 </div>
                 <!-- -------------------------------------------------------------------------------------------------------------------  -->
             </div>
@@ -396,9 +406,8 @@
                 event.preventDefault();
                 var href = $(this).attr('href');
 
-
+				
                 $.get(href, function(viaje, status) {
-
                     $('.form-update #id').val(viaje.idViaje);
                     $('.form-update #fecha').val(viaje.fecha);
                     $('.form-update #direccion').val(viaje.direccion);
@@ -407,7 +416,14 @@
                     $('.form-update #cliente').val(viaje.cliente.idPersona);
                     $('.form-update #importe').val(viaje.importe);
                     $('.form-update #detalle').val(viaje.detalle);
-
+                    
+                    if(viaje){
+                    	$('.form-update #contado').val(true);
+                    }else{
+                    	$('.form-update #contado').val(false);
+                    }
+                    
+					
 
                 });
 
