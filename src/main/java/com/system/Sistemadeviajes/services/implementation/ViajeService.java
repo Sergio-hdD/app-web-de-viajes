@@ -1,5 +1,7 @@
 package com.system.Sistemadeviajes.services.implementation;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -8,11 +10,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.system.Sistemadeviajes.converters.ViajeConverter;
-import com.system.Sistemadeviajes.repositories.IViajeRepository;
-import com.system.Sistemadeviajes.services.IViajeService;
 import com.system.Sistemadeviajes.entities.Viaje;
 import com.system.Sistemadeviajes.models.EmpleadoModel;
 import com.system.Sistemadeviajes.models.ViajeModel;
+import com.system.Sistemadeviajes.repositories.IViajeRepository;
+import com.system.Sistemadeviajes.services.IViajeService;
 
 @Service("viajeService")
 public class ViajeService implements IViajeService{
@@ -62,5 +64,58 @@ public class ViajeService implements IViajeService{
 		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(empleado.getIdPersona(), fecha1, fecha2);
 		 return viajes;
 	}
+	
+	@Override
+	public double getGananciaViajes() {
+		double ganancia = 0;
+		
+		for(Viaje v : this.getAll()) {
+			ganancia += v.getImporte();
+		}
+		
+		return ganancia;
+	}
+	
+	public double getGananciaDelMes() {
+		double ganancia = 0;
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("M");
+		
+		for(Viaje v : this.getAll()) {
+			
+			if(Integer.parseInt(simpleDateFormat.format(v.getFecha()))  == LocalDate.now().getMonthValue()) {
+				ganancia += v.getImporte();
+				
+			}
+		}
+		
+		return ganancia;
+	}
+	
+	@Override
+	public int getCantidadViajesEmpleado(long idPersona) {
+		int cantidad = 0;
+		
+		for(Viaje v : this.getAll()) {
+			if(v.getEmpleado().getIdPersona() == idPersona) {
+				cantidad ++;
+			}
+		}
+		
+		return cantidad;
+	}
+	
+	@Override
+	public int getCantidadViajesCliente(long idPersona) {
+		int cantidad = 0;
+		
+		for(Viaje v : this.getAll()) {
+			if(v.getCliente().getIdPersona() == idPersona) {
+				cantidad ++;
+			}
+		}
+				
+		return cantidad;
+	}
+	
 	
 }// fin class

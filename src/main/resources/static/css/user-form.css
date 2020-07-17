@@ -20,9 +20,7 @@ label{
 	font-weight: bold;
 }
 
-.nav-tabs .nav-item a:not(.active){
-	background-color: #d1d3d6;
-}
+
 
 .nav-tabs{
 	border-bottom:0px;

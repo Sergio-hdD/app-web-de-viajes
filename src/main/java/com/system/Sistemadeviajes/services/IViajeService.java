@@ -19,5 +19,15 @@ public interface IViajeService {
 	
 	public List<Viaje> traerViajesDelEmpleadoEntreFechas(EmpleadoModel empleado,Date fecha1,Date fecha2);
 	
+	public double getGananciaViajes();
+	
+	public int getCantidadViajesEmpleado(long idPersona);
+	
+	public int getCantidadViajesCliente(long idPersona);
+	
+	public double getGananciaDelMes();
+	
+	
+	
 }//fin interface
 
