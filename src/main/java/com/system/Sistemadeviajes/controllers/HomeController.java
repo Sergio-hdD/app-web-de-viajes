@@ -23,8 +23,7 @@ public class HomeController {
 	@Qualifier("viajeService")
 	private IViajeService viajeService;
 	
-	
-	@GetMapping("/home")
+	@GetMapping({"/home", ""})
 	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelpers.HOME);	
 		return modelAndView;

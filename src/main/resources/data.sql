@@ -1,7 +1,9 @@
 USE `Sistema-de-viajes`;
 
-INSERT INTO user (id,createdat,enabled,password,updatedat,username,photo) VALUES(1, "2020-03-22 00:00:01", 1, "$2a$10$zUXqm9ehdGj7I6f1M8HNRugErdA5SJ06sJUo7dTLty8q7tbKBklPi", "2020-03-22 00:00:01", "empleado","image-1.jpg");
-INSERT INTO user (id,createdat,enabled,password,updatedat,username,photo) VALUES(2, "2020-03-22 00:00:01", 1, "$2a$10$wUbGKY0nzIA9aH9gPZuqOuBNhwTmOmzRBZeMk8L8YHCz.AczonfLG", "2020-03-22 00:00:01", "admin", "image-2.jpg");
+/*INSERT INTO user (id,createdat,enabled,password,updatedat,username,photo) VALUES(1, "2020-03-22 00:00:01", 1, "$2a$10$zUXqm9ehdGj7I6f1M8HNRugErdA5SJ06sJUo7dTLty8q7tbKBklPi", "2020-03-22 00:00:01", "empleado","image-1.jpg");
+INSERT INTO user (id,createdat,enabled,password,updatedat,username,photo) VALUES(2, "2020-03-22 00:00:01", 1, "$2a$10$wUbGKY0nzIA9aH9gPZuqOuBNhwTmOmzRBZeMk8L8YHCz.AczonfLG", "2020-03-22 00:00:01", "admin", "image-2.jpg");*/
+INSERT INTO user (id,createdat,enabled,password,updatedat,username,photo) VALUES(3, "2020-03-22 00:00:01", 1, "$2a$10$SQFFXWS5kg/zUJbhVtjcvuORyzksCDgvhOwjHIA8cv29iGeBQBq66", "2020-03-22 00:00:01", "danymotos", "image-2.jpg");
+
 
 INSERT INTO user_role (id,createdat,role,updatedat,user_id) VALUES(1, "2020-03-22 00:00:01", "ROLE_USER", "2020-03-22 00:00:01", 1);
 INSERT INTO user_role (id,createdat,role,updatedat,user_id) VALUES(2, "2020-03-22 00:00:01", "ROLE_ADMIN", "2020-03-22 00:00:01", 2);

@@ -60,8 +60,8 @@ public class UserController {
 		  username = ((UserDetails)principal).getUsername();
 		}
 		System.out.println(username);
+		
 		if(username.isEmpty()) {
-			System.out.println("no hay ninguna cuenta logueada");
 			return "redirect:/";	
 		}
 		else return "/user/login";	
