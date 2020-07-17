@@ -166,11 +166,7 @@
                                     <div class="form-inline">
 
                                         <a class="btn btn-warning btn-edit" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Editar</a>
-
-
-                                        <form action="#" th:action="@{/viajes/delete/{id}(id=${v.idViaje})}" method="post">
-                                            <input class="btn btn-danger" type="submit" value="Eliminar"></form>
-
+                                        <a class="btn btn-danger btn-delete" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Eliminar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -364,6 +360,68 @@
                         </form>
                     </div>
 
+<!-- ---------------------------AGREGADO PARA ELIMINAR-------------------------------------------------------------- -->
+                    <div class="form-delete">
+                          <form action="#" method="post" th:action="@{/viajes/delete}" novalidate class="formulario">
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar el Viaje???</h4>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
+
+                                            <div class="form-group">
+
+                                                <label class="col-form-label" for="name">Del Cadete</label>
+                                            <select class="form-control " id="empleado" name="empleado.idPersona" required>
+                                             <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+                                           </select>
+
+                                            </div>
+
+
+                                            <div class="form-group">
+
+                                                <label for="formGroupExampleInput">De la fecha</label>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha">
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Direccion</label>
+                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput2">Localidad</label>
+                                                <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
+                                            </div>
+
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+
+                                            <input class="btn btn-danger" type="submit" value="Eliminar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         </form>
+                    </div>
+<!-- ---------------------------FIN AGREGADO PARA ELIMINAR---------------------------------------------------------- -->
 
 
                     <a href="#" class="btn btn-success btn-add">
@@ -430,6 +488,27 @@
                 $('.form-update #exampleModal').modal();
 
             });
+            
+            
+            
+            $('.btn-delete').on('click', function(event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
+
+				
+                $.get(href, function(viaje, status) {
+                    $('.form-delete #id').val(viaje.idViaje);
+                    $('.form-delete #fecha').val(viaje.fecha);
+                    $('.form-delete #direccion').val(viaje.direccion);
+                    $('.form-delete #localidad').val(viaje.localidad);
+                    $('.form-delete #empleado').val(viaje.empleado.idPersona);
+                });
+
+                $('.form-delete #exampleModal').modal();
+
+            });
+            
+            
 
             $('#selectFecha').on('change', function() {
                 //Seteo la fecha actual al campo input date

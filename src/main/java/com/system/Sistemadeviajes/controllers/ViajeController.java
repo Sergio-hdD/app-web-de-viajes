@@ -60,9 +60,9 @@ public class ViajeController {
 		return mAV;
 	}
 
-	@PostMapping("/delete/{id}")
-	public RedirectView delete(@PathVariable("id") long idViaje) {
-		viajeService.remove(idViaje);
+	@PostMapping("/delete")
+	public RedirectView delete(ViajeModel viajeModel) {
+		viajeService.remove(viajeModel.getIdViaje());
 				
 		return new RedirectView(ViewRouteHelpers.TRAVEL_ROOT);
 	}

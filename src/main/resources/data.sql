@@ -19,18 +19,18 @@ INSERT INTO cliente (id_persona,razon_social,cuit) VALUES(2,"Muñoz Hogar","30-1
 INSERT INTO cliente (id_persona,razon_social,cuit) VALUES(6,"Z-motos","33-11111111-6");
 
 
-INSERT INTO viaje (id_viaje,fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES(1,'2020-05-17',"Arredondo 2345","Sourigues",1,2,790," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-17',"San Martín 345","Florencio Varela",1,2,750," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-18',"San Martín 345","Florencio Varela",3,2,750," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-18',"Mitre 678","Quilmes",1,6,700," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-18',"Sarmiento 781","CABA",1,2,600," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-18',"Av. Mitre 2589","Avellaneda",1,6,650," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-20',"De la Canal 1234","Esteban Echevería",3,6,780," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-20',"Azucena 345","Rafael Calzada",1,6,790," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-21',"San Martín 1345","Arogué",1,6,850," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-21',"San Martín 345","Florencio Varela",4,6,750," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-21',"Mitre 678","Quilmes",4,2,700," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-21',"Sarmiento 781","CABA",1,6,600," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-25',"Av. Mitre 2589","Avellaneda",3,2,650," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-25',"De la Canal 1234","Esteban Echevería",4,6,780," ");
-INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,detalle) VALUES('2020-05-25',"Azucena 345","Rafael Calzada",1,2,790," ");
+INSERT INTO viaje (id_viaje,fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES(1,'2020-05-17',"Arredondo 2345","Sourigues",1,2,790,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-17',"San Martín 345","Florencio Varela",1,2,750,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-18',"San Martín 345","Florencio Varela",3,2,750,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-18',"Mitre 678","Quilmes",1,6,700,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-18',"Sarmiento 781","CABA",1,2,600,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-18',"Av. Mitre 2589","Avellaneda",1,6,650,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-20',"De la Canal 1234","Esteban Echevería",3,6,780,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-20',"Azucena 345","Rafael Calzada",1,6,790,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-21',"San Martín 1345","Arogué",1,6,850,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-21',"San Martín 345","Florencio Varela",4,6,750,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-21',"Mitre 678","Quilmes",4,2,700,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-21',"Sarmiento 781","CABA",1,6,600,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-25',"Av. Mitre 2589","Avellaneda",3,2,650,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-25',"De la Canal 1234","Esteban Echevería",4,6,780,0," ");
+INSERT INTO viaje (fecha,direccion,localidad,empleado_id_persona,cliente_id_persona,importe,contado,detalle) VALUES('2020-05-25',"Azucena 345","Rafael Calzada",1,2,790,0," ");
