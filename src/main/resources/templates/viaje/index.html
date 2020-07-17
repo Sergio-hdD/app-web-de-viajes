@@ -385,7 +385,7 @@
                                             <div class="form-group">
 
                                                 <label class="col-form-label" for="name">Del Cadete</label>
-                                            <select class="form-control " id="empleado" name="empleado.idPersona" required>
+                                            <select class="form-control " id="empleado" name="empleado.idPersona" disabled="true" >
                                              <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
 
                                            </select>
@@ -401,18 +401,18 @@
 
                                             <div class="form-group">
 
-                                                <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha">
+                                                <input type="date" id="fecha" name="fecha" class="form-control" readonly="readonly">
 
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="formGroupExampleInput">Direccion</label>
-                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
+                                                <input type="text" class="form-control" id="direccion" name="direccion" readonly="readonly">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="formGroupExampleInput2">Localidad</label>
-                                                <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
+                                                <input type="text" class="form-control" id="localidad" name="localidad" readonly="readonly">
                                             </div>
 
                                             
