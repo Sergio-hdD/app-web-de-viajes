@@ -61,3 +61,7 @@
   max-width: 530px;
   margin: 0 auto;
 }
+
+th{
+  font-weight: 600 !important;
+}

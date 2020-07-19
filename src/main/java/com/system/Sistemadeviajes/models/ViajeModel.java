@@ -1,14 +1,11 @@
 package com.system.Sistemadeviajes.models;
 
-import java.util.Date;
+import java.sql.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class ViajeModel {
 
 	private long idViaje;
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
 	private String direccion;
 	private String localidad;
@@ -16,13 +13,14 @@ public class ViajeModel {
 	private EmpleadoModel empleado;
 	private ClienteModel cliente;
 	private String detalle;
+	private boolean contado;
 	
 	
 	public ViajeModel() { }
 
 
 	public ViajeModel(long idViaje, Date fecha, String direccion, String localidad, double importe,
-			EmpleadoModel empleado, ClienteModel cliente, String detalle) {
+			EmpleadoModel empleado, ClienteModel cliente, String detalle, boolean contado) {
 		super();
 		this.idViaje = idViaje;
 		this.fecha = fecha;
@@ -32,6 +30,7 @@ public class ViajeModel {
 		this.empleado = empleado;
 		this.cliente = cliente;
 		this.detalle = detalle;
+		this.contado = contado;
 	}
 
 
@@ -115,11 +114,32 @@ public class ViajeModel {
 	}
 
 
+	public long getIdViaje() {
+		return idViaje;
+	}
+
+
+	public void setIdViaje(long idViaje) {
+		this.idViaje = idViaje;
+	}
+
+
+	public boolean isContado() {
+		return contado;
+	}
+
+
+	public void setContado(boolean contado) {
+		this.contado = contado;
+	}
+
+
 	@Override
 	public String toString() {
-		return "ViajeModel [idViajes=" + idViaje + ", fecha=" + fecha + ", direccion=" + direccion + ", localidad="
-				+ localidad + ", importe=" + importe + ", cliente=" + cliente + ", detalle="+ detalle + "]";
+		return "ViajeModel [idViaje=" + idViaje + ", fecha=" + fecha + ", direccion=" + direccion + ", localidad="
+				+ localidad + ", importe=" + importe + ", empleado=" + empleado + ", cliente=" + cliente + ", detalle="
+				+ detalle + ", contado=" + contado + "]";
 	}
-	
+
 	
 }//fin class

@@ -19,11 +19,11 @@ public class ViajeConverter {
 	private EmpleadoConverter empleadoConverter;
 	
 	public ViajeModel entityToModel(Viaje viaje) {
-		return new ViajeModel(viaje.getIdViaje(),viaje.getFecha(),viaje.getDireccion(),viaje.getLocalidad(),viaje.getImporte(),empleadoConverter.entityToModel(viaje.getEmpleado()),clienteConverter.entityToModel(viaje.getCliente()),viaje.getDetalle());
+		return new ViajeModel(viaje.getIdViaje(),viaje.getFecha(),viaje.getDireccion(),viaje.getLocalidad(),viaje.getImporte(),empleadoConverter.entityToModel(viaje.getEmpleado()),clienteConverter.entityToModel(viaje.getCliente()),viaje.getDetalle(),viaje.isContado());
 	}
 	
 	public Viaje modelToEntity(ViajeModel viajeModel) {
-		return new Viaje(viajeModel.getIdViajes(),viajeModel.getFecha(),viajeModel.getDireccion(),viajeModel.getLocalidad(),viajeModel.getImporte(),empleadoConverter.modelToEntity(viajeModel.getEmpleado()),clienteConverter.modelToEntity(viajeModel.getCliente()),viajeModel.getDetalle());
+		return new Viaje(viajeModel.getIdViajes(),viajeModel.getFecha(),viajeModel.getDireccion(),viajeModel.getLocalidad(),viajeModel.getImporte(),empleadoConverter.modelToEntity(viajeModel.getEmpleado()),clienteConverter.modelToEntity(viajeModel.getCliente()),viajeModel.getDetalle(),viajeModel.isContado());
 	}
 
 }

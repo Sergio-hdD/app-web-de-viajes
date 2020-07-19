@@ -1,6 +1,7 @@
 package com.system.Sistemadeviajes.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.system.Sistemadeviajes.entities.Cliente;
+import com.system.Sistemadeviajes.entities.Empleado;
 import com.system.Sistemadeviajes.entities.Viaje;
 import com.system.Sistemadeviajes.helpers.ViewRouteHelpers;
+import com.system.Sistemadeviajes.models.CantidadViajes;
 import com.system.Sistemadeviajes.models.EmpleadoModel;
 import com.system.Sistemadeviajes.models.ViajeModel;
 import com.system.Sistemadeviajes.repositories.IEmpleadoRepository;
@@ -60,9 +64,9 @@ public class ViajeController {
 		return mAV;
 	}
 
-	@PostMapping("/delete/{id}")
-	public RedirectView delete(@PathVariable("id") long idViaje) {
-		viajeService.remove(idViaje);
+	@PostMapping("/delete")
+	public RedirectView delete(ViajeModel viajeModel) {
+		viajeService.remove(viajeModel.getIdViaje());
 				
 		return new RedirectView(ViewRouteHelpers.TRAVEL_ROOT);
 	}
@@ -76,6 +80,8 @@ public class ViajeController {
 
 	@PostMapping("/update")
 	public RedirectView update(ViajeModel viajeModel) {
+		
+		System.out.println(viajeModel.isContado());
 		
 		viajeModel.setCliente(clienteService.findByIdPersona(viajeModel.getCliente().getIdPersona()));
 		viajeModel.setEmpleado(empleadoService.findByIdPersona(viajeModel.getEmpleado().getIdPersona()));
@@ -112,6 +118,39 @@ public class ViajeController {
 	    mAV.addObject("cantidad",viajes.size());
 		mAV.addObject("viajes",viajes);
 		return mAV;
-	}	
+	}
+	
+	
+	@GetMapping("/cantidadViajesEmpleados")
+	@ResponseBody
+	public ArrayList<CantidadViajes> cantidadViajesEmpleados(){
+		ArrayList<CantidadViajes> lstCantidadViajes = new ArrayList<CantidadViajes>();
+		
+		for(Empleado e : empleadoService.getAll()) {
+			if(viajeService.getCantidadViajesEmpleado(e.getIdPersona())> 0) {
+				lstCantidadViajes.add(new CantidadViajes(e.getNombre() + " " + e.getApellido(),viajeService.getCantidadViajesEmpleado(e.getIdPersona())));
+			}
+		}
+		
+		
+		return lstCantidadViajes;
+	}
+	
+	@GetMapping("/cantidadViajesClientes")
+	@ResponseBody
+	public ArrayList<CantidadViajes> cantidadViajesClientes(){
+		ArrayList<CantidadViajes> lstCantidadViajes = new ArrayList<CantidadViajes>();
+		
+		for(Cliente c : clienteService.getAll()) {
+			if(viajeService.getCantidadViajesCliente(c.getIdPersona())> 0) {
+				lstCantidadViajes.add(new CantidadViajes(c.getRazonSocial(),viajeService.getCantidadViajesCliente(c.getIdPersona())));
+			}
+		}
+		
+		return lstCantidadViajes;
+	}
+	
+	
+	
 	
 }//fin class

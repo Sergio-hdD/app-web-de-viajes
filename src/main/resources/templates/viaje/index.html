@@ -29,20 +29,26 @@
 
         <div class="sidebar" data-color="red">
             <!--
-            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-            -->
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+        -->
 
             <div class="logo">
                 <a href="/home" class="simple-text logo-mini">
                     <i class="fas fa-motorcycle"></i>
                 </a>
                 <a href="/home" class="simple-text logo-normal">
-                  DANY-MOTOS
-                </a>
+              DANY-MOTOS
+            </a>
             </div>
 
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
+                    <li>
+                        <a href="/dashboard">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
                     <li>
                         <a href="/empleados">
                             <i class="now-ui-icons users_single-02"></i>
@@ -98,7 +104,7 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <form>
                             <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <input type="text" value="" class="form-control" placeholder="Search..." id="search">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="now-ui-icons ui-1_zoom-bold"></i>
@@ -107,18 +113,15 @@
                             </div>
                         </form>
                         <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="now-ui-icons users_single-02"></i>
-                                    <p>
-                                        <span class="d-lg-none d-md-block">Some Actions</span>
-                                    </p>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span style="text-transform: capitalize; font-size: 14px" sec:authentication="name"></span>
+
+                                <i class="now-ui-icons users_single-02"></i>
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                            </div>
                             </li>
                         </ul>
                     </div>
@@ -133,10 +136,9 @@
                 <!-- -------------------------------------------------------------------------------------------------------------------  -->
                 <div class="container-fluid">
 
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="myTable">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Direccion</th>
                                 <th scope="col">Localidad</th>
@@ -144,13 +146,13 @@
                                 <th scope="col">Cadete</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Detalle</th>
+                                <th scope="col">Contado?</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <tr th:each="v : ${viajes}">
-                                <th scope="row" th:text="${v.idViaje}"></th>
                                 <td th:text="${#dates.format(v.fecha,'dd MMMM yyyy')}"></td>
                                 <td th:text="${v.direccion}"></td>
                                 <td th:text="${v.localidad}"></td>
@@ -158,17 +160,14 @@
                                 <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
                                 <td th:text="${v.Cliente.razonSocial}"></td>
                                 <td th:text="${v.detalle}"></td>
+                                <td th:text="${v.contado}"></td>
 
 
                                 <td>
                                     <div class="form-inline">
 
                                         <a class="btn btn-warning btn-edit" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Editar</a>
-
-
-                                        <form action="#" th:action="@{/viajes/delete/{id}(id=${v.idViaje})}" method="post">
-                                            <input class="btn btn-danger" type="submit" value="Eliminar"></form>
-
+                                        <a class="btn btn-danger btn-delete" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Eliminar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -185,7 +184,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Agregar Viaje xx
+                                            <h5 class="modal-title" id="exampleModalLabel">Agregar Viaje
                                             </h5>
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                     <span aria-hidden="true">&times;</span>
@@ -214,48 +213,68 @@
 
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="formGroupExampleInput">Direccion</label>
-                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="formGroupExampleInput2">Localidad</label>
-                                                <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label class="col-form-label" for="name">Cadete</label>
+                                            <div class="form-row">
 
 
-                                                <select class="form-control " id="empleado" name="empleado.idPersona" required>
-                                        <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
 
-                                    </select>
+                                                <div class="form-group col-md-7">
+                                                    <label for="formGroupExampleInput">Direccion</label>
+                                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
+                                                </div>
+
+                                                <div class="form-group col-md-5">
+                                                    <label for="formGroupExampleInput2">Localidad</label>
+                                                    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
+                                                </div>
 
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-row">
 
-                                                <label class="col-form-label" for="name">Cliente</label>
+                                                <div class="form-group col-md-6">
 
-                                                <select class="form-control " id="cliente" name="cliente.idPersona" required>
+                                                    <label class="col-form-label" for="name">Cadete</label>
+
+
+                                                    <select class="form-control " id="empleado" name="empleado.idPersona" required>
+                                                    <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+                                                </select>
+
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+
+                                                    <label class="col-form-label" for="name">Cliente</label>
+
+                                                    <select class="form-control " id="cliente" name="cliente.idPersona" required>
                                         <option th:each="c : ${clientes}" th:value="${c.idPersona}"  th:text="${c.razonSocial}"></option>
 
                                     </select>
 
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="formGroupExampleInput2">Importe</label>
+                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="formGroupExampleInput">Detalle</label>
+                                                    <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
+                                                </div>
+
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="formGroupExampleInput2">Importe</label>
-                                                <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe">
+                                                <input type="checkbox" name="contado" id="contado">
+                                                <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="formGroupExampleInput">Detalle</label>
-                                                <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
-                                            </div>
 
                                         </div>
                                         <div class="modal-footer">
@@ -297,54 +316,70 @@
 
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="formGroupExampleInput">Direccion</label>
-                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
+                                            <div class="form-row">
+
+                                                <div class="form-group col-md-7">
+                                                    <label for="formGroupExampleInput">Direccion</label>
+                                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
+                                                </div>
+
+                                                <div class="form-group col-md-5">
+                                                    <label for="formGroupExampleInput2">Localidad</label>
+                                                    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
+                                                </div>
+
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="formGroupExampleInput2">Localidad</label>
-                                                <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
-                                            </div>
+                                            <div class="form-row">
 
-                                            <div class="form-group">
+                                                <div class="form-group col-md-6">
 
-                                                <label class="col-form-label" for="name">Cadete</label>
+                                                    <label class="col-form-label" for="name">Cadete</label>
 
 
-                                                <select class="form-control " id="empleado" name="empleado.idPersona" required>
+                                                    <select class="form-control " id="empleado" name="empleado.idPersona" required>
                                         <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
 
                                     </select>
 
-                                            </div>
+                                                </div>
 
-                                            <div class="form-group">
+                                                <div class="form-group col-md-6">
 
-                                                <label class="col-form-label" for="name">Cliente</label>
+                                                    <label class="col-form-label" for="name">Cliente</label>
 
-                                                <select class="form-control " id="cliente" name="cliente.idPersona" required>
+                                                    <select class="form-control " id="cliente" name="cliente.idPersona" required>
                                         <option th:each="c : ${clientes}" th:value="${c.idPersona}"  th:text="${c.razonSocial}"></option>
 
                                     </select>
 
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="formGroupExampleInput2">Importe</label>
+                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="formGroupExampleInput">Detalle</label>
+                                                    <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
+                                                </div>
+
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="formGroupExampleInput2">Importe</label>
-                                                <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe">
+                                                <input type="checkbox" id="contado" name="contado">
+                                                <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
                                             </div>
-
-                                            <div class="form-group">
-                                                <label for="formGroupExampleInput">Detalle</label>
-                                                <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
-                                            </div>
-
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                            <input class="btn btn-success" type="submit" value="Save" />
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+                                            <input class="btn btn-success" type="submit" value="Guardar" />
                                         </div>
                                     </div>
                                 </div>
@@ -352,6 +387,68 @@
                         </form>
                     </div>
 
+                    <!-- ---------------------------AGREGADO PARA ELIMINAR-------------------------------------------------------------- -->
+                    <div class="form-delete">
+                        <form action="#" method="post" th:action="@{/viajes/delete}" novalidate class="formulario">
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar el Viaje???</h4>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
+
+                                            <div class="form-group">
+
+                                                <label class="col-form-label" for="name">Del Cadete</label>
+                                                <select class="form-control " id="empleado" name="empleado.idPersona" disabled="true">
+                                             <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+                                           </select>
+
+                                            </div>
+
+
+                                            <div class="form-group">
+
+                                                <label for="formGroupExampleInput">De la fecha</label>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <input type="date" id="fecha" name="fecha" class="form-control" readonly="readonly">
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Direccion</label>
+                                                <input type="text" class="form-control" id="direccion" name="direccion" readonly="readonly">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput2">Localidad</label>
+                                                <input type="text" class="form-control" id="localidad" name="localidad" readonly="readonly">
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+
+                                            <input class="btn btn-danger" type="submit" value="Eliminar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- ---------------------------FIN AGREGADO PARA ELIMINAR---------------------------------------------------------- -->
 
 
                     <a href="#" class="btn btn-success btn-add">
@@ -368,11 +465,37 @@
 
     </div>
     <!-- -------------------------------------------------------------------------------------------------------------------  -->
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <form th:action="@{/logout}" method="post">
+                        <input class="btn btn-primary" style="cursor: pointer" type="submit" value="Logout" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -396,7 +519,6 @@
 
 
                 $.get(href, function(viaje, status) {
-
                     $('.form-update #id').val(viaje.idViaje);
                     $('.form-update #fecha').val(viaje.fecha);
                     $('.form-update #direccion').val(viaje.direccion);
@@ -406,12 +528,40 @@
                     $('.form-update #importe').val(viaje.importe);
                     $('.form-update #detalle').val(viaje.detalle);
 
+                    if (viaje) {
+                        $('.form-update #contado').val(true);
+                    } else {
+                        $('.form-update #contado').val(false);
+                    }
+
+
 
                 });
 
                 $('.form-update #exampleModal').modal();
 
             });
+
+
+
+            $('.btn-delete').on('click', function(event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
+
+
+                $.get(href, function(viaje, status) {
+                    $('.form-delete #id').val(viaje.idViaje);
+                    $('.form-delete #fecha').val(viaje.fecha);
+                    $('.form-delete #direccion').val(viaje.direccion);
+                    $('.form-delete #localidad').val(viaje.localidad);
+                    $('.form-delete #empleado').val(viaje.empleado.idPersona);
+                });
+
+                $('.form-delete #exampleModal').modal();
+
+            });
+
+
 
             $('#selectFecha').on('change', function() {
                 //Seteo la fecha actual al campo input date
@@ -429,6 +579,9 @@
 
         });
     </script>
+
+    <script src="demo/dataTable.js"></script>
+
 
 </body>
 

@@ -1,6 +1,6 @@
 package com.system.Sistemadeviajes.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 
 @Entity
 public class Viaje {
@@ -20,7 +18,6 @@ public class Viaje {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idViaje;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fecha")
 	private Date fecha;
 	
@@ -42,12 +39,15 @@ public class Viaje {
 	@Column(name = "detalle")
 	private String detalle;
 	
+	@Column(name = "contado")
+	private boolean contado;
+	
 	
 	public Viaje() { }
 
 
 	public Viaje(long idViaje, Date fecha, String direccion, String localidad, double importe, Empleado empleado,
-			Cliente cliente,String detalle) {
+			Cliente cliente,String detalle, boolean contado) {
 		super();
 		this.idViaje = idViaje;
 		this.fecha = fecha;
@@ -57,6 +57,7 @@ public class Viaje {
 		this.empleado = empleado;
 		this.cliente = cliente;
 		this.detalle = detalle;
+		this.contado = contado;
 	}
 
 
@@ -153,6 +154,17 @@ public class Viaje {
 	public void setDetalle(String detalle) {
 		this.detalle = detalle;
 	}
+
+
+	public boolean isContado() {
+		return contado;
+	}
+
+
+	public void setContado(boolean contado) {
+		this.contado = contado;
+	}
+	
 	
 
 }//fin class

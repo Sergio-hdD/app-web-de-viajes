@@ -48,6 +48,7 @@ html, body{
 	padding: 0;
 	width: 100%;
 	box-sizing: border-box;
+	
 }
 .list-unstyle{
 	margin: 0;
@@ -400,8 +401,7 @@ html, body{
 	line-height: 50px;
 	color: #fff;
 	width: 100%;
-	font-size: 27px;
-	background-color: #F5672C;
+	font-size: 30px;
 	margin: -2% 0px 0px 0px;
 }
 .navLateral-body-logo .zmdi-close{
@@ -509,7 +509,7 @@ html, body{
 ======================================================*/
 /*=============Azulejos o accesos directos(Tiles)*/
 .tile{
-	border: 1px solid #E1E1E1;
+	border: 3px solid white;
 	height: 140px;
 	width: 30%;
 	margin: 0 1%;
@@ -520,9 +520,8 @@ html, body{
 	margin-bottom: 20px;
 	display: inline-block;
 }
-.tile:hover .tile-text span{ color: #3F51B5; }
+.tile:hover .tile-text span{ color: #dbdbdbea; }
 .tile:hover .tile-icon{
-	color: rgba(0,191,238,.3);
 	transform: scale(1.5) translate(-10px, -10px);
 }
 .tile-text{
@@ -534,7 +533,7 @@ html, body{
 .tile-text span,
 .tile-icon{
 	position: absolute;
-	color: rgba(0,0,0,.3);
+	color: rgba(255, 255, 255, 0.897);
 	transition: all .3s ease-in-out;
 	-moz-user-select: none;
 	-webkit-user-select: none;
