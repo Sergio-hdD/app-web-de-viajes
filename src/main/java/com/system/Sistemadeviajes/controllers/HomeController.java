@@ -32,8 +32,15 @@ public class HomeController {
 	@GetMapping("/dashboard")
 	public ModelAndView dashboard(){
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.DASHBOARD_INDEX);	
-		
+		//LocalDate fechaActual = LocalDate.of(2020, 5, 19);//LA USÉ PARA PROBAR
+		LocalDate fechaActual = LocalDate.now(); //obtengo la fecha actual
+		LocalDate inicioSem = fechaActual.minusDays(fechaActual.getDayOfWeek().getValue()-1);// si el número de día de la semana de la fecha actual es x yo quiero que a la fecha actual le reste x-1 (para tomar el primero de la semana)
+		LocalDate finSem = fechaActual.plusDays(7-fechaActual.getDayOfWeek().getValue());// si el número de día de la semana de la fecha actual es x yo quiero que a la fecha actual le sume 7-x (para tomar el último de la semana) 
+	
+		mAV.addObject("inicioSemana",inicioSem);
+		mAV.addObject("finSemana",finSem);
 		mAV.addObject("mes", LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES")));
+		mAV.addObject("gananciaSemanal", viajeService.getGananciaEntreFechas(inicioSem, finSem));
 		mAV.addObject("gananciaMes", viajeService.getGananciaDelMes());
 		mAV.addObject("gananciaTotal", viajeService.getGananciaViajes());
 		

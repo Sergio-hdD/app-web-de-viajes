@@ -20,6 +20,8 @@ public class ViewRouteHelpers {
 	public final static String TRAVEL_INDEX = "viaje/index";
 	public final static String TRAVEL_PEDIRFECHAS = "viaje/pedirFechas";
 	public final static String TRAVEL_EMPLEADO_ENTRE_FECHAS = "viaje/viajesDeEmpleadoEntreFechas";
+	public final static String TRAVEL_PEDIRFECHAS_CLI = "viaje/pedirFechasCli";
+	public final static String TRAVEL_CLI_ENTRE_FECHAS = "viaje/viajesDeCliEntreFechas";
 	
 	//Empleado
 	public final static String EMPLOYEE_UPDATE = "empleado/update";

@@ -67,13 +67,22 @@
                         <p>Viajes</p>
                     </a>
                 </li>
-                <li>
-                    <a href="/viajes/empleadoYFechas">
-                        <i class="fas fa-calendar-alt"></i>
-                        <p>Viajes/Cadete/fechas</p>
-                    </a>
-                </li>
-                <li>
+                    <li>
+                        <a href="/viajes/empleadoYFechas">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>Viajes/Cadete/Cliente/fechas</p>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="/viajes/clienteYFechas">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>Viajes/CLIENTE/fechas</p>
+                        </a>
+                    </li>
+                    
+                    <li>
                     <a href="/home">
                         <i class="now-ui-icons shopping_shop"></i>
                         <p>Volver a home</p>
@@ -165,6 +174,14 @@
                             </div>
                         </div>
                            
+			<div class="alert alert-warning alert-with-icon" data-notify="container">
+
+                  <span data-notify="icon" class="now-ui-icons business_money-coins"></span>
+                  
+                  <b th:text="'Ganancia de la semana actual (del '+ ${inicioSemana}+' al '+ ${finSemana}+' )' "></b>
+                  <br>
+                  <span data-notify="message" th:text="'$ ' + ${gananciaSemanal}"></span>
+            </div>
 			
 			<div class="alert alert-success alert-with-icon" data-notify="container">
 
@@ -173,7 +190,7 @@
                   <b th:text="'Ganancia del mes actual ( ' + ${mes} + ' )'"></b>
                   <br>
                   <span data-notify="message" th:text="'$ ' + ${gananciaMes}"></span>
-                </div>                    
+            </div>                    
 			
 			<div class="alert alert-info alert-with-icon" data-notify="container">
 
@@ -181,7 +198,7 @@
                   <b> Ganancia Total </b>
                   <br>
                   <span data-notify="message" th:text="'$ ' + ${gananciaTotal}"></span>
-                </div>
+            </div>
 			
 			
         </div>

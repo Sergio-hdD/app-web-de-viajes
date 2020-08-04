@@ -37,7 +37,7 @@
                     <i class="fas fa-motorcycle"></i>
                 </a>
                 <a href="/home" class="simple-text logo-normal">
-              DANY-MOTOS
+              NEW-MOTOS
             </a>
             </div>
 
@@ -70,9 +70,18 @@
                     <li>
                         <a href="/viajes/empleadoYFechas">
                             <i class="fas fa-calendar-alt"></i>
-                            <p>Viajes/Cadete/fechas</p>
+                            <p>Viajes/Cadete/Cliente/fechas</p>
                         </a>
                     </li>
+                    
+                    
+                    <li>
+                        <a href="/viajes/clienteYFechas">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>Viajes/CLIENTE/fechas</p>
+                        </a>
+                    </li>
+                    
                     <li>
                         <a href="/home">
                             <i class="now-ui-icons shopping_shop"></i>
@@ -143,11 +152,14 @@
                                 <th scope="col">Direccion</th>
                                 <th scope="col">Localidad</th>
                                 <th scope="col">Importe</th>
+                                <th scope="col">Descuento</th>
+                                <th scope="col">neto</th>
                                 <th scope="col">Cadete</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Detalle</th>
                                 <th scope="col">Contado?</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Entregado?</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -156,11 +168,14 @@
                                 <td th:text="${#dates.format(v.fecha,'dd MMMM yyyy')}"></td>
                                 <td th:text="${v.direccion}"></td>
                                 <td th:text="${v.localidad}"></td>
-                                <td th:text="'$' + ${v.importe}"></td>
+                                <td th:text="'$ ' + ${v.importe}"></td>
+                                 <td th:text="'$' + ${v.descuento}"></td>
+                                 <td th:text="'$' + ${v.neto}"></td>
                                 <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
                                 <td th:text="${v.Cliente.razonSocial}"></td>
                                 <td th:text="${v.detalle}"></td>
                                 <td th:text="${v.contado}"></td>
+                                 <td th:text="${v.entregado}"></td>
 
 
                                 <td>
@@ -264,6 +279,12 @@
                                                 </div>
 
                                                 <div class="form-group col-md-6">
+                                                    <label for="formGroupExampleInput2">Descuento</label>
+                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento">
+                                                </div>
+
+
+                                                <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput">Detalle</label>
                                                     <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
                                                 </div>
@@ -273,6 +294,12 @@
                                             <div class="form-group">
                                                 <input type="checkbox" name="contado" id="contado">
                                                 <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="checkbox" name="entregado" id="entregado">
+                                                <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
                                             </div>
 
 
@@ -365,6 +392,12 @@
                                                 </div>
 
                                                 <div class="form-group col-md-6">
+                                                    <label for="formGroupExampleInput2">Descuento</label>
+                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento">
+                                                </div>
+                                                
+
+                                                <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput">Detalle</label>
                                                     <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
                                                 </div>
@@ -374,6 +407,12 @@
                                             <div class="form-group">
                                                 <input type="checkbox" id="contado" name="contado">
                                                 <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="checkbox" name="entregado" id="entregado">
+                                                <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
                                             </div>
 
                                         </div>

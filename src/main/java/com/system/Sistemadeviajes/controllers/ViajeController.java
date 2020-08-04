@@ -27,6 +27,8 @@ import com.system.Sistemadeviajes.entities.Empleado;
 import com.system.Sistemadeviajes.entities.Viaje;
 import com.system.Sistemadeviajes.helpers.ViewRouteHelpers;
 import com.system.Sistemadeviajes.models.CantidadViajes;
+import com.system.Sistemadeviajes.models.ClienEmpleModel;
+import com.system.Sistemadeviajes.models.ClienteModel;
 import com.system.Sistemadeviajes.models.EmpleadoModel;
 import com.system.Sistemadeviajes.models.ViajeModel;
 import com.system.Sistemadeviajes.repositories.IEmpleadoRepository;
@@ -97,28 +99,58 @@ public class ViajeController {
 	    return viajeService.findByIdViaje(idViaje);
 	}
 
-	
 	@GetMapping("/empleadoYFechas")
-	public ModelAndView pedirLocalYFecha() {
+	public ModelAndView pedirEmpleYFecha() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS);
 		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes",clienteService.getAll());
 		return mAV;
 	}	
 
 	@RequestMapping(value = "/devolverEmpleadoYFechas", method = RequestMethod.POST)
-	public ModelAndView traerLocalYFechas(@ModelAttribute("empleadoModel") EmpleadoModel empleadoModel,
+	public ModelAndView traerEmpleYFechas(@ModelAttribute("clienEmpleModel") ClienEmpleModel clienEmpleModel,
 			@RequestParam("fecha1") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha1,
 			@RequestParam("fecha2") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha2, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_EMPLEADO_ENTRE_FECHAS);
-		EmpleadoModel empleado = empleadoService.findByIdPersona(empleadoModel.getIdPersona());
+		ClienteModel cliente = clienteService.findByIdPersona(clienEmpleModel.getCliente().getIdPersona());
+		EmpleadoModel empleado = empleadoService.findByIdPersona(clienEmpleModel.getEmpleado().getIdPersona());
 		mAV.addObject("fecha1",new SimpleDateFormat("dd-MM-yyyy").format(fecha1));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
 		mAV.addObject("fecha2",new SimpleDateFormat("dd-MM-yyyy").format(fecha2));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
 		mAV.addObject("empleado",empleado);
-		List<Viaje> viajes = viajeService.traerViajesDelEmpleadoEntreFechas(empleado,fecha1, fecha2); 
+		mAV.addObject("cliente",cliente);
+		List<Viaje> viajes = viajeService.traerViajesDelEmpleadoEntreFechas(cliente,empleado,fecha1, fecha2); 
 	    mAV.addObject("cantidad",viajes.size());
+	    mAV.addObject("bruto", viajeService.totalBrutoEntreFechas(cliente,empleado,fecha1, fecha2));
+	    mAV.addObject("descuento", viajeService.totalDescuentoEntreFechas(cliente,empleado,fecha1, fecha2));
+	    mAV.addObject("neto", viajeService.totalNetoEntreFechas(cliente,empleado,fecha1, fecha2));
 		mAV.addObject("viajes",viajes);
 		return mAV;
 	}
+	
+//-----------------------------------------------------------------------
+	@GetMapping("/clienteYFechas")
+	public ModelAndView pedirClieYFecha() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS_CLI);
+		mAV.addObject("clientes", clienteService.getAll());
+		return mAV;
+	}	
+
+	@RequestMapping(value = "/devolverClienteYFechas", method = RequestMethod.POST)
+	public ModelAndView traerClieYFechas(@ModelAttribute("clienteModel") ClienteModel clienteModel,
+			@RequestParam("fecha1") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha1,
+			@RequestParam("fecha2") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha2, Model model) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_CLI_ENTRE_FECHAS);
+		ClienteModel cliente = clienteService.findByIdPersona(clienteModel.getIdPersona());
+		mAV.addObject("fecha1",new SimpleDateFormat("dd-MM-yyyy").format(fecha1));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
+		mAV.addObject("fecha2",new SimpleDateFormat("dd-MM-yyyy").format(fecha2));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
+		mAV.addObject("cliente",cliente);
+		List<Viaje> viajes = viajeService.traerViajesDelClienteEntreFechas(cliente,fecha1, fecha2); 
+	    mAV.addObject("cantidad",viajes.size());
+	    mAV.addObject("imporTotal", viajeService.totalAFacturarEntreFechas(cliente,fecha1, fecha2));
+		mAV.addObject("viajes",viajes);
+		return mAV;
+	}
+//-----------------------------------------------------------------------
 	
 	
 	@GetMapping("/cantidadViajesEmpleados")

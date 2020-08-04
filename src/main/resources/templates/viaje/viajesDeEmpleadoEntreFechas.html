@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Viajes/Cadetes entre fechas
+        Viajes/Cadete/Cliente entre fechas
     </title>
 
 
@@ -42,7 +42,7 @@
                     <i class="fas fa-motorcycle"></i>
                 </a>
                 <a href="/home" class="simple-text logo-normal">
-              DANY-MOTOS
+              NEW-MOTOS
             </a>
             </div>
 
@@ -75,7 +75,7 @@
                     <li>
                         <a href="/viajes/empleadoYFechas">
                             <i class="fas fa-calendar-alt"></i>
-                            <p>Viajes/Cadete/fechas</p>
+                            <p>Viajes/Cadete/Cliente/fechas</p>
                         </a>
                     </li>
                     <li>
@@ -157,20 +157,62 @@
 
                             <div class="card text-white bg-primary mb-3">
                                 <div class="card-header">
-                                    <h4 class="card-title">Resultado de la consulta <b>VIAJES DEL CADETE ENTRE FECHAS</b></h4>
+                                    <h4 class="card-title">Resultado de la consulta <b>VIAJES DEL CADETE/CLIENTE ENTRE FECHAS</b></h4>
                                 </div>
                                 <div class="card-body">
 
-                                    <div class="card-body">
-                                        <h5 style='color:black'><b>El cadete: </b>
-                                            <td><span th:text="${empleado.nombre}+' '+${empleado.apellido}" /></td> <b> ,    entre las fechas:</b>
-                                            <td><span th:text="${fecha1}" /></td> y
-                                            <td><span th:text="${fecha2}" /></td>
-                                        </h5>
+<!-- ---------------------------------------------------- -->                                   
+                                      <div class="table" id="list2">
+                                        <table id="userList" class="table table-bordered table-hover table-striped">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">Cadete</th>
+                                                    <th scope="col">Desde (fecha)</th>
+                                                    <th scope="col">Hasta (fecha)</th>
+                                                    <th scope="col">Cliente</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span th:text="${empleado.nombre}+' '+${empleado.apellido}" /></td>
+                                                    <td><span th:text="${fecha1}" /></td>
+                                                    <td><span th:text="${fecha2}" /></td>
+                                                    <td><span th:text="${cliente.razonSocial}" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
+ <!-- ---------------------------------------------------- -->  
+                                     <br>
                                     <div class="card-body">
-                                        <h5 style='color:black'><b>HIZO UN TOTAL DE  <b style='color:red'><td><span th:text="${cantidad}" /></td></b> VIAJES</b>
-                                        </h5>
+                                        <h5 style='color:black'><b style='color:red'>VIAJES</b></h5>
+                                    </div>                                 
+                                       <div class="table" id="list2">
+                                        <table id="userList" class="table table-bordered table-hover table-striped">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">Cantidad de viajes</th>
+                                                    <th scope="col">Bruto</th>
+                                                    <th scope="col">Descuento</th>
+                                                    <th scope="col">Neto</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span th:text="${cantidad}" /></td>
+                                                    <td><span th:text="' $ '+${bruto}" /></td>
+                                                    <td><span th:text="' $ '+${descuento}" /></td>
+                                                    <td><span th:text="' $ '+${neto}" /></td> 
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+ <!-- ---------------------------------------------------- --> 
+                                    <br>
+                                    <div class="card-body">
+                                        <h6 style='color:black'><b style='color:red'>DETALLES</b></h6>
                                     </div>
 
                                     <div class="table" id="list2">
@@ -180,9 +222,8 @@
                                                     <th scope="col">Fecha</th>
                                                     <th scope="col">Direccion</th>
                                                     <th scope="col">Localidad</th>
-                                                    <th scope="col">Cliente</th>
-                                                    <th scope="col">Importe ($)</th>
-                                                    <th scope="col">Detalle</th>
+                                                    <th scope="col">Importe </th>
+                                                    <th scope="col">Descuento</th>
                                                 </tr>
 
                                             </thead>
@@ -191,15 +232,14 @@
                                                     <td><span th:text="${viaje.fecha}" /></td>
                                                     <td><span id="viajeConDatos" th:text="${viaje.direccion}" /></td>
                                                     <td><span th:text="${viaje.localidad}" /></td>
-                                                    <td><span th:text="${viaje.cliente.razonSocial}" /></td>
-                                                    <td><span th:text="${viaje.importe}" /></td>
-                                                    <td><span th:text="${viaje.detalle}" /></td>
+                                                    <td><span th:text="' $ '+${viaje.importe}" /></td>
+                                                    <td><span th:text="${viaje.descuento}" /></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <br/>
-
                                     </div>
+ <!-- ---------------------------------------------------- -->                                   
                                 </div>
                             </div>
                         </div>

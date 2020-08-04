@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Fechas/cadete/cliente
+        Fechas y cliente
     </title>
 
 
@@ -73,6 +73,14 @@
                             <p>Viajes/Cadete/Cliente/fechas</p>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="/viajes/clienteYFechas">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>Viajes/CLIENTE/fechas</p>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="/home">
                             <i class="now-ui-icons shopping_shop"></i>
@@ -140,14 +148,14 @@
 
                         <div class="card text-white bg-warning mb-1">
                             <div class="card-header">
-                                <h4 class="card-title" style=color:black>Ver los viajes entre fechas de un cadete</h4>
+                                <h4 class="card-title" style=color:black>Ver los viajes entre fechas de un CLIENTE</h4>
                             </div>
                         </div>
 
 
 
                         <div class="card-body">
-                            <form th:action="devolverEmpleadoYFechas" action="#" method="post" style="padding-top: 10px;">
+                            <form th:action="devolverClienteYFechas" action="#" method="post" style="padding-top: 10px;">
 
 
 
@@ -198,15 +206,15 @@
 
                                         <div class="col">
 
-                                            <span><b style=font-size:16px>Elija el cadete: </b> 
+                                            <span><b style=font-size:16px>Elija el cliente: </b> 
                                           
                                             </div>
 
                                             <div class="col">
 
 
-                                          <select class="form-control" placeholder="empleado" name="empleado.idPersona">
-                                        <option th:each="e : ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre}+' '+${e.apellido}"></option>
+                                          <select class="form-control" placeholder="cliente" name="idPersona">
+                                        <option th:each="c : ${clientes}" th:value="${c.idPersona}" th:text="${c.razonSocial}"></option>
                                       </select></span>
 
                                         </div>
@@ -218,34 +226,7 @@
 
 
 
-
-                                <div class="card-body">
-
-                                    <div class="row">
-
-                                        <div class="col">
-
-                                          <span><b style=font-size:16px>Elija el cliente: </b> 
-                                          
-                                            </div>
-
-                                            <div class="col">
-
-
-                                          <select class="form-control" placeholder="cliente" name="cliente.idPersona">
-                                              <option th:each="c : ${clientes}" th:value="${c.idPersona}" th:text="${c.razonSocial}"></option>
-                                          </select> 
-                                         </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-
-								<br />
+                                <br />
 
 
                                 <a> <button type="submit" class="btn btn-primary">ENVIAR RESPUESTA  <i  style="padding-left: 5px;" class="now-ui-icons ui-1_send"></i></button></a>
