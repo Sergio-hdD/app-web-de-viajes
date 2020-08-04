@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.system.Sistemadeviajes.converters.ViajeConverter;
 import com.system.Sistemadeviajes.entities.Viaje;
+import com.system.Sistemadeviajes.models.ClienteModel;
 import com.system.Sistemadeviajes.models.EmpleadoModel;
 import com.system.Sistemadeviajes.models.ViajeModel;
 import com.system.Sistemadeviajes.repositories.IViajeRepository;
@@ -32,10 +33,11 @@ public class ViajeService implements IViajeService{
 	public List<Viaje> getAll() {
 		return viajeRepository.findAll();
 	}
-
+	
 
 	@Override
 	public ViajeModel insertOrUpdate(ViajeModel viajeModel) {
+		viajeModel.setNeto(viajeModel.getImporte() - viajeModel.getDescuento());
 		Viaje v = viajeRepository.save(viajeConverter.modelToEntity(viajeModel));
 		return viajeConverter.entityToModel(v);
 	}
@@ -60,9 +62,57 @@ public class ViajeService implements IViajeService{
 	}
 
 	@Override
-	public List<Viaje> traerViajesDelEmpleadoEntreFechas(EmpleadoModel empleado,Date fecha1,Date fecha2){
-		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(empleado.getIdPersona(), fecha1, fecha2);
+	public List<Viaje> traerViajesDelEmpleadoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
+		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
 		 return viajes;
+	}
+	
+	@Override
+	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
+		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
+		 double bruto =0; 
+		 for(Viaje viaje:viajes) {
+			 bruto += viaje.getImporte();
+		 }
+		 return bruto;
+	}
+	
+	@Override
+	public double totalDescuentoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
+		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
+		 double descuento =0; 
+		 for(Viaje viaje:viajes) {
+			 descuento += viaje.getDescuento();
+		 }
+		 return descuento;
+	}
+
+	@Override
+	public double totalNetoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
+		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
+		 double neto =0; 
+		 for(Viaje viaje:viajes) {
+			 neto += viaje.getNeto();
+		 }
+		 return neto;
+	}
+	
+	
+
+	@Override
+	public List<Viaje> traerViajesDelClienteEntreFechas(ClienteModel cliente,Date fecha1,Date fecha2){
+		 List<Viaje> viajes = viajeRepository.viajesDelClienteEntreFachas(cliente.getIdPersona(), fecha1, fecha2);
+		 return viajes;
+	}
+
+	@Override
+	public double totalAFacturarEntreFechas(ClienteModel cliente,Date fecha1,Date fecha2){
+		 List<Viaje> viajes = viajeRepository.viajesDelClienteEntreFachas(cliente.getIdPersona(), fecha1, fecha2);
+		 double total =0; 
+		 for(Viaje viaje:viajes) {
+			 total += viaje.getImporte();
+		 }
+		 return total;
 	}
 	
 	@Override
@@ -91,6 +141,17 @@ public class ViajeService implements IViajeService{
 		return ganancia;
 	}
 	
+
+	public double getGananciaEntreFechas(LocalDate fecha1,LocalDate fecha2) {
+		double ganancia = 0;
+		for(Viaje v : viajeRepository.viajesEntreFachas(fecha1, fecha2)) {			
+				ganancia += v.getImporte();
+		}
+		
+		return ganancia;
+	}
+    
+	
 	@Override
 	public int getCantidadViajesEmpleado(long idPersona) {
 		int cantidad = 0;
@@ -118,4 +179,4 @@ public class ViajeService implements IViajeService{
 	}
 	
 	
-}// fin class
+}// fin class 

@@ -14,13 +14,17 @@ public class ViajeModel {
 	private ClienteModel cliente;
 	private String detalle;
 	private boolean contado;
+	private boolean entregado;
+	private double descuento;
+	private double neto;
 	
 	
 	public ViajeModel() { }
 
-
+	
 	public ViajeModel(long idViaje, Date fecha, String direccion, String localidad, double importe,
-			EmpleadoModel empleado, ClienteModel cliente, String detalle, boolean contado) {
+			EmpleadoModel empleado, ClienteModel cliente, String detalle, boolean contado, boolean entregado,
+			double descuento,double neto) {
 		super();
 		this.idViaje = idViaje;
 		this.fecha = fecha;
@@ -31,7 +35,12 @@ public class ViajeModel {
 		this.cliente = cliente;
 		this.detalle = detalle;
 		this.contado = contado;
+		this.entregado = entregado;
+		this.descuento = descuento;
+		this.neto = neto;
 	}
+
+
 
 
 	public long getIdViajes() {
@@ -134,12 +143,43 @@ public class ViajeModel {
 	}
 
 
+	public boolean isEntregado() {
+		return entregado;
+	}
+
+
+	public void setEntregado(boolean entregado) {
+		this.entregado = entregado;
+	}
+
+
+	public double getDescuento() {
+		return descuento;
+	}
+
+
+	public void setDescuento(double descuento) {
+		this.descuento = descuento;
+	}
+
+
+	public double getNeto() {
+		return neto;
+	}
+
+
+	public void setNeto(double neto) {
+		this.neto = neto;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ViajeModel [idViaje=" + idViaje + ", fecha=" + fecha + ", direccion=" + direccion + ", localidad="
 				+ localidad + ", importe=" + importe + ", empleado=" + empleado + ", cliente=" + cliente + ", detalle="
-				+ detalle + ", contado=" + contado + "]";
+				+ detalle + ", contado=" + contado + ", entregado=" + entregado + ", descuento=" + descuento + ", neto="
+				+ neto + "]";
 	}
 
-	
+
 }//fin class

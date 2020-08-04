@@ -42,12 +42,21 @@ public class Viaje {
 	@Column(name = "contado")
 	private boolean contado;
 	
+	@Column(name = "entregado")
+	private boolean entregado;
+	
+	@Column(name = "descuento")
+	private double descuento;
+	
+	@Column(name = "neto")
+	private double neto;
+	
 	
 	public Viaje() { }
 
 
 	public Viaje(long idViaje, Date fecha, String direccion, String localidad, double importe, Empleado empleado,
-			Cliente cliente,String detalle, boolean contado) {
+			Cliente cliente, String detalle, boolean contado, boolean entregado, double descuento,double neto) {
 		super();
 		this.idViaje = idViaje;
 		this.fecha = fecha;
@@ -58,7 +67,12 @@ public class Viaje {
 		this.cliente = cliente;
 		this.detalle = detalle;
 		this.contado = contado;
+		this.entregado = entregado;
+		this.descuento = descuento;
+		this.neto = neto;
 	}
+
+
 
 
 	public long getIdViaje() {
@@ -163,6 +177,36 @@ public class Viaje {
 
 	public void setContado(boolean contado) {
 		this.contado = contado;
+	}
+
+
+	public boolean isEntregado() {
+		return entregado;
+	}
+
+
+	public void setEntregado(boolean entregado) {
+		this.entregado = entregado;
+	}
+
+
+	public double getDescuento() {
+		return descuento;
+	}
+
+
+	public void setDescuento(double descuento) {
+		this.descuento = descuento;
+	}
+
+
+	public double getNeto() {
+		return neto;
+	}
+
+
+	public void setNeto(double neto) {
+		this.neto = neto;
 	}
 	
 	
