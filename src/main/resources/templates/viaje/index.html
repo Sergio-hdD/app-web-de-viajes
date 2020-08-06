@@ -7,10 +7,12 @@
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title> Viajes </title>
+
+    <title>Viajes</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -153,12 +155,13 @@
                                 <th scope="col">Localidad</th>
                                 <th scope="col">Importe</th>
                                 <th scope="col">Descuento</th>
-                                <th scope="col">neto</th>
+                                <th scope="col">Neto</th>
                                 <th scope="col">Cadete</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Detalle</th>
                                 <th scope="col">Contado?</th>
                                 <th scope="col">Entregado?</th>
+                                <th scope="col">Acciones</th>
                                 
                             </tr>
                         </thead>
@@ -169,14 +172,14 @@
                                 <td th:text="${v.direccion}"></td>
                                 <td th:text="${v.localidad}"></td>
                                 <td th:text="'$ ' + ${v.importe}"></td>
-                                 <td th:text="'$' + ${v.descuento}"></td>
-                                 <td th:text="'$' + ${v.neto}"></td>
+                                <td th:text="'$' + ${v.descuento}"></td>
+                                <td th:text="'$' + ${v.neto}"></td>
                                 <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
                                 <td th:text="${v.Cliente.razonSocial}"></td>
                                 <td th:text="${v.detalle}"></td>
                                 <td th:text="${v.contado}"></td>
-                                 <td th:text="${v.entregado}"></td>
-
+                                <td th:text="${v.entregado}"></td>
+								
 
                                 <td>
                                     <div class="form-inline">
@@ -224,8 +227,8 @@
 
                                             <div class="form-group">
 
-                                                <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha">
-
+                                                <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha" required>
+												
                                             </div>
 
                                             <div class="form-row">
@@ -234,12 +237,18 @@
 
                                                 <div class="form-group col-md-7">
                                                     <label for="formGroupExampleInput">Direccion</label>
-                                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
+                                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar la direccion   
+			                                        </div>
                                                 </div>
 
                                                 <div class="form-group col-md-5">
                                                     <label for="formGroupExampleInput2">Localidad</label>
-                                                    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
+                                                    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar la localidad
+			                                        </div>
                                                 </div>
 
                                             </div>
@@ -275,12 +284,18 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Importe</label>
-                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe">
+                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar el importe   
+			                                        </div>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Descuento</label>
-                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento">
+                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar el descuento   
+			                                        </div>
                                                 </div>
 
 
@@ -288,20 +303,26 @@
                                                     <label for="formGroupExampleInput">Detalle</label>
                                                     <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
                                                 </div>
+                                                
+                                                <div class="form-group col-md-6 mt-4">
+                                                	
+                                                	<div class="form-group">
+		                                                <input type="checkbox" name="contado" id="contado">
+		                                                <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+		                                            </div>
+		
+		
+		                                            <div class="form-group">
+		                                                <input type="checkbox" name="entregado" id="entregado">
+		                                                <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
+		                                            </div>
+                                                	
+                                                
+                                                </div>
 
                                             </div>
 
-                                            <div class="form-group">
-                                                <input type="checkbox" name="contado" id="contado">
-                                                <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <input type="checkbox" name="entregado" id="entregado">
-                                                <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
-                                            </div>
-
+                                            
 
                                         </div>
                                         <div class="modal-footer">
@@ -340,19 +361,25 @@
                                             <div class="form-group">
 
                                                 <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha">
-
+			
                                             </div>
 
                                             <div class="form-row">
 
                                                 <div class="form-group col-md-7">
                                                     <label for="formGroupExampleInput">Direccion</label>
-                                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion">
+                                                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar la direccion   
+			                                        </div>
                                                 </div>
 
                                                 <div class="form-group col-md-5">
                                                     <label for="formGroupExampleInput2">Localidad</label>
-                                                    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad">
+                                                    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar la localidad   
+			                                        </div>
                                                 </div>
 
                                             </div>
@@ -388,12 +415,18 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Importe</label>
-                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe">
+                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar el importe
+			                                        </div>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Descuento</label>
-                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento">
+                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento" required>
+                                                	<div class="invalid-feedback">
+			                                         	Debe ingresar el descuento   
+			                                        </div>
                                                 </div>
                                                 
 
@@ -401,18 +434,21 @@
                                                     <label for="formGroupExampleInput">Detalle</label>
                                                     <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
                                                 </div>
+                                                
+                                                <div class="form-group col-md-6 mt-4">
 
+		                                            <div class="form-group">
+		                                                <input type="checkbox" id="contado" name="contado" required>
+		                                                <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+		                                            </div>
+		
+		                                            <div class="form-group">
+		                                                <input type="checkbox" name="entregado" id="entregado" required>
+		                                                <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
+		                                            </div>
+                                            
                                             </div>
 
-                                            <div class="form-group">
-                                                <input type="checkbox" id="contado" name="contado">
-                                                <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <input type="checkbox" name="entregado" id="entregado">
-                                                <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
                                             </div>
 
                                         </div>
@@ -426,7 +462,7 @@
                         </form>
                     </div>
 
-                    <!-- ---------------------------AGREGADO PARA ELIMINAR-------------------------------------------------------------- -->
+                    <!------------------------------AGREGADO PARA ELIMINAR-------------------------------------------------------------- -->
                     <div class="form-delete">
                         <form action="#" method="post" th:action="@{/viajes/delete}" novalidate class="formulario">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
@@ -566,6 +602,7 @@
                     $('.form-update #cliente').val(viaje.cliente.idPersona);
                     $('.form-update #importe').val(viaje.importe);
                     $('.form-update #detalle').val(viaje.detalle);
+                    $('.form-update #descuento').val(viaje.descuento);
 
                     if (viaje) {
                         $('.form-update #contado').val(true);
@@ -615,6 +652,24 @@
                 var d = new Date();
                 return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
             }
+            
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('formulario');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
 
         });
     </script>
