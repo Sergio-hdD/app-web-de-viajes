@@ -74,6 +74,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/viajes/clienteYFechas">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>Viajes/CLIENTE/fechas</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/home">
                             <i class="now-ui-icons shopping_shop"></i>
                             <p>Volver a home</p>
@@ -147,7 +153,7 @@
 
 
                         <div class="card-body">
-                            <form th:action="devolverEmpleadoYFechas" action="#" method="post" style="padding-top: 10px;">
+                            <form th:action="devolverEmpleadoYFechas" novalidate action="#" method="post" style="padding-top: 10px;" class="formulario">
 
 
 
@@ -162,9 +168,17 @@
 
                                         <div class="col">
 
-                                            <input class="form-control" type="date" th:name="fecha1" />
+                                            <input class="form-control" type="date" th:name="fecha1" required />
+                                            
+                                            <div class="invalid-feedback" style="padding-left:5px">
+                                            
+												Debe ingresar la fecha de inicio
+                                            
+                                        	</div>
 
                                         </div>
+                                        
+                                        
 
 
                                     </div>
@@ -182,7 +196,14 @@
 
                                         <div class="col">
 
-                                            <input class="form-control" type="date" th:name="fecha2" />
+                                            <input class="form-control" type="date" th:name="fecha2" required />
+                                            
+                                            <div class="invalid-feedback" style="padding-left:5px">
+                                            
+												Debe ingresar la fecha final
+                                            
+                                        	</div>
+                                            
 
                                         </div>
 
@@ -205,7 +226,7 @@
                                             <div class="col">
 
 
-                                          <select class="form-control" placeholder="empleado" name="empleado.idPersona">
+                                          <select class="form-control" placeholder="empleado" name="empleado.idPersona" required>
                                         <option th:each="e : ${empleados}" th:value="${e.idPersona}" th:text="${e.nombre}+' '+${e.apellido}"></option>
                                       </select></span>
 
@@ -232,7 +253,7 @@
                                             <div class="col">
 
 
-                                          <select class="form-control" placeholder="cliente" name="cliente.idPersona">
+                                          <select class="form-control" placeholder="cliente" name="cliente.idPersona" required>
                                               <option th:each="c : ${clientes}" th:value="${c.idPersona}" th:text="${c.razonSocial}"></option>
                                           </select> 
                                          </span>
@@ -291,7 +312,30 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	
+	   <script type="text/javascript">
+        $(document).ready(function() {
 
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('formulario');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+
+        });
+    </script>
 
 </body>
 
