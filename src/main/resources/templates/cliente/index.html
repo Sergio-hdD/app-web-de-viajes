@@ -7,7 +7,6 @@
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -175,8 +174,8 @@
                                     <a class="btn btn-warning btn-edit" href="#" th:href="@{/clientes/{id}(id=${c.idPersona})}" style="margin-right: 5px">Editar</a>
 
 
-                                    <form action="#" th:action="@{/clientes/delete/{id}(id=${c.idPersona})}" method="post">
-                                        <input class="btn btn-danger" type="submit" value="Eliminar"></form>
+                                    <form action="#"  method="post">
+                                        <input class="btn btn-danger btn-delete" type="submit" th:href="@{/clientes/{id}(id=${c.idPersona})}" value="Eliminar"></form>
 
 
                                 </div>
@@ -205,24 +204,36 @@
 
                                             <div class="form-group col-md-6">
                                                 <label for="formGroupExampleInput">Razon social</label>
-                                                <input type="text" class="form-control" id="razonSocial" name="razonSocial" placeholder="Ingrese la razon social">
+                                                <input type="text" class="form-control" id="razonSocial" name="razonSocial" placeholder="Ingrese la razon social" required>
+                                            	<div class="invalid-feedback">
+                                                    Debe ingresar la razon social
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <label for="formGroupExampleInput2">Cuit</label>
-                                                <input type="text" class="form-control" id="Cuit" name="Cuit" placeholder="Ingrese el nro de cuit">
+                                                <input type="text" class="form-control" id="Cuit" name="Cuit" placeholder="Ingrese el nro de cuit" required>
+                                            	<div class="invalid-feedback">
+                                                    Debe ingresar el cuit
+                                                </div>
                                             </div>
 
                                         </div>
 
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Direccion</label>
-                                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide">
+                                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide" required>
+                                        	<div class="invalid-feedback">
+                                               	Debe ingresar la direccion
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Telefono</label>
-                                            <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono">
+                                            <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono" required>
+                                        	<div class="invalid-feedback">
+                                                Debe ingresar el telefono
+                                            </div>
                                         </div>
 
 
@@ -260,28 +271,37 @@
 
                                             <div class="form-group col-md-6">
                                                 <label for="formGroupExampleInput">Razon Social</label>
-                                                <input type="text" class="form-control" id="razonSocial" name="razonSocial" placeholder="Ingrese la razon social">
+                                                <input type="text" class="form-control" id="razonSocial" name="razonSocial" placeholder="Ingrese la razon social" required>
+                                            	<div class="invalid-feedback">
+                                                    Debe ingresar la razon social
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <label for="formGroupExampleInput2">Cuit</label>
-                                                <input type="text" class="form-control" id="cuit" name="cuit" placeholder="Ingrese el nro de cuit">
+                                                <input type="text" class="form-control" id="cuit" name="cuit" placeholder="Ingrese el nro de cuit" required>
+                                            	<div class="invalid-feedback">
+                                                    Debe ingresar el cuit
+                                                </div>
                                             </div>
 
                                         </div>
 
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Direccion</label>
-                                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide">
+                                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide" required>
+                                        	<div class="invalid-feedback">
+                                                    Debe ingresar la direccion
+                                                </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Telefono</label>
-                                            <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono">
+                                            <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono" required>
+                                        	<div class="invalid-feedback">
+                                                    Debe ingresar el telefono
+                                            </div>
                                         </div>
-
-
-
 
 
                                     </div>
@@ -294,6 +314,34 @@
                         </div>
                     </form>
                 </div>
+                
+                   <!------------------------------AGREGADO PARA ELIMINAR-------------------------------------------------------------- -->
+                    <div class="form-delete">
+                        <form action="#" method="post" th:action="@{/clientes/delete/}" novalidate class="formulario">
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar?</h4>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+
+                                            <input class="form-control" id="id" name="idPersona" type="text" value="" />
+	
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+
+                                            <input class="btn btn-danger"  type="submit" value="Eliminar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- ---------------------------FIN AGREGADO PARA ELIMINAR---------------------------------------------------------- -->
+
 
 
 
@@ -328,8 +376,15 @@
                     </form>
                 </div>
             </div>
+            
+            <a href="#" class="btn btn-success btn-add">
+                    <i class="fas fa-plus" style="padding-right:5px;"></i>
+                    <span class="p">Agregar Cliente</span>
+
+                </a>
         </div>
     </div>
+    
 
 
 
@@ -370,6 +425,40 @@
                 $('.form-update #exampleModal').modal();
 
             });
+            
+            $('.btn-delete').on('click', function(event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
+
+
+                $.get(href, function(cliente, status) {
+                    $('.form-delete #id').val(cliente.idPersona);
+                    $('.form-delete #exampleModalLabel').html("Realmente quiere eliminar el cliente" + " " + cliente.razonSocial + "?");
+
+                });
+
+                $('.form-delete #exampleModal').modal();
+
+            });
+            
+            
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('formulario');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
 
         });
     </script>

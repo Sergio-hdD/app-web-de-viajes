@@ -32,9 +32,9 @@ public class EmpleadoController {
 		return mAV;
 	}
 	
-	@PostMapping("/delete/{id}")
-	public RedirectView delete(@PathVariable ("id") long idPersona) {
-		empleadoService.remove(idPersona);
+	@PostMapping("/delete")
+	public RedirectView delete(EmpleadoModel empleadoModel) {
+		empleadoService.remove(empleadoModel.getIdPersona());
 		
 		return new RedirectView(ViewRouteHelpers.EMPLOYEE_ROOT);
 	}

@@ -170,19 +170,11 @@
                         <td>
                             <div class="form-inline">
 
-                                <!--
-
-                            <form action="#" th:action="@{/empleados/{id}(id=${e.idPersona})}" method="get"
-                                style="padding-right: 5px;"><input class="btn btn-warning" type="submit" value="Editar">
-                            </form>
-
-                            -->
-
                                 <a class="btn btn-warning btn-edit" href="#" th:href="@{/empleados/{id}(id=${e.idPersona})}" style="margin-right: 5px">Editar</a>
 
 
                                 <form action="#" th:action="@{/empleados/delete/{id}(id=${e.idPersona})}" method="post">
-                                    <input class="btn btn-danger" type="submit" value="Eliminar"></form>
+                                    <input class="btn btn-danger btn-delete" href="#" th:href="@{/empleados/{id}(id=${e.idPersona})}" type="submit" value="Eliminar"></form>
 
                             </div>
                         </td>
@@ -210,12 +202,18 @@
 
                                         <div class="form-group col-md-6">
                                             <label for="formGroupExampleInput">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre">
+                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" required>
+                                        	<div class="invalid-feedback">
+                                         		Debe ingresar el nombre   
+                                        	</div>
                                         </div>
 
                                         <div class="form-group col-md-6">
                                             <label for="formGroupExampleInput2">Apellido</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido">
+                                            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido" required>
+                                        	<div class="invalid-feedback">
+	                                         	Debe ingresar el apellido   
+	                                        </div>
                                         </div>
 
                                     </div>
@@ -238,24 +236,29 @@
 
                                         <div class="form-group col-md-7">
                                             <label for="formGroupExampleInput2">DNI</label>
-                                            <input type="number" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="Ingrese numero de documento">
+                                            <input type="number" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="Ingrese numero de documento" required>
+                                        	<div class="invalid-feedback">
+                                                    Debe ingresar el DNI
+                                            </div>
                                         </div>
 
                                     </div>
 
                                     <div class="form-group">
                                         <label for="formGroupExampleInput2">Direccion</label>
-                                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide">
+                                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide" required>
+                                    	<div class="invalid-feedback">
+                                         	Debe ingresar la direccion     
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="formGroupExampleInput2">Telefono</label>
-                                        <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono">
+                                        <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono" required>
+                                        <div class="invalid-feedback">
+                                         	Debe ingresar el telefono
+                                        </div>
                                     </div>
-
-
-
-
 
                                 </div>
                                 <div class="modal-footer">
@@ -288,12 +291,18 @@
 
                                         <div class="form-group col-md-6">
                                             <label for="formGroupExampleInput">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre">
+                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" required>
+                                        	<div class="invalid-feedback">
+	                                         	Debe ingresar el nombre     
+	                                        </div>
                                         </div>
 
                                         <div class="form-group col-md-6">
                                             <label for="formGroupExampleInput2">Apellido</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido">
+                                            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido" required>
+                                        	<div class="invalid-feedback">
+	                                         	Debe ingresar el apellido     
+	                                        </div>
                                         </div>
 
                                     </div>
@@ -316,19 +325,28 @@
 
                                         <div class="form-group col-md-7">
                                             <label for="formGroupExampleInput2">DNI</label>
-                                            <input type="number" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="Ingrese numero de documento">
+                                            <input type="number" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="Ingrese numero de documento" required>
+                                        	<div class="invalid-feedback">
+	                                         	Debe ingresar el DNI     
+	                                        </div>
                                         </div>
 
                                     </div>
 
                                     <div class="form-group">
                                         <label for="formGroupExampleInput2">Direccion</label>
-                                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide">
+                                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese Direccion donde recide" required>
+                                    	<div class="invalid-feedback">
+                                         	Debe ingresar la direccion     
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="formGroupExampleInput2">Telefono</label>
-                                        <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono">
+                                        <input type="number" class="form-control" id="telCel" name="telCel" placeholder="Ingrese telefono" required>
+                                    	<div class="invalid-feedback">
+                                         	Debe ingresar el telefono 
+                                        </div>
                                     </div>
 
 
@@ -343,6 +361,32 @@
                 </form>
             </div>
 
+                   <!------------------------------AGREGADO PARA ELIMINAR-------------------------------------------------------------- -->
+                    <div class="form-delete">
+                        <form action="#" method="post" th:action="@{/empleados/delete/}" novalidate class="formulario">
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar el empleado?</h4>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+
+                                            <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+	
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+
+                                            <input class="btn btn-danger" type="submit" value="Eliminar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- ---------------------------FIN AGREGADO PARA ELIMINAR---------------------------------------------------------- -->
 
 
             <a href="#" class="btn btn-success btn-icon-split btn-add">
@@ -417,6 +461,39 @@
                 $('.form-update #exampleModal').modal();
 
             });
+            
+            $('.btn-delete').on('click', function(event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
+
+
+                $.get(href, function(empleado, status) {
+                    $('.form-delete #id').val(empleado.idPersona);
+                    $('.form-delete #exampleModalLabel').html("Realmente quiere eliminar el empleado" + " " + empleado.nombre + " " + empleado.apellido + "?");
+
+                });
+
+                $('.form-delete #exampleModal').modal();
+
+            });
+            
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('formulario');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
 
         });
     </script>
