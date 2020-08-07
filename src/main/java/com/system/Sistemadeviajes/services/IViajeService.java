@@ -1,13 +1,13 @@
 package com.system.Sistemadeviajes.services;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import com.system.Sistemadeviajes.entities.Viaje;
 import com.system.Sistemadeviajes.models.ClienteModel;
 import com.system.Sistemadeviajes.models.EmpleadoModel;
 import com.system.Sistemadeviajes.models.ViajeModel;
+
 
 public interface IViajeService {
 	
@@ -19,17 +19,17 @@ public interface IViajeService {
 
 	public boolean remove(long idViaje);
 	
-	public List<Viaje> traerViajesDelEmpleadoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2);
+	public List<Viaje> traerViajesDelEmpleadoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);
 	
-	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2);	
+	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);	
 	
-	public double totalDescuentoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2);
+	public double totalDescuentoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);
 	
-	public double totalNetoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2);
+	public double totalNetoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);
 	
-	public List<Viaje> traerViajesDelClienteEntreFechas(ClienteModel cliente,Date fecha1,Date fecha2);
+	public List<Viaje> traerViajesDelClienteEntreFechas(ClienteModel cliente,LocalDate fecha1,LocalDate fecha2);
 	
-	public double totalAFacturarEntreFechas(ClienteModel cliente,Date fecha1,Date fecha2);
+	public double totalAFacturarEntreFechas(ClienteModel cliente,LocalDate fecha1,LocalDate fecha2);
 	
 	public double getGananciaViajes();
 	

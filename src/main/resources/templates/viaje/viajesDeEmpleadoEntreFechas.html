@@ -79,6 +79,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/viajes/clienteYFechas">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>Viajes/CLIENTE/fechas</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/home">
                             <i class="now-ui-icons shopping_shop"></i>
                             <p>Volver a home</p>
@@ -224,6 +230,7 @@
                                                     <th scope="col">Localidad</th>
                                                     <th scope="col">Importe </th>
                                                     <th scope="col">Descuento</th>
+                                                    <th scope="col">Neto</th>
                                                 </tr>
 
                                             </thead>
@@ -233,7 +240,8 @@
                                                     <td><span id="viajeConDatos" th:text="${viaje.direccion}" /></td>
                                                     <td><span th:text="${viaje.localidad}" /></td>
                                                     <td><span th:text="' $ '+${viaje.importe}" /></td>
-                                                    <td><span th:text="${viaje.descuento}" /></td>
+                                                    <td><span th:text="' $ '+${viaje.descuento}" /></td>
+                                                    <td><span th:text="' $ '+${viaje.neto}" /></td>
                                                 </tr>
                                             </tbody>
                                         </table>

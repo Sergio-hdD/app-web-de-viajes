@@ -1,8 +1,7 @@
 package com.system.Sistemadeviajes.controllers;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,13 +108,11 @@ public class ViajeController {
 
 	@RequestMapping(value = "/devolverEmpleadoYFechas", method = RequestMethod.POST)
 	public ModelAndView traerEmpleYFechas(@ModelAttribute("clienEmpleModel") ClienEmpleModel clienEmpleModel,
-			@RequestParam("fecha1") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha1,
-			@RequestParam("fecha2") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha2, Model model) {
+			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
+			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_EMPLEADO_ENTRE_FECHAS);
 		ClienteModel cliente = clienteService.findByIdPersona(clienEmpleModel.getCliente().getIdPersona());
 		EmpleadoModel empleado = empleadoService.findByIdPersona(clienEmpleModel.getEmpleado().getIdPersona());
-		mAV.addObject("fecha1",new SimpleDateFormat("dd-MM-yyyy").format(fecha1));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
-		mAV.addObject("fecha2",new SimpleDateFormat("dd-MM-yyyy").format(fecha2));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
 		mAV.addObject("empleado",empleado);
 		mAV.addObject("cliente",cliente);
 		List<Viaje> viajes = viajeService.traerViajesDelEmpleadoEntreFechas(cliente,empleado,fecha1, fecha2); 
@@ -123,6 +120,8 @@ public class ViajeController {
 	    mAV.addObject("bruto", viajeService.totalBrutoEntreFechas(cliente,empleado,fecha1, fecha2));
 	    mAV.addObject("descuento", viajeService.totalDescuentoEntreFechas(cliente,empleado,fecha1, fecha2));
 	    mAV.addObject("neto", viajeService.totalNetoEntreFechas(cliente,empleado,fecha1, fecha2));
+		mAV.addObject("fecha1",fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("fecha2",fecha2.getDayOfMonth()+"/"+fecha2.getMonthValue()+"/"+fecha2.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
 		mAV.addObject("viajes",viajes);
 		return mAV;
 	}
@@ -137,16 +136,16 @@ public class ViajeController {
 
 	@RequestMapping(value = "/devolverClienteYFechas", method = RequestMethod.POST)
 	public ModelAndView traerClieYFechas(@ModelAttribute("clienteModel") ClienteModel clienteModel,
-			@RequestParam("fecha1") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha1,
-			@RequestParam("fecha2") @DateTimeFormat(pattern = "yy-MM-dd") Date fecha2, Model model) {
+			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
+			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_CLI_ENTRE_FECHAS);
 		ClienteModel cliente = clienteService.findByIdPersona(clienteModel.getIdPersona());
-		mAV.addObject("fecha1",new SimpleDateFormat("dd-MM-yyyy").format(fecha1));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
-		mAV.addObject("fecha2",new SimpleDateFormat("dd-MM-yyyy").format(fecha2));//se mostraba "Fri  May  15    00:00:00" y yo quería "dd-mm-yyyy"
 		mAV.addObject("cliente",cliente);
 		List<Viaje> viajes = viajeService.traerViajesDelClienteEntreFechas(cliente,fecha1, fecha2); 
 	    mAV.addObject("cantidad",viajes.size());
 	    mAV.addObject("imporTotal", viajeService.totalAFacturarEntreFechas(cliente,fecha1, fecha2));
+		mAV.addObject("fecha1",fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("fecha2",fecha2.getDayOfMonth()+"/"+fecha2.getMonthValue()+"/"+fecha2.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
 		mAV.addObject("viajes",viajes);
 		return mAV;
 	}
