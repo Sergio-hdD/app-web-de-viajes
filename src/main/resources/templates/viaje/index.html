@@ -168,7 +168,7 @@
                         <tbody>
 
                             <tr th:each="v : ${viajes}">
-                                <td th:text="${#dates.format(v.fecha,'dd MMMM yyyy')}"></td>
+                                <td th:text="${v.fecha}"></td>
                                 <td th:text="${v.direccion}"></td>
                                 <td th:text="${v.localidad}"></td>
                                 <td th:text="'$ ' + ${v.importe}"></td>
