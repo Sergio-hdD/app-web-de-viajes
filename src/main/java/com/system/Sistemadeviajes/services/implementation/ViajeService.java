@@ -2,7 +2,6 @@ package com.system.Sistemadeviajes.services.implementation;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +16,14 @@ import com.system.Sistemadeviajes.models.ViajeModel;
 import com.system.Sistemadeviajes.repositories.IViajeRepository;
 import com.system.Sistemadeviajes.services.IViajeService;
 
+
 @Service("viajeService")
 public class ViajeService implements IViajeService{
-	
+
 	@Autowired
 	@Qualifier("viajeRepository")
 	private IViajeRepository viajeRepository;
-	
+
 	@Autowired
 	@Qualifier("viajeConverter")
 	private ViajeConverter viajeConverter;
@@ -33,7 +33,7 @@ public class ViajeService implements IViajeService{
 	public List<Viaje> getAll() {
 		return viajeRepository.findAll();
 	}
-	
+
 
 	@Override
 	public ViajeModel insertOrUpdate(ViajeModel viajeModel) {
@@ -58,125 +58,129 @@ public class ViajeService implements IViajeService{
 		catch(Exception e) {
 			return false;
 		}
-			
+
 	}
 
 	@Override
-	public List<Viaje> traerViajesDelEmpleadoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
-		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
-		 return viajes;
-	}
-	
-	@Override
-	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
-		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
-		 double bruto =0; 
-		 for(Viaje viaje:viajes) {
-			 bruto += viaje.getImporte();
-		 }
-		 return bruto;
-	}
-	
-	@Override
-	public double totalDescuentoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
-		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
-		 double descuento =0; 
-		 for(Viaje viaje:viajes) {
-			 descuento += viaje.getDescuento();
-		 }
-		 return descuento;
+	public List<Viaje> traerViajesDelEmpleadoEntreFechas(ClienteModel cliente,EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2){
+		List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
+		return viajes;
 	}
 
 	@Override
-	public double totalNetoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,Date fecha1,Date fecha2){
-		 List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
-		 double neto =0; 
-		 for(Viaje viaje:viajes) {
-			 neto += viaje.getNeto();
-		 }
-		 return neto;
-	}
-	
-	
-
-	@Override
-	public List<Viaje> traerViajesDelClienteEntreFechas(ClienteModel cliente,Date fecha1,Date fecha2){
-		 List<Viaje> viajes = viajeRepository.viajesDelClienteEntreFachas(cliente.getIdPersona(), fecha1, fecha2);
-		 return viajes;
+	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2){
+		List<Viaje> viajes = traerViajesDelEmpleadoEntreFechas(cliente,empleado, fecha1, fecha2);
+		double bruto =0; 
+		for(Viaje viaje:viajes) {
+			bruto += viaje.getImporte();
+		}
+		return bruto;
 	}
 
 	@Override
-	public double totalAFacturarEntreFechas(ClienteModel cliente,Date fecha1,Date fecha2){
-		 List<Viaje> viajes = viajeRepository.viajesDelClienteEntreFachas(cliente.getIdPersona(), fecha1, fecha2);
-		 double total =0; 
-		 for(Viaje viaje:viajes) {
-			 total += viaje.getImporte();
-		 }
-		 return total;
+	public double totalDescuentoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2){
+		List<Viaje> viajes = traerViajesDelEmpleadoEntreFechas(cliente,empleado, fecha1, fecha2);
+		double descuento =0; 
+		for(Viaje viaje:viajes) {
+			descuento += viaje.getDescuento();
+		}
+		return descuento;
 	}
-	
+
+	@Override
+	public double totalNetoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2){
+		List<Viaje> viajes = traerViajesDelEmpleadoEntreFechas(cliente,empleado, fecha1, fecha2);
+		double neto =0; 
+		for(Viaje viaje:viajes) {
+			neto += viaje.getNeto();
+		}
+		return neto;
+	}
+
+
+	@Override
+	public List<Viaje> traerViajesDelClienteEntreFechas(ClienteModel cliente,LocalDate fecha1,LocalDate fecha2){
+		List<Viaje>  viajes = viajeRepository.viajesDelClienteEntreFachas(cliente.getIdPersona(), fecha1, fecha2);
+		return viajes;
+	}
+
+	@Override
+	public double totalAFacturarEntreFechas(ClienteModel cliente,LocalDate fecha1,LocalDate fecha2){
+		List<Viaje> viajes = traerViajesDelClienteEntreFechas(cliente,fecha1,fecha2);
+		double total =0; 
+		for(Viaje viaje:viajes) {
+			total += viaje.getImporte();
+		}
+		return total;
+	}
+
 	@Override
 	public double getGananciaViajes() {
 		double ganancia = 0;
-		
+
 		for(Viaje v : this.getAll()) {
 			ganancia += v.getImporte();
 		}
-		
+
 		return ganancia;
 	}
-	
+
 	public double getGananciaDelMes() {
 		double ganancia = 0;
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("M");
-		
+
 		for(Viaje v : this.getAll()) {
-			
+
 			if(Integer.parseInt(simpleDateFormat.format(v.getFecha()))  == LocalDate.now().getMonthValue()) {
 				ganancia += v.getImporte();
-				
+
 			}
 		}
-		
+
 		return ganancia;
 	}
-	
+
 
 	public double getGananciaEntreFechas(LocalDate fecha1,LocalDate fecha2) {
 		double ganancia = 0;
 		for(Viaje v : viajeRepository.viajesEntreFachas(fecha1, fecha2)) {			
-				ganancia += v.getImporte();
+			ganancia += v.getImporte();
 		}
-		
+
 		return ganancia;
 	}
-    
-	
+
+
 	@Override
 	public int getCantidadViajesEmpleado(long idPersona) {
+		//LocalDate fechaActual = LocalDate.of(2020, 5, 19);//LA USÉ PARA PROBAR
+		LocalDate fechaActual = LocalDate.now(); //obtengo la fecha actual
+		LocalDate inicioSem = fechaActual.minusDays(fechaActual.getDayOfWeek().getValue()-1);// si el número de día de la semana de la fecha actual es x yo quiero que a la fecha actual le reste x-1 (para tomar el primero de la semana)
+		LocalDate finSem = fechaActual.plusDays(7-fechaActual.getDayOfWeek().getValue());// si el número de día de la semana de la fecha actual es x yo quiero que a la fecha actual le sume 7-x (para tomar el último de la semana) 
 		int cantidad = 0;
-		
-		for(Viaje v : this.getAll()) {
+		for(Viaje v : viajeRepository.viajesEntreFachas(inicioSem, finSem)) {
 			if(v.getEmpleado().getIdPersona() == idPersona) {
 				cantidad ++;
 			}
 		}
-		
+
 		return cantidad;
 	}
-	
+
 	@Override
 	public int getCantidadViajesCliente(long idPersona) {
+		//LocalDate fechaActual = LocalDate.of(2020, 5, 19);//LA USÉ PARA PROBAR
+		LocalDate fechaActual = LocalDate.now(); //obtengo la fecha actual
+		LocalDate inicioSem = fechaActual.minusDays(fechaActual.getDayOfWeek().getValue()-1);// si el número de día de la semana de la fecha actual es x yo quiero que a la fecha actual le reste x-1 (para tomar el primero de la semana)
+		LocalDate finSem = fechaActual.plusDays(7-fechaActual.getDayOfWeek().getValue());// si el número de día de la semana de la fecha actual es x yo quiero que a la fecha actual le sume 7-x (para tomar el último de la semana) 
 		int cantidad = 0;
-		
-		for(Viaje v : this.getAll()) {
+		for(Viaje v : viajeRepository.viajesEntreFachas(inicioSem, finSem)) {
 			if(v.getCliente().getIdPersona() == idPersona) {
 				cantidad ++;
 			}
 		}
-				
+
 		return cantidad;
 	}
-	
-	
+
 }// fin class 
