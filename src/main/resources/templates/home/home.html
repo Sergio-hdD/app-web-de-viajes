@@ -3,37 +3,21 @@
   ESE GUIÓN AL COMIENZO EVITA UN FRANJA BLANCA ARRIBA DE TODO
 -->
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
     <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
     <!-- Los iconos tipo Solid de Fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/png" th:href="@{/images/fondoNM.png}" />
 <!--     <link rel="icon" type="image/png" href="/img/favicon.png"> -->
  
-    <!-- DATA TABLE -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <!--  ordenamiento de la lista -->
 
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-
-
 
     <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
 
@@ -49,10 +33,9 @@
     <script>
         window.jQuery || document.write('<script src="/js/jquery-1.11.2.min.js"><\/script>')
     </script>
-    <script src="/js/material.min.js"></script>
-    <script src="/js/sweetalert2.min.js"></script>
-    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="/js/main.js"></script>
+
+        <link rel="shortcut icon" type="image/png" th:href="@{/images/fondoNM.png}" />
+    
 </head>
 
 <body id="image">
@@ -60,7 +43,7 @@
     <section class="full-width text-center">
 
         <div class="full-width navLateral-body-logo-b text-center " style="margin-bottom: 50px;">
-            <h1 style="font-family: 'Fira Sans', sans-serif;">NEW - MOTOS</h1>
+	            <h1 style="font-family: 'Fira Sans', sans-serif;">NEW - MOTOS</h1>
         </div>
 
         <br>
@@ -78,8 +61,9 @@
 						</span>
                     </div>
                 </div>
+              <i class="fas fa-dolly-flatbed tile-icon"></i>
+                
             </a>
-            <i class="fas fa-dolly-flatbed tile-icon"></i>
         </article>
 
 
@@ -92,8 +76,9 @@
 						</span>
                     </div>
                 </div>
+               <i class="fas fa-user tile-icon"></i>
+                
             </a>
-            <i class="fas fa-user tile-icon"></i>
         </article>
 
 
@@ -106,8 +91,9 @@
 						</span>
                     </div>
                 </div>
-            </a>
             <i class="fas fa-user-circle tile-icon"></i>
+			</a>
+            
         </article>
 
 
@@ -120,8 +106,9 @@
 						</span>
                     </div>
                 </div>
+               <i class="fas fa-calendar-alt tile-icon"></i>
+                
             </a>
-            <i class="fas fa-calendar-alt tile-icon"></i>
         </article>
         
         
@@ -134,8 +121,9 @@
 						</span>
                     </div>
                 </div>
+			<i class="fas fa-calendar-alt tile-icon"></i>
+                
             </a>
-            <i class="fas fa-calendar-alt tile-icon"></i>
         </article>               
         
     </section>
