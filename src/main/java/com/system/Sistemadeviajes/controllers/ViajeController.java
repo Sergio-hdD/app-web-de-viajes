@@ -97,20 +97,26 @@ public class ViajeController {
 	public Viaje get(@PathVariable("id") @RequestBody long idViaje) {
 	    return viajeService.findByIdViaje(idViaje);
 	}
-
-	@GetMapping("/empleadoYFechas")
-	public ModelAndView pedirEmpleYFecha() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS);
+	
+	
+//---------------------------------consulta por empleado, cliente y fechas--------------------------------------
+	@GetMapping("/getCliEmplYFechas")
+	public ModelAndView pedirCliEmpleYFecha() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS_CLI_EMPL);
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("clientes",clienteService.getAll());
 		return mAV;
 	}	
-
-	@RequestMapping(value = "/devolverEmpleadoYFechas", method = RequestMethod.POST)
-	public ModelAndView traerEmpleYFechas(@ModelAttribute("clienEmpleModel") ClienEmpleModel clienEmpleModel,
+    
+	ClienEmpleModel cliEmplGlobal = new ClienEmpleModel();
+	LocalDate fecha1Global;
+	LocalDate fecha2Global;
+	@RequestMapping(value = "/cliEmpleYFechas", method = RequestMethod.POST)
+	public ModelAndView traerCliEmpleYFechas(@ModelAttribute("clienEmpleModel") ClienEmpleModel clienEmpleModel,
 			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
 			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_EMPLEADO_ENTRE_FECHAS);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_CLI_EMPL_ENTRE_FECHAS);
+		cliEmplGlobal = clienEmpleModel;   	fecha1Global = fecha1;   fecha2Global = fecha2;
 		ClienteModel cliente = clienteService.findByIdPersona(clienEmpleModel.getCliente().getIdPersona());
 		EmpleadoModel empleado = empleadoService.findByIdPersona(clienEmpleModel.getEmpleado().getIdPersona());
 		mAV.addObject("empleado",empleado);
@@ -125,20 +131,22 @@ public class ViajeController {
 		mAV.addObject("viajes",viajes);
 		return mAV;
 	}
+//-----------------------------fin consulta por empleado, cliente y fechas--------------------------------------
 	
-//-----------------------------------------------------------------------
+//---------------------------------consulta por cliente y fechas--------------------------------------
 	@GetMapping("/clienteYFechas")
 	public ModelAndView pedirClieYFecha() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS_CLI);
 		mAV.addObject("clientes", clienteService.getAll());
 		return mAV;
 	}	
-
+    long idCliGoblal=0;
 	@RequestMapping(value = "/devolverClienteYFechas", method = RequestMethod.POST)
 	public ModelAndView traerClieYFechas(@ModelAttribute("clienteModel") ClienteModel clienteModel,
 			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
 			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_CLI_ENTRE_FECHAS);
+		idCliGoblal = clienteModel.getIdPersona();   fecha1Global = fecha1;   fecha2Global = fecha2;
 		ClienteModel cliente = clienteService.findByIdPersona(clienteModel.getIdPersona());
 		mAV.addObject("cliente",cliente);
 		List<Viaje> viajes = viajeService.traerViajesDelClienteEntreFechas(cliente,fecha1, fecha2); 
@@ -149,8 +157,43 @@ public class ViajeController {
 		mAV.addObject("viajes",viajes);
 		return mAV;
 	}
-//-----------------------------------------------------------------------
+//-----------------------------fin consulta por cliente y fechas--------------------------------------
 	
+//-------------------------------para imprimir/descargar------------------------
+	@GetMapping("/imprDowlCliEmpl")
+	public ModelAndView printDownloadCliEmp() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_P_D_CLIE_EMPL);
+		ClienteModel cliente = clienteService.findByIdPersona(cliEmplGlobal.getCliente().getIdPersona());
+		EmpleadoModel empleado = empleadoService.findByIdPersona(cliEmplGlobal.getEmpleado().getIdPersona());
+		mAV.addObject("empleado",empleado);
+		mAV.addObject("cliente",cliente);
+		List<Viaje> viajes = viajeService.traerViajesDelEmpleadoEntreFechas(cliente,empleado,fecha1Global, fecha2Global); 
+	    mAV.addObject("cantidad",viajes.size());
+	    mAV.addObject("bruto", viajeService.totalBrutoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
+	    mAV.addObject("descuento", viajeService.totalDescuentoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
+	    mAV.addObject("neto", viajeService.totalNetoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
+		mAV.addObject("viajes",viajes);
+		mAV.addObject("fecha1",fecha1Global.getDayOfMonth()+"/"+fecha1Global.getMonthValue()+"/"+fecha1Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("fecha2",fecha2Global.getDayOfMonth()+"/"+fecha2Global.getMonthValue()+"/"+fecha2Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		return mAV;
+	}
+	
+	@GetMapping("/imprDowlCliente")
+	public ModelAndView printDownloadCliente() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_P_D_CLIENTE);
+		ClienteModel cliente = clienteService.findByIdPersona(idCliGoblal);		
+		mAV.addObject("cCcliente",cliente);
+		List<Viaje> viajes = viajeService.traerViajesDelClienteEntreFechas(cliente,fecha1Global, fecha2Global); 
+	    mAV.addObject("cCcantidad",viajes.size());
+	    mAV.addObject("imporTotal", viajeService.totalAFacturarEntreFechas(cliente,fecha1Global, fecha2Global));
+		mAV.addObject("cCviajes",viajes);
+		mAV.addObject("fecha1",fecha1Global.getDayOfMonth()+"/"+fecha1Global.getMonthValue()+"/"+fecha1Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("fecha2",fecha2Global.getDayOfMonth()+"/"+fecha2Global.getMonthValue()+"/"+fecha2Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		return mAV;
+	}
+	
+	
+//---------------------------fin para imprimir/descargar------------------------				
 	
 	@GetMapping("/cantidadViajesEmpleados")
 	@ResponseBody

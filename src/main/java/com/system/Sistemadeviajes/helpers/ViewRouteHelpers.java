@@ -18,15 +18,16 @@ public class ViewRouteHelpers {
 	
 	//Viajes
 	public final static String TRAVEL_INDEX = "viaje/index";
-	public final static String TRAVEL_PEDIRFECHAS = "viaje/pedirFechas";
-	public final static String TRAVEL_EMPLEADO_ENTRE_FECHAS = "viaje/viajesDeEmpleadoEntreFechas";
+	public final static String TRAVEL_PEDIRFECHAS_CLI_EMPL = "viaje/pedirFechasCliEmpl";
+	public final static String TRAVEL_CLI_EMPL_ENTRE_FECHAS = "viaje/viajesCliEmplEntreFechas";
 	public final static String TRAVEL_PEDIRFECHAS_CLI = "viaje/pedirFechasCli";
 	public final static String TRAVEL_CLI_ENTRE_FECHAS = "viaje/viajesDeCliEntreFechas";
+	public final static String TRAVEL_P_D_CLIE_EMPL = "viaje/printDownloadCliEmpl";
+	public final static String TRAVEL_P_D_CLIENTE = "viaje/printDownloadCliente";
 	
 	//Empleado
 	public final static String EMPLOYEE_UPDATE = "empleado/update";
 	public final static String EMPLOYEE_ADD = "empleado/new";
 	public final static String EMPLOYEE_INDEX = "empleado/index";
 	
-
 }//Fin class

@@ -21,8 +21,9 @@
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
-
+    <link rel="shortcut icon" type="image/png" th:href="@{/images/fondoNM.png}" />
+<!--     <link rel="icon" type="image/png" href="/img/favicon.png"> -->
+ 
     <!-- DATA TABLE -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -111,7 +112,7 @@
 
 
         <article class="full-width tile">
-            <a th:href="@{/viajes/empleadoYFechas}" class="full-width">
+            <a th:href="@{/viajes/getCliEmplYFechas}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">
                         <span class="text-condensedLight">
