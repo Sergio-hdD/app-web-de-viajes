@@ -4,7 +4,11 @@ public class ClienEmpleModel {
          private ClienteModel cliente;
          private EmpleadoModel empleado;
 		
-         public ClienEmpleModel(ClienteModel cliente, EmpleadoModel empleado) {
+         
+         
+         public ClienEmpleModel() { }
+
+		public ClienEmpleModel(ClienteModel cliente, EmpleadoModel empleado) {
 			super();
 			this.cliente = cliente;
 			this.empleado = empleado;
