@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/Sistema-de-viajes?serverTimezone=UTC  # ?createDatabaseIfNotExist=true # esta linea sería para que se cree sola, pero no me anduvo
+    url: jdbc:mysql://localhost/Sistema-de-viajes?serverTimezone=UTC
     username: root 
     password: 
-    #initialization-mode: always
+    initialization-mode: always
   jpa:
     show-sql: false #true
     hibernate:

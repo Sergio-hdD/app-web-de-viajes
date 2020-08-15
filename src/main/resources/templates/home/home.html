@@ -1,8 +1,5 @@
--
-<!-- 
-  ESE GUIÓN AL COMIENZO EVITA UN FRANJA BLANCA ARRIBA DE TODO
--->
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
 
@@ -17,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
+        <link rel="shortcut icon" type="image/png" th:href="@{/images/fondoNM.png}" />
+    
 
     <meta charset="UTF-8">
     <title>Home</title>
@@ -35,10 +34,11 @@
 <body id="image">
 
     <section class="full-width text-center">
-
-        <div class="full-width navLateral-body-logo-b text-center " style="margin-bottom: 50px;">
-	            <h1 style="font-family: 'Fira Sans', sans-serif;">NEW - MOTOS</h1>
-        </div>
+		<article class="full-width tile" style="border: none;" >
+		<span class="text-condensedLight">
+							<h1>NEW-MOTOS</h1>
+						</span>
+		</article>
 
         <br>
         <br>
@@ -46,7 +46,7 @@
         <!-- Tiles -->
 
 
-        <article class="full-width tile">
+        <article class="full-width tile" >
             <a th:href="@{/viajes}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">

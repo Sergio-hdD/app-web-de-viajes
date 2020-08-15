@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 
 import com.system.Sistemadeviajes.converters.ClienteConverter;
 import com.system.Sistemadeviajes.entities.Cliente;
+import com.system.Sistemadeviajes.entities.Viaje;
 import com.system.Sistemadeviajes.models.ClienteModel;
 import com.system.Sistemadeviajes.repositories.IClienteRepository;
+import com.system.Sistemadeviajes.repositories.IViajeRepository;
 import com.system.Sistemadeviajes.services.IClienteService;
+import com.system.Sistemadeviajes.services.IViajeService;
 
 
 @Service("clienteService")
@@ -21,6 +24,14 @@ public class ClienteService implements IClienteService{
 	@Autowired
 	@Qualifier("clienteConverter")
 	private ClienteConverter clienteConverter;
+
+	@Autowired
+	@Qualifier("viajeRepository")
+	private IViajeRepository viajeRepository;
+	
+	@Autowired
+	@Qualifier("viajeService")
+	private IViajeService viajeService;
 
 	@Override
 	public List<Cliente> getAll() {
@@ -39,15 +50,18 @@ public class ClienteService implements IClienteService{
 	}
  
 	@Override
-	public boolean remove(long id) {
-		try {
-			clienteRepository.deleteById(id);
-			return true;
-		}
-		catch(Exception e) {
-			return false;
-		}
+	public void remove(long id) {
+		eliminarViajesDelCliente(id);//elimino los viajes hechos para el cliente que quiero eliminar
+	    clienteRepository.deleteById(id);//elimino el cliente
 	}
-	
+
+	public void eliminarViajesDelCliente(long idPersona) {
+		List<Viaje> viajes = viajeRepository.viajesDelCliente(idPersona); 
+		if(viajes!=null) {
+			for (Viaje v : viajes ) {
+				viajeService.remove(v.getIdViaje());
+			}	
+		}	
+	}
 
 }

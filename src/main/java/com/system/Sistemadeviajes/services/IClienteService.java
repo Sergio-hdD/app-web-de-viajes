@@ -12,6 +12,6 @@ public interface IClienteService {
 
 	public ClienteModel findByIdPersona(long id);
 
-	public boolean remove(long id);
+	public void remove(long id);
 
 }
