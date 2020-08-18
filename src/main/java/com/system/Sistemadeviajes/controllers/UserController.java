@@ -43,7 +43,7 @@ public class UserController {
 		if (principal instanceof UserDetails) {
 		  username = ((UserDetails)principal).getUsername();
 		}
-		System.out.println(username);
+//		System.out.println(username);
 		if(!username.isEmpty()) {
 			return "redirect:/";
 		}
@@ -59,7 +59,7 @@ public class UserController {
 		if (principal instanceof UserDetails) {
 		  username = ((UserDetails)principal).getUsername();
 		}
-		System.out.println(username);
+//		System.out.println(username);
 		
 		if(username.isEmpty()) {
 			return "redirect:/";	

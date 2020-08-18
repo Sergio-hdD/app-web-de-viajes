@@ -5,6 +5,19 @@
      border-width: 2px;
 }
 
+#imageBackground {
+    background: url(../images/fondoNMResumen.png) no-repeat center center fixed;
+    height: 100vh;
+    max-width: 100%;
+    position:relative;
+    z-index: 1;
+    opacity: 0.9;
+  }
+
+#colorBackground {
+    background-color: #F1F8FA;
+ }   
+ 
 .roboto {
      font-family: 'Roboto', sans-serif;
 }

@@ -98,7 +98,8 @@ public class ViajeController {
 	    return viajeService.findByIdViaje(idViaje);
 	}
 	
-	
+
+//------------------------------BLOQUE DE COONSULTAS E IMPRIMIR/DESCARGAR PDF -----------------------------------	
 //---------------------------------consulta por empleado, cliente y fechas--------------------------------------
 	@GetMapping("/getCliEmplYFechas")
 	public ModelAndView pedirCliEmpleYFecha() {
@@ -108,7 +109,8 @@ public class ViajeController {
 		return mAV;
 	}	
     
-	ClienEmpleModel cliEmplGlobal = new ClienEmpleModel();
+	long idCliGlobal=0;
+	long idEmpleGlobal=0;
 	LocalDate fecha1Global;
 	LocalDate fecha2Global;
 	@RequestMapping(value = "/cliEmpleYFechas", method = RequestMethod.POST)
@@ -116,12 +118,13 @@ public class ViajeController {
 			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
 			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_CLI_EMPL_ENTRE_FECHAS);
-		cliEmplGlobal = clienEmpleModel;   	fecha1Global = fecha1;   fecha2Global = fecha2;
+		fecha1Global = fecha1;   fecha2Global = fecha2; 
+		idCliGlobal=clienEmpleModel.getCliente().getIdPersona();  idEmpleGlobal=clienEmpleModel.getEmpleado().getIdPersona();
 		ClienteModel cliente = clienteService.findByIdPersona(clienEmpleModel.getCliente().getIdPersona());
 		EmpleadoModel empleado = empleadoService.findByIdPersona(clienEmpleModel.getEmpleado().getIdPersona());
 		mAV.addObject("empleado",empleado);
 		mAV.addObject("cliente",cliente);
-		List<Viaje> viajes = viajeService.traerViajesDelEmpleadoEntreFechas(cliente,empleado,fecha1, fecha2); 
+		List<Viaje> viajes = viajeService.traerViajesDeCliEmpleEntreFechas(cliente,empleado,fecha1, fecha2); 
 	    mAV.addObject("cantidad",viajes.size());
 	    mAV.addObject("bruto", viajeService.totalBrutoEntreFechas(cliente,empleado,fecha1, fecha2));
 	    mAV.addObject("descuento", viajeService.totalDescuentoEntreFechas(cliente,empleado,fecha1, fecha2));
@@ -140,13 +143,13 @@ public class ViajeController {
 		mAV.addObject("clientes", clienteService.getAll());
 		return mAV;
 	}	
-    long idCliGoblal=0;
+    
 	@RequestMapping(value = "/devolverClienteYFechas", method = RequestMethod.POST)
 	public ModelAndView traerClieYFechas(@ModelAttribute("clienteModel") ClienteModel clienteModel,
 			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
 			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_CLI_ENTRE_FECHAS);
-		idCliGoblal = clienteModel.getIdPersona();   fecha1Global = fecha1;   fecha2Global = fecha2;
+		idCliGlobal = clienteModel.getIdPersona();   fecha1Global = fecha1;   fecha2Global = fecha2;
 		ClienteModel cliente = clienteService.findByIdPersona(clienteModel.getIdPersona());
 		mAV.addObject("cliente",cliente);
 		List<Viaje> viajes = viajeService.traerViajesDelClienteEntreFechas(cliente,fecha1, fecha2); 
@@ -159,41 +162,104 @@ public class ViajeController {
 	}
 //-----------------------------fin consulta por cliente y fechas--------------------------------------
 	
-//-------------------------------para imprimir/descargar------------------------
-	@GetMapping("/imprDowlCliEmpl")
-	public ModelAndView printDownloadCliEmp() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_P_D_CLIE_EMPL);
-		ClienteModel cliente = clienteService.findByIdPersona(cliEmplGlobal.getCliente().getIdPersona());
-		EmpleadoModel empleado = empleadoService.findByIdPersona(cliEmplGlobal.getEmpleado().getIdPersona());
+//---------------------------------consulta por empleado y fechas--------------------------------------
+	@GetMapping("/empleadoYFechas")
+	public ModelAndView pedirEmpleYFecha() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS_EMPLE);
+		mAV.addObject("empleados", empleadoService.getAll());
+		return mAV;
+	}	
+	@RequestMapping(value = "/devolverEmpleadoYFechas", method = RequestMethod.POST)
+	public ModelAndView traerEmpleYFechas(@ModelAttribute("clienteModel") EmpleadoModel empleadoModel,
+			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
+			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_RES_EMPLE_ENTRE_FECHAS);
+		idCliGlobal = empleadoModel.getIdPersona();   fecha1Global = fecha1;   fecha2Global = fecha2;
+		EmpleadoModel empleado = empleadoService.findByIdPersona(empleadoModel.getIdPersona());
+		mAV.addObject("empleado",empleado);
+		List<Viaje> viajes = viajeService.resumenViajesDelEmpleadoEntreFechas(empleado,fecha1, fecha2); 
+		mAV.addObject("fecha1",fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("fecha2",fecha2.getDayOfMonth()+"/"+fecha2.getMonthValue()+"/"+fecha2.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("viajes",viajes);
+		return mAV;
+	}
+	
+	@GetMapping("/paraConsulta/{id}")
+	public ModelAndView traerCliAndEmpleYFechas(@PathVariable("id") long idViaje) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_CLI_EMPL_ENTRE_FECHAS);
+		Viaje viaje = viajeService.findByIdViaje(idViaje);
+		idCliGlobal= viaje.getCliente().getIdPersona();     idEmpleGlobal= viaje.getEmpleado().getIdPersona();//AMBAS (idCliGlobal y idEmpleGlobal) LAS USO EN OTRA FUNCIÓN además de en esta
+		ClienteModel cliente = clienteService.findByIdPersona(idCliGlobal);
+		EmpleadoModel empleado = empleadoService.findByIdPersona(idEmpleGlobal);
 		mAV.addObject("empleado",empleado);
 		mAV.addObject("cliente",cliente);
-		List<Viaje> viajes = viajeService.traerViajesDelEmpleadoEntreFechas(cliente,empleado,fecha1Global, fecha2Global); 
+		List<Viaje> viajes = viajeService.traerViajesDeCliEmpleEntreFechas(cliente,empleado,fecha1Global, fecha2Global); 
 	    mAV.addObject("cantidad",viajes.size());
 	    mAV.addObject("bruto", viajeService.totalBrutoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
 	    mAV.addObject("descuento", viajeService.totalDescuentoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
 	    mAV.addObject("neto", viajeService.totalNetoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
-		mAV.addObject("viajes",viajes);
 		mAV.addObject("fecha1",fecha1Global.getDayOfMonth()+"/"+fecha1Global.getMonthValue()+"/"+fecha1Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
 		mAV.addObject("fecha2",fecha2Global.getDayOfMonth()+"/"+fecha2Global.getMonthValue()+"/"+fecha2Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("viajes",viajes);
+		return mAV;
+	}
+	
+//-----------------------------fin consulta por empleado y fechas--------------------------------------	
+
+	
+//-------------------------------para imprimir/descargar------------------------
+	@GetMapping("/imprDowlCliEmpl")
+	public ModelAndView printDownloadCliEmp() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_P_D_CLIE_EMPL);
+		ClienteModel cliente = clienteService.findByIdPersona(idCliGlobal);
+		EmpleadoModel empleado = empleadoService.findByIdPersona(idEmpleGlobal);
+		mAV.addObject("empleado",empleado);
+		mAV.addObject("cliente",cliente);
+		List<Viaje> viajes = viajeService.traerViajesDeCliEmpleEntreFechas(cliente,empleado,fecha1Global, fecha2Global);
+	    mAV.addObject("cantidad",viajes.size());
+	    mAV.addObject("bruto", viajeService.totalBrutoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
+	    mAV.addObject("descuento", viajeService.totalDescuentoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
+	    mAV.addObject("neto", viajeService.totalNetoEntreFechas(cliente,empleado,fecha1Global, fecha2Global));
+		mAV.addObject("fecha1",fecha1Global.getDayOfMonth()+"/"+fecha1Global.getMonthValue()+"/"+fecha1Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+		mAV.addObject("fecha2",fecha2Global.getDayOfMonth()+"/"+fecha2Global.getMonthValue()+"/"+fecha2Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+        mAV.addObject("listaDeListasViajes",crearListaDeListaViaje(viajes));
 		return mAV;
 	}
 	
 	@GetMapping("/imprDowlCliente")
 	public ModelAndView printDownloadCliente() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_P_D_CLIENTE);
-		ClienteModel cliente = clienteService.findByIdPersona(idCliGoblal);		
-		mAV.addObject("cCcliente",cliente);
+		ClienteModel cliente = clienteService.findByIdPersona(idCliGlobal);		
+		mAV.addObject("cliente",cliente);
 		List<Viaje> viajes = viajeService.traerViajesDelClienteEntreFechas(cliente,fecha1Global, fecha2Global); 
-	    mAV.addObject("cCcantidad",viajes.size());
+	    mAV.addObject("cantidad",viajes.size());
 	    mAV.addObject("imporTotal", viajeService.totalAFacturarEntreFechas(cliente,fecha1Global, fecha2Global));
-		mAV.addObject("cCviajes",viajes);
 		mAV.addObject("fecha1",fecha1Global.getDayOfMonth()+"/"+fecha1Global.getMonthValue()+"/"+fecha1Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
 		mAV.addObject("fecha2",fecha2Global.getDayOfMonth()+"/"+fecha2Global.getMonthValue()+"/"+fecha2Global.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
+        mAV.addObject("listaDeListasViajes",crearListaDeListaViaje(viajes));
 		return mAV;
 	}
 	
+	public List <ArrayList<Viaje>> crearListaDeListaViaje(List<Viaje> viajes){//separo los viajes en grupos de 23 el primer grupo, los siguentes de 29
+		// Creo una lista de listas de Viajes. Cada lista tendrá hasta max 23 items el primer grupo, los siguentes de 29 (seran 23 o 29) Viajes por hoja
+        List <ArrayList<Viaje>> listaDeListas = new ArrayList<ArrayList<Viaje>>();
+         int cursorListas = -1;
+         for(int i=0; i<viajes.size(); i++) {     
+              if(i == 0 || i == 23) {//cuando i es 0 y cuando llega a 23 
+                   listaDeListas.add(new ArrayList<Viaje>());//crea una nuava lista (dónde se van a guardar 23 viajes en la que se crea en 0) y la agrega a la listaDeListas
+                   cursorListas++;
+              } else if((i-23) % 29 == 0) {//cuando llega a 23, creo la lista y empieza a guardar de a 29 y legado a ese 29 crea otra lista a la que también le cargará 29 viajes
+	                listaDeListas.add(new ArrayList<Viaje>());//crea una nuava lista (dónde se van a guardar 29 viajes) y la agrega a la listaDeListas
+	                cursorListas++;
+              }
+              listaDeListas.get( cursorListas ).add( viajes.get(i) );//se agrega un viaje a la lista que le corresponde en la listaDeListas
+          //EJEMPLO: si son 90 viajes, crea LISTA, en el viaje 0 (con 23), en el viaje 23 (con 29), en el viaje 52 (con 29), en el viaje 81 (con los 9 restante)... y esas listas las agrega a "listaDeListas"   
+         }	
+       return listaDeListas;  
+	}
 	
 //---------------------------fin para imprimir/descargar------------------------				
+//------------------------------FIN BLOQUE DE COONSULTAS E IMPRIMIR/DESCARGAR PDF -----------------------------------	
 	
 	@GetMapping("/cantidadViajesEmpleados")
 	@ResponseBody

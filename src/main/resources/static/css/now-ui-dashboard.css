@@ -4256,6 +4256,10 @@ Created using IcoMoon - icomoon.io
   color: #FFFFFF;
 }
 
+.textCenter {
+	text-align: center;
+}
+
 .panel-header .header .category {
   max-width: 600px;
   color: rgba(255, 255, 255, 0.5);

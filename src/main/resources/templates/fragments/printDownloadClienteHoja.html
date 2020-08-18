@@ -1,0 +1,62 @@
+<!-- 
+      ----------------------------------Hoja cliente----------------------------------------------- 
+-->
+
+<div th:fragment="viajesCliente" class="container-container" id="viajesCliente">
+     <div class="viaje-container" id="colorBackground">
+         <div class="barraComun"> <small th:text="${'Hoja ' + hojaNro}"></small>  </div>
+          <div th:if="${primerHoja != false}" class="remitente-info">
+               <div class="divisor3-info">
+                    <img th:src="@{/images/fondoNM.png}" alt="NEW-MOTOS ICONO" />
+                    <div class="info">
+                         <p class="divisor3-title roboto"><strong>NEW - MOTOS</strong></p>
+                    </div>
+               </div>
+               <div>
+                    <div style="margin-top:25px;">
+                         <p>
+                         <b>Para el cliente: </b>
+                         <br>
+                         <span  th:text="' '+${cliente1.razonSocial}"></span>
+                         </p>
+                    </div>
+               </div>
+          </div>
+          <div th:if="${primerHoja != false}" class="divisor-info">
+               <div class="divisorFecha">
+                    <p style="margin-top:-1px;" class="rol roboto">Rango de fechas</p>
+                    <p class="datos roboto">
+                       <b>Desde el:</b><span th:text="' '+${fechaA}"></span>
+                       <b>Hasta el:</b> <span th:text="' '+${fechaB}"></span>
+                     </p>
+               </div>
+               <div class="divisor">
+                    <p style="margin-top:-1px;" class="rol roboto">Cantidad de viajes</p>
+                    <p class="datos roboto" th:text="${cantidad1}"></p>
+               </div>
+               <div class="divisor">
+                    <p style="margin-top:-1px;" class="rol roboto">Importe TOTAL</p>
+                    <td class="datos roboto">$ <span th:text="${#numbers.formatDecimal(imporTotal1, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+               </div>
+          </div>
+               <div th:if="${primerHoja != false}" class="barraComun2" style="margin-top: 2px;"> <p class="rol roboto">DETALLE</p> </div>
+               <table class="roboto">
+                    <thead>
+                         <tr>
+                              <th>Fecha</th>
+                              <th>Direccion</th>
+                              <th>Localidad</th>
+                              <th>Importe</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr th:each="viaje : ${viajes}">
+                              <td th:text="${viaje.fecha}"></td>
+                              <td th:text="${viaje.direccion}"></td>
+                              <td th:text="${viaje.localidad}"></td>
+                              <td>$ <span th:text="${#numbers.formatDecimal(viaje.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+                         </tr>
+                    </tbody>
+               </table>
+     </div>
+</div>

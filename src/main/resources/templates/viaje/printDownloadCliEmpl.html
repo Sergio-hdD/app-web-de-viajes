@@ -16,7 +16,7 @@
                     <i class="fas fa-print"></i><br />IMPRIMIR</button>
                <button class="btn btn-secondary m-4" onclick="descargar()">
                     <i class="fas fa-download"></i><br />DESCARGAR</button>
-                 <form action="#" th:action="@{/viajes/getCliEmplYFechas}" method="get"> 
+                 <form action="#" th:action="@{/home}" method="get"> 
                    <button class="btn btn-secondary m-4">
                     <i class="fas fa-times-circle"></i><br />CANCELAR</button>
                  </form>                   
@@ -26,75 +26,22 @@
                Para imprimir varias páginas se recomienda Chrome u otro navegador basado en Chromium
           </small>
           <div id="viajesContainer"> <!-- ******************div contenedor General********************** -->				
-				<!-- ----------------------------------empleado/cliente----------------------------------------------- -->
-				
-				<div class="container-container" id="viajesCliEmmple">
-				     <div class="viaje-container">
-				          <div class="barraComun"></div>
-				          <div class="remitente-info">
-				               <div class="divisor3-info">
-				                    <img th:src="@{/images/fondoNM.png}" alt="NEW-MOTOS ICONO" />
-				                    <div class="info">
-				                         <p class="divisor3-title roboto"><strong>NEW - MOTOS</strong></p>
-				                    </div>
-				               </div>
-				               <div>
-				                    <div style="margin-top:15px;">
-				                         <p><b>Viajes del cadete: </b><span th:text="' '+${empleado.nombre}+' '+${empleado.apellido}"></span> 
-				                         <br>
-				                         <b>Para el cliente: </b><span  th:text="' '+${cliente.razonSocial}"></span> 
-				                         <br>
-				                         <b>Desde el:</b><span th:text="' '+${fecha1}"></span>
-				                         <b>Hasta el:</b> <span th:text="' '+${fecha2}"></span>
-				                         </p>
-				                    </div>
-				               </div>
-				          </div>
-				          <div class="divisor-info">
-				               <div class="divisor">
-				                    <p style="margin-top:-1px;" class="rol roboto">Cantidad</p>
-				                    <p class="datos roboto" th:text="${cantidad}"></p>
-				               </div>
-				               <div class="divisor">
-				                    <p style="margin-top:-1px;" class="rol roboto">Importe</p>
-				                    <p class="datos roboto" th:text="${bruto}"></p>
-				               </div>
-				                 <div class="divisor">
-				                    <p style="margin-top:-1px;" class="rol roboto">Descuento</p>
-				                    <p class="datos roboto" th:text="${descuento}"></p>
-				               </div>
-				                <div class="divisor">
-				                    <p style="margin-top:-1px;" class="rol roboto">Neto</p>
-				                    <p class="datos roboto" th:text="${neto}"></p>
-				               </div>
-				          </div>
-                          <div class="barraComun2" style="margin-top: 2px;"> <p class="rol roboto">DETALLE</p> </div>
-				               <table class="roboto">
-				                    <thead>
-				                         <tr>
-				                              <th>Fecha</th>
-				                              <th>Direccion</th>
-				                              <th>Localidad</th>
-				                              <th>Importe</th>
-				                              <th>Descuento</th>
-				                              <th>Neto</th>
-				                         </tr>
-				                    </thead>
-				                    <tbody>
-				                         <tr th:each="viaje : ${viajes}">
-				                              <td th:text="${viaje.fecha}"></td>
-				                              <td id="viajeCliEmpConDatos"  th:text="${viaje.direccion}"></td>
-				                              <td th:text="${viaje.localidad}"></td>
-				                              <td th:text="' $ '+${viaje.importe}"></td>
-				                              <td th:text="' $ '+${viaje.descuento}"></td>
-				                              <td th:text="' $ '+${viaje.neto}"></td>
-				                         </tr>
-				                    </tbody>
-				               </table>
-				     </div>
-				</div>
-				
-				<!-- ------------------------------fin empleado/cliente----------------------------------------------- -->				
+
+               <div th:each="listaViajes : ${listaDeListasViajes}">
+                
+                    <div th:replace="fragments/printDownloadCliEmplHoja :: viajesCliEmple(
+                                   viajes = ${listaViajes}, 
+                                   hojaNro = ${listaViajesStat.index + 1} + '/' + ${listaDeListasViajes.size()}, 
+                                   primerHoja = ( ${listaViajesStat.index + 1} == ${1} ),
+                                   ultimaHoja = ( ${listaViajesStat.index + 1} == ${listaDeListasViajes.size()} ),
+                                   fechaA = ${fecha1} , fechaB = ${fecha2}, cantidad1 = ${cantidad}, bruto1 = ${bruto}, 
+                                   descuento1 = ${descuento}, neto1 = ${neto}, empleado1 = ${empleado}, cliente1 = ${cliente}
+                              )">
+                    </div>
+                    <div th:if="${listaViajesStat.index + 1} != ${listaDeListasViajes.size()}"
+                         style="page-break-before: always; margin:0;">
+                   </div>
+               </div>
 				
           </div> <!-- **************fin div contenedor General********************** -->
      </main>

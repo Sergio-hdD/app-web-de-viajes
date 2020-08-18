@@ -45,9 +45,9 @@
                                 <td th:text="${v.fecha}"></td>
                                 <td th:text="${v.direccion}"></td>
                                 <td th:text="${v.localidad}"></td>
-                                <td th:text="'$ ' + ${v.importe}"></td>
-                                <td th:text="'$' + ${v.descuento}"></td>
-                                <td th:text="'$' + ${v.neto}"></td>
+	                            <td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+	                            <td>$ <span th:text="${#numbers.formatDecimal(v.descuento, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+	                            <td>$ <span th:text="${#numbers.formatDecimal(v.neto, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
                                 <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
                                 <td th:text="${v.Cliente.razonSocial}"></td>
                                 <td th:text="${v.detalle}"></td>
@@ -158,7 +158,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Importe</label>
-                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe" required>
+                                                    <input type="number" class="form-control" id="importe" step="0.01" name="importe" placeholder="Ingrese importe" required> <!--  el "step="0.01"" es para permitir 2 decimale, para más sería step="any"  -->
                                                 	<div class="invalid-feedback">
 			                                         	Debe ingresar el importe   
 			                                        </div>
@@ -166,7 +166,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Descuento</label>
-                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento" required>
+                                                    <input type="number" class="form-control" id="descuento" step="0.01" name="descuento" placeholder="Ingrese descuento" required> <!--  el "step="0.01"" es para permitir 2 decimale, para más sería step="any"  -->
                                                 	<div class="invalid-feedback">
 			                                         	Debe ingresar el descuento   
 			                                        </div>
@@ -289,7 +289,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Importe</label>
-                                                    <input type="number" class="form-control" id="importe" name="importe" placeholder="Ingrese importe" required>
+                                                    <input type="number" class="form-control" id="importe" step="0.01" name="importe" placeholder="Ingrese importe" required> <!--  el "step="0.01"" es para permitir 2 decimale, para más sería step="any"  -->
                                                 	<div class="invalid-feedback">
 			                                         	Debe ingresar el importe
 			                                        </div>
@@ -297,7 +297,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label for="formGroupExampleInput2">Descuento</label>
-                                                    <input type="number" class="form-control" id="descuento" name="descuento" placeholder="Ingrese descuento" required>
+                                                    <input type="number" class="form-control" id="descuento" step="0.01" name="descuento" placeholder="Ingrese descuento" required> <!--  el "step="0.01"" es para permitir 2 decimale, para más sería step="any"  -->
                                                 	<div class="invalid-feedback">
 			                                         	Debe ingresar el descuento   
 			                                        </div>

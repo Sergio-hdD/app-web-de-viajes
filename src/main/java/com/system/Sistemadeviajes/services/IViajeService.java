@@ -19,7 +19,9 @@ public interface IViajeService {
 
 	public boolean remove(long idViaje);
 	
-	public List<Viaje> traerViajesDelEmpleadoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);
+	public List<Viaje> traerViajesDeCliEmpleEntreFechas(ClienteModel cliente,EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2);
+	
+	public List<Viaje> resumenViajesDelEmpleadoEntreFechas(EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);
 	
 	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);	
 	
