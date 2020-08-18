@@ -16,12 +16,24 @@ public interface IViajeRepository extends JpaRepository<Viaje, Serializable>{
 	public abstract Viaje findByIdViaje(long idViaje);
 
 	@Query(nativeQuery=true,value="select * from Viaje where empleado_id_persona=(:idEmpleado) and cliente_id_persona=(:idCliente) and fecha BETWEEN (:fecha1) and (:fecha2)")
-	public abstract List<Viaje> viajesDelEmpladoEntreFachas(long idCliente,long idEmpleado,LocalDate fecha1,LocalDate fecha2);
+	public abstract List<Viaje> viajesDelCliEmpleEntreFachas(long idCliente,long idEmpleado,LocalDate fecha1,LocalDate fecha2);
+	
+	@Query(nativeQuery=true,value="select * from Viaje where empleado_id_persona=(:idEmpleado) and fecha BETWEEN (:fecha1) and (:fecha2)")
+	public abstract List<Viaje> viajesDelEmpleadoEntreFachas(long idEmpleado,LocalDate fecha1,LocalDate fecha2);
+	
+	@Query(nativeQuery=true,value="select * from Viaje where empleado_id_persona=(:idEmpleado) and fecha BETWEEN (:fecha1) and (:fecha2) group by cliente_id_persona")
+	public abstract List<Viaje> viajesDelEmpleEntreFachasGroupByClientes(long idEmpleado,LocalDate fecha1,LocalDate fecha2);
 	
 	@Query(nativeQuery=true,value="select * from Viaje where cliente_id_persona=(:idCliente) and fecha BETWEEN (:fecha1) and (:fecha2)")
 	public abstract List<Viaje> viajesDelClienteEntreFachas(long idCliente,LocalDate fecha1,LocalDate fecha2);
 
 	@Query(nativeQuery=true,value="select * from Viaje where fecha BETWEEN (:fecha1) and (:fecha2)")
 	public abstract List<Viaje> viajesEntreFachas(LocalDate fecha1,LocalDate fecha2);
+	
+	@Query(nativeQuery=true,value="select * from Viaje where cliente_id_persona=(:idCliente)")
+	public abstract List<Viaje> viajesDelCliente(long idCliente);
+	
+	@Query(nativeQuery=true,value="select * from Viaje where empleado_id_persona=(:idEmpleado)")
+	public abstract List<Viaje> viajesDelEmpleado(long idEmpleado);
 	
 }//Fin class

@@ -2,12 +2,14 @@ package com.system.Sistemadeviajes.services.implementation;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.system.Sistemadeviajes.converters.ClienteConverter;
 import com.system.Sistemadeviajes.converters.ViajeConverter;
 import com.system.Sistemadeviajes.entities.Viaje;
 import com.system.Sistemadeviajes.models.ClienteModel;
@@ -27,7 +29,10 @@ public class ViajeService implements IViajeService{
 	@Autowired
 	@Qualifier("viajeConverter")
 	private ViajeConverter viajeConverter;
-
+	
+	@Autowired
+	@Qualifier("clienteConverter")
+	private ClienteConverter clienteConverter;
 
 	@Override
 	public List<Viaje> getAll() {
@@ -62,14 +67,28 @@ public class ViajeService implements IViajeService{
 	}
 
 	@Override
-	public List<Viaje> traerViajesDelEmpleadoEntreFechas(ClienteModel cliente,EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2){
-		List<Viaje> viajes = viajeRepository.viajesDelEmpladoEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
+	public List<Viaje> traerViajesDeCliEmpleEntreFechas(ClienteModel cliente,EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2){
+		List<Viaje> viajes = viajeRepository.viajesDelCliEmpleEntreFachas(cliente.getIdPersona(),empleado.getIdPersona(), fecha1, fecha2);
 		return viajes;
 	}
 
 	@Override
+	public List<Viaje> resumenViajesDelEmpleadoEntreFechas(EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2){
+		List<Viaje> viajesResumen = new ArrayList<Viaje>();
+		for(Viaje viaje : viajeRepository.viajesDelEmpleEntreFachasGroupByClientes(empleado.getIdPersona(),fecha1,fecha2)) {
+			viaje.setImporte(totalBrutoEntreFechas(clienteConverter.entityToModel(viaje.getCliente()),empleado,fecha1,fecha2));
+			viaje.setDescuento(totalDescuentoEntreFechas(clienteConverter.entityToModel(viaje.getCliente()),empleado,fecha1,fecha2));
+			viaje.setNeto(totalNetoEntreFechas(clienteConverter.entityToModel(viaje.getCliente()),empleado,fecha1,fecha2));
+			viaje.setDetalle(String.valueOf(traerViajesDeCliEmpleEntreFechas(clienteConverter.entityToModel(viaje.getCliente()),empleado,fecha1,fecha2).size()));
+			//en la linea anterior traigo la cantidad (es int) de viajes hechos a un cliente por el empleado y la convierto a String para poder guardarlo en el atributo detalle y para mostralo
+			viajesResumen.add(viaje);	
+		}
+		return viajesResumen;
+	}	
+	
+	@Override
 	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2){
-		List<Viaje> viajes = traerViajesDelEmpleadoEntreFechas(cliente,empleado, fecha1, fecha2);
+		List<Viaje> viajes = traerViajesDeCliEmpleEntreFechas(cliente,empleado, fecha1, fecha2);
 		double bruto =0; 
 		for(Viaje viaje:viajes) {
 			bruto += viaje.getImporte();
@@ -79,7 +98,7 @@ public class ViajeService implements IViajeService{
 
 	@Override
 	public double totalDescuentoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2){
-		List<Viaje> viajes = traerViajesDelEmpleadoEntreFechas(cliente,empleado, fecha1, fecha2);
+		List<Viaje> viajes = traerViajesDeCliEmpleEntreFechas(cliente,empleado, fecha1, fecha2);
 		double descuento =0; 
 		for(Viaje viaje:viajes) {
 			descuento += viaje.getDescuento();
@@ -89,7 +108,7 @@ public class ViajeService implements IViajeService{
 
 	@Override
 	public double totalNetoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2){
-		List<Viaje> viajes = traerViajesDelEmpleadoEntreFechas(cliente,empleado, fecha1, fecha2);
+		List<Viaje> viajes = traerViajesDeCliEmpleEntreFechas(cliente,empleado, fecha1, fecha2);
 		double neto =0; 
 		for(Viaje viaje:viajes) {
 			neto += viaje.getNeto();
@@ -183,4 +202,4 @@ public class ViajeService implements IViajeService{
 		return cantidad;
 	}
 
-}// fin class 
+}// fin class
