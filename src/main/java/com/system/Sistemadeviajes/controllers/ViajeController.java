@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -277,17 +279,16 @@ public class ViajeController {
 	}
 	
 	@GetMapping("/cantidadViajesClientes")
-	@ResponseBody
-	public ArrayList<CantidadViajes> cantidadViajesClientes(){
+	public ResponseEntity<ArrayList<CantidadViajes>> cantidadViajesClientes(){
 		ArrayList<CantidadViajes> lstCantidadViajes = new ArrayList<CantidadViajes>();
-		
+				
 		for(Cliente c : clienteService.getAll()) {
 			if(viajeService.getCantidadViajesCliente(c.getIdPersona())> 0) {
 				lstCantidadViajes.add(new CantidadViajes(c.getRazonSocial(),viajeService.getCantidadViajesCliente(c.getIdPersona())));
 			}
 		}
 		
-		return lstCantidadViajes;
+		return new ResponseEntity<ArrayList<CantidadViajes>>(lstCantidadViajes, HttpStatus.OK);
 	}
 	
 	
