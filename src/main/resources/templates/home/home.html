@@ -2,137 +2,110 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
 
-    <!--JQUERY-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Los iconos tipo Solid de Fontawesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
-
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
-        <link rel="shortcut icon" type="image/png" th:href="@{/images/fondoNM.png}" />
-    
-
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/images/fondoNM.png}" />
     <link href="/css/normalize.css" rel="stylesheet">
-    <link href="/css/sweetalert2.css" rel="stylesheet">
     <link href="/css/material.min.css" rel="stylesheet">
-    <link href="/css/material-design-iconic-font.min.css" rel="stylesheet">
-    <link href="/css/jquery.mCustomScrollbar.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="/js/jquery-1.11.2.min.js"><\/script>')
-    </script>
+
 </head>
 
 <body id="image">
 
     <section class="full-width text-center">
-		<article class="full-width tile" style="border: none;" >
-		<span class="text-condensedLight">
-							<h1>NEW-MOTOS</h1>
-						</span>
-		</article>
+        <article class="full-width tile" style="border: none; cursor:auto;">
+            <span class="text-condensedLight">
+                <h1>NEW-MOTOS</h1>
+            </span>
+        </article>
 
         <br>
         <br>
 
-        <!-- Tiles -->
-
-
-        <article class="full-width tile" >
+        <article class="full-width tile">
             <a th:href="@{/viajes}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">
                         <span class="text-condensedLight">
-							<h3>Lista de Viajes</h3>
-						</span>
+                            <h3>Lista de Viajes</h3>
+                        </span>
                     </div>
                 </div>
-              <i class="fas fa-dolly-flatbed tile-icon"></i>
-                
+                <i class="fas fa-dolly-flatbed tile-icon"></i>
             </a>
         </article>
-
 
         <article class="full-width tile">
             <a th:href="@{/empleados}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">
                         <span class="text-condensedLight">
-							<h3>Lista de Cadetes</h3>
-						</span>
+                            <h3>Lista de Cadetes</h3>
+                        </span>
                     </div>
                 </div>
-               <i class="fas fa-user tile-icon"></i>
-                
+                <i class="fas fa-user tile-icon"></i>
             </a>
         </article>
-
 
         <article class="full-width tile">
             <a th:href="@{/clientes}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">
                         <span class="text-condensedLight">
-							<h3>Lista de Clientes</h3>
-						</span>
+                            <h4>Lista de Clientes</h3>
+                        </span>
                     </div>
                 </div>
-            <i class="fas fa-user-circle tile-icon"></i>
-			</a>
-            
+                <i class="fas fa-user-circle tile-icon"></i>
+            </a>
         </article>
-
 
         <article class="full-width tile">
             <a th:href="@{/viajes/getCliEmplYFechas}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">
                         <span class="text-condensedLight">
-							<h4>Consultar viajes por Cadete/Cliente <br> entre fechas</h4>
-						</span>
+                            <h4>Consultar viajes por Cadete/Cliente <br> entre fechas</h4>
+                        </span>
                     </div>
                 </div>
-               <i class="fas fa-calendar-alt tile-icon"></i>
-                
+                <i class="fas fa-calendar-alt tile-icon"></i>
             </a>
         </article>
-  
+
         <article class="full-width tile">
             <a th:href="@{/viajes/empleadoYFechas}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">
                         <span class="text-condensedLight">
-							<h4>Resumen de viajes de un Cadete <br> entre fechas</h4>
-						</span>
+                            <h4>Resumen de viajes de un Cadete <br> entre fechas</h4>
+                        </span>
                     </div>
                 </div>
-               <i class="fas fa-calendar-alt tile-icon"></i>
-                
+                <i class="fas fa-calendar-alt tile-icon"></i>
             </a>
-        </article>        
-        
+        </article>
+
         <article class="full-width tile">
             <a th:href="@{/viajes/clienteYFechas}" class="full-width">
                 <div class="card mb-3" style="background-color: transparent;">
                     <div class="tile-text">
                         <span class="text-condensedLight">
-							<h4>Consultar viajes por CLIENTE <br> entre fechas</h4>
-						</span>
+                            <h4>Consultar viajes por CLIENTE <br> entre fechas</h4>
+                        </span>
                     </div>
                 </div>
-			<i class="fas fa-calendar-alt tile-icon"></i>
-                
+                <i class="fas fa-calendar-alt tile-icon"></i>
             </a>
-        </article>               
-        
+        </article>
+
     </section>
 
 </body>

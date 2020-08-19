@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+
     <head th:replace="fragments/head :: head(title='Fechas/cliente')"></head>
 
 </head>
@@ -9,17 +10,12 @@
 <body>
 
     <div class="wrapper">
-        
-        	<th:block th:include="fragments/sidebar :: sidebar"></th:block>
 
-    <!-- -------------------------------------------------------------------------------------------------------------------  -->
-    <div class="main-panel" id="main-panel">
+        <th:block th:include="fragments/sidebar :: sidebar"></th:block>
 
-        <th:block th:include="fragments/navbarSinSearch :: navbar"></th:block>
+        <div class="main-panel" id="main-panel">
 
-        <!-- -------------------------------------------------------------------------------------------------------------------  -->
-
-
+            <th:block th:include="fragments/navbarSinSearch :: navbar"></th:block>
 
             <div class="mx-auto col-md-12 main-section" id="myTab" role="tablist">
 
@@ -32,12 +28,9 @@
                             </div>
                         </div>
 
-
-
                         <div class="card-body">
-                            <form th:action="devolverClienteYFechas" action="#" method="post" style="padding-top: 10px;" class="formulario" novalidate>
-
-
+                            <form th:action="devolverClienteYFechas" action="#" method="post" style="padding-top: 10px;"
+                                class="formulario" novalidate>
 
                                 <div class="card-body">
                                     <div class="row">
@@ -51,15 +44,14 @@
                                         <div class="col">
 
                                             <input class="form-control" type="date" th:name="fecha1" required />
-                                            
+
                                             <div class="invalid-feedback" style="padding-left:5px">
-                                            
-												Debe ingresar la fecha inicial
-                                            
-                                        	</div>
+
+                                                Debe ingresar la fecha inicial
+
+                                            </div>
 
                                         </div>
-
 
                                     </div>
                                 </div>
@@ -77,20 +69,18 @@
                                         <div class="col">
 
                                             <input class="form-control" type="date" th:name="fecha2" required />
-                                            
+
                                             <div class="invalid-feedback" style="padding-left:5px">
-                                            
-												Debe ingresar la fecha final
-                                            
-                                        	</div>
+
+                                                Debe ingresar la fecha final
+
+                                            </div>
 
                                         </div>
-
 
                                     </div>
 
                                 </div>
-
 
                                 <div class="card-body">
 
@@ -98,16 +88,17 @@
 
                                         <div class="col">
 
-                                            <span><b style=font-size:16px>Elija el cliente: </b> 
-                                          
-                                            </div>
+                                            <span><b style=font-size:16px>Elija el cliente: </b>
 
-                                            <div class="col">
+                                        </div>
 
+                                        <div class="col">
 
-                                          <select class="form-control" placeholder="cliente" name="idPersona" required>
-                                        <option th:each="c : ${clientes}" th:value="${c.idPersona}" th:text="${c.razonSocial}"></option>
-                                      </select></span>
+                                            <select class="form-control" placeholder="cliente" name="idPersona"
+                                                required>
+                                                <option th:each="c : ${clientes}" th:value="${c.idPersona}"
+                                                    th:text="${c.razonSocial}"></option>
+                                            </select></span>
 
                                         </div>
 
@@ -115,13 +106,10 @@
 
                                 </div>
 
+                                <br>
 
-
-
-                                <br />
-
-
-                                <a> <button type="submit" class="btn btn-primary">ENVIAR RESPUESTA  <i  style="padding-left: 5px;" class="now-ui-icons ui-1_send"></i></button></a>
+                                <a> <button type="submit" class="btn btn-primary">ENVIAR RESPUESTA <i
+                                            style="padding-left: 5px;" class="now-ui-icons ui-1_send"></i></button></a>
                             </form>
 
                         </div>
@@ -129,24 +117,23 @@
                     </div>
                 </div>
 
-
                 <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab"></div>
             </div>
-
 
         </div>
 
     </div>
 
     <!-- Logout Modal-->
-    	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    	 <div class="modal-dialog" role="document">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"><i class="fas fa-times"></i></span>
-              </button>
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     Seleccione "Logout" si est&aacute listo para finalizar su sesi&oacuten actual.</div>
@@ -159,25 +146,20 @@
             </div>
         </div>
     </div>
-    </div>
 
+    <th:block th:include="fragments/scripts :: scripts"></th:block>
 
-    <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	
-	<script type="text/javascript">
-        $(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-            (function() {
+            (function () {
                 'use strict';
-                window.addEventListener('load', function() {
+                window.addEventListener('load', function () {
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
                     var forms = document.getElementsByClassName('formulario');
                     // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
                             if (form.checkValidity() === false) {
                                 event.preventDefault();
                                 event.stopPropagation();
