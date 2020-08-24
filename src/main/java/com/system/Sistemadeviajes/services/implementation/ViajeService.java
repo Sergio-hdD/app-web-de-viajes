@@ -87,6 +87,23 @@ public class ViajeService implements IViajeService{
 	}	
 	
 	@Override
+	public Viaje totalesResumenViajes(EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2){
+		Viaje viajeResumen = new Viaje();
+		int cantDiasTrabajados = viajeRepository.diasTrabajadosXEmpleEntreFachas(empleado.getIdPersona(), fecha1, fecha2);//traigo la cantidad dias trabajados por el empleado
+		viajeResumen.setDireccion(String.valueOf(cantDiasTrabajados));//Convierto el int a String para poder guardarlo en el atributo detalle y para mostralo
+		int cantViajes = 0;
+		for(Viaje viaje : resumenViajesDelEmpleadoEntreFechas(empleado,fecha1,fecha2)) {
+			viajeResumen.setImporte(viajeResumen.getImporte()+viaje.getImporte());
+			viajeResumen.setDescuento(viajeResumen.getDescuento()+viaje.getDescuento());
+			viajeResumen.setNeto(viajeResumen.getNeto()+viaje.getNeto());
+			cantViajes += traerViajesDeCliEmpleEntreFechas(clienteConverter.entityToModel(viaje.getCliente()),empleado,fecha1,fecha2).size(); //traigo y sumo la cantidad (es int) de viajes hechos a un cliente por el empleado 
+		}
+		viajeResumen.setDetalle(String.valueOf(cantViajes));//Convierto el int a String para poder guardarlo en el atributo detalle y para mostralo
+		return viajeResumen;
+	}		
+	
+	
+	@Override
 	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2){
 		List<Viaje> viajes = traerViajesDeCliEmpleEntreFechas(cliente,empleado, fecha1, fecha2);
 		double bruto =0; 

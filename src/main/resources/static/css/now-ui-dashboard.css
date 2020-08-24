@@ -4260,6 +4260,15 @@ Created using IcoMoon - icomoon.io
 	text-align: center;
 }
 
+.inline-block{
+	display: inline-block;
+}
+
+.inline-block-margin-left-40{
+	display: inline-block; 
+	margin-left: 40px;
+}
+
 .panel-header .header .category {
   max-width: 600px;
   color: rgba(255, 255, 255, 0.5);
