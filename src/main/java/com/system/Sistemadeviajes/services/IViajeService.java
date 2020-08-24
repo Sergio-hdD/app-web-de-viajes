@@ -23,6 +23,8 @@ public interface IViajeService {
 	
 	public List<Viaje> resumenViajesDelEmpleadoEntreFechas(EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);
 	
+	public Viaje totalesResumenViajes(EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2);
+	
 	public double totalBrutoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);	
 	
 	public double totalDescuentoEntreFechas(ClienteModel cliente,EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);

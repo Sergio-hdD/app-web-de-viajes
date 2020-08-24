@@ -24,6 +24,9 @@ public interface IViajeRepository extends JpaRepository<Viaje, Serializable>{
 	@Query(nativeQuery=true,value="select * from Viaje where empleado_id_persona=(:idEmpleado) and fecha BETWEEN (:fecha1) and (:fecha2) group by cliente_id_persona")
 	public abstract List<Viaje> viajesDelEmpleEntreFachasGroupByClientes(long idEmpleado,LocalDate fecha1,LocalDate fecha2);
 	
+	@Query(nativeQuery=true,value="select count(distinct(fecha)) from Viaje where empleado_id_persona=(:idEmpleado) and fecha BETWEEN (:fecha1) and (:fecha2)")
+	public abstract int diasTrabajadosXEmpleEntreFachas(long idEmpleado,LocalDate fecha1,LocalDate fecha2);
+	
 	@Query(nativeQuery=true,value="select * from Viaje where cliente_id_persona=(:idCliente) and fecha BETWEEN (:fecha1) and (:fecha2)")
 	public abstract List<Viaje> viajesDelClienteEntreFachas(long idCliente,LocalDate fecha1,LocalDate fecha2);
 

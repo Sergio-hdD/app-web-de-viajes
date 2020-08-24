@@ -18,41 +18,32 @@
 
                     <table class="table table-striped" id="myTable">
                         <thead>
-                            <tr>
+                            <tr class="textCenter">
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Direccion</th>
                                 <th scope="col">Localidad</th>
                                 <th scope="col">Importe</th>
-                                <th scope="col">Descuento</th>
-                                <th scope="col">Neto</th>
                                 <th scope="col">Cadete</th>
                                 <th scope="col">Cliente</th>
-                                <th scope="col">Detalle</th>
-                                <th scope="col">Contado?</th>
                                 <th scope="col">Entregado?</th>
                                 <th scope="col">Acciones</th>
-
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="textCenter">
 
                             <tr th:each="v : ${viajes}">
                                 <td th:text="${v.fecha}"></td>
                                 <td th:text="${v.direccion}"></td>
                                 <td th:text="${v.localidad}"></td>
                                 <td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-	                            <td>$ <span th:text="${#numbers.formatDecimal(v.descuento, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-	                            <td>$ <span th:text="${#numbers.formatDecimal(v.neto, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
                                 <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
                                 <td th:text="${v.Cliente.razonSocial}"></td>
-                                <td th:text="${v.detalle}"></td>
-                                <td th:text="${v.contado}"></td>
                                 <td th:text="${v.entregado}"></td>
 								
 
                                 <td>
                                     <div class="form-inline">
-
+                                        <a class="btn btn-info btn-viewPlus" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Ver m&aacutes</a> 
                                         <a class="btn btn-warning btn-edit" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Editar</a>
                                         <a class="btn btn-danger btn-delete" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Eliminar</a>
                                     </div>
@@ -283,7 +274,7 @@
                                             <div class="form-row">
 
                                                 <div class="form-group col-md-6">
-                                                    <label for="formGroupExampleInput2">Importe</label>
+                                                    <label for="formGroupExampleInput2">Importe ($)</label>
                                                     <input type="number" class="form-control" id="importe" step="0.01" name="importe" placeholder="Ingrese importe" required> <!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
                                                 	<div class="invalid-feedback">
 			                                         	Debe ingresar el importe
@@ -291,7 +282,7 @@
                                                 </div>
 
                                                 <div class="form-group col-md-6">
-                                                    <label for="formGroupExampleInput2">Descuento</label>
+                                                    <label for="formGroupExampleInput2">Descuento ($)</label>
                                                     <input type="number" class="form-control" id="descuento" step="0.01" name="descuento" placeholder="Ingrese descuento" required> <!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
                                                 	<div class="invalid-feedback">
 			                                         	Debe ingresar el descuento   
@@ -307,12 +298,12 @@
                                                 <div class="form-group col-md-6 mt-4">
 
 		                                            <div class="form-group">
-		                                                <input type="checkbox" id="contado" name="contado" required>
+		                                                <input type="checkbox" id="contado" name="contado" >
 		                                                <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
 		                                            </div>
 		
 		                                            <div class="form-group">
-		                                                <input type="checkbox" name="entregado" id="entregado" required>
+		                                                <input type="checkbox" name="entregado" id="entregado" >
 		                                                <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
 		                                            </div>
                                             
@@ -392,11 +383,58 @@
                         </form>
                     </div>
 
+                    <div class="form-viewPlus">
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">Se muestran mas datos del Viaje</h4>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
+
+                                            <div class="form-group">
+
+                                                <label class="col-form-label" for="name">Descuento</label>                                              
+                                                 <input type="text" class="form-control" id="descuento" name="descuento" readonly="readonly">
+                                            </div>
+                                            
+                                            
+                                            
+                                           <div class="form-group">
+                                                <label class="col-form-label" for="name">Neto</label>                                              
+	                                             <input type="text" class="form-control" id="neto" name="neto" readonly="readonly">
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput">Detalle</label>
+                                                <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" readonly="readonly"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="formGroupExampleInput2">Se paga al contado?</label>
+                                                <input type="text" class="form-control" id="contado" name="contado" readonly="readonly">
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">CERRAR</button>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
 
                     <a href="#" class="btn btn-success btn-add">
                         <i class="fas fa-plus" style="padding-right:5px;"></i>
                         <span class="p">Agregar Viaje</span>
-
                     </a>
 
                 </div>
@@ -448,7 +486,6 @@
                 event.preventDefault();
                 var href = $(this).attr('href');
 
-
                 $.get(href, function (viaje, status) {
                     $('.form-update #id').val(viaje.idViaje);
                     $('.form-update #fecha').val(viaje.fecha);
@@ -456,17 +493,11 @@
                     $('.form-update #localidad').val(viaje.localidad);
                     $('.form-update #empleado').val(viaje.empleado.idPersona);
                     $('.form-update #cliente').val(viaje.cliente.idPersona);
-                    $('.form-update #importe').val(viaje.importe);
+                    $('.form-update #importe').val(viaje.importe);   //.val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.importe)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
                     $('.form-update #detalle').val(viaje.detalle);
-                    $('.form-update #descuento').val(viaje.descuento);
-
-                    if (viaje) {
-                        $('.form-update #contado').val(true);
-                    } else {
-                        $('.form-update #contado').val(false);
-                    }
-
-
+                    $('.form-update #descuento').val(viaje.descuento);   //.val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.descuento)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
+                    $('.form-update #contado').prop("checked", viaje.contado);             
+             		$('.form-update #entregado').prop("checked", viaje.entregado);
 
                 });
 
@@ -474,12 +505,9 @@
 
             });
 
-
-
             $('.btn-delete').on('click', function (event) {
                 event.preventDefault();
                 var href = $(this).attr('href');
-
 
                 $.get(href, function (viaje, status) {
                     $('.form-delete #id').val(viaje.idViaje);
@@ -493,14 +521,29 @@
 
             });
 
+            
+            $('.btn-viewPlus').on('click', function (event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
 
+                $.get(href, function (viaje, status) {
+                    $('.form-viewPlus #id').val(viaje.idViaje);
+                    $('.form-viewPlus #descuento').val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.descuento)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
+                    $('.form-viewPlus #neto').val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
+                    $('.form-viewPlus #detalle').val(viaje.detalle);
+                    $('.form-viewPlus #contado').val(viaje.contado);             
+                });
 
+                $('.form-viewPlus #exampleModal').modal();
+
+            });
+
+            
             $('#selectFecha').on('change', function () {
                 //Seteo la fecha actual al campo input date
                 $('#fecha').val(getCurrentDate());
 
                 $('#fecha').toggle();
-
 
             });
 

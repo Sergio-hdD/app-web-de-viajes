@@ -84,8 +84,6 @@ public class ViajeController {
 	@PostMapping("/update")
 	public RedirectView update(ViajeModel viajeModel) {
 		
-		System.out.println(viajeModel.isContado());
-		
 		viajeModel.setCliente(clienteService.findByIdPersona(viajeModel.getCliente().getIdPersona()));
 		viajeModel.setEmpleado(empleadoService.findByIdPersona(viajeModel.getEmpleado().getIdPersona()));
 		
@@ -171,6 +169,7 @@ public class ViajeController {
 		mAV.addObject("empleados", empleadoService.getAll());
 		return mAV;
 	}	
+
 	@RequestMapping(value = "/devolverEmpleadoYFechas", method = RequestMethod.POST)
 	public ModelAndView traerEmpleYFechas(@ModelAttribute("clienteModel") EmpleadoModel empleadoModel,
 			@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
@@ -179,10 +178,12 @@ public class ViajeController {
 		idCliGlobal = empleadoModel.getIdPersona();   fecha1Global = fecha1;   fecha2Global = fecha2;
 		EmpleadoModel empleado = empleadoService.findByIdPersona(empleadoModel.getIdPersona());
 		mAV.addObject("empleado",empleado);
-		List<Viaje> viajes = viajeService.resumenViajesDelEmpleadoEntreFechas(empleado,fecha1, fecha2); 
+		List<Viaje> viajes = viajeService.resumenViajesDelEmpleadoEntreFechas(empleado,fecha1, fecha2);
+		Viaje viaje = viajeService.totalesResumenViajes(empleado, fecha1, fecha2);
 		mAV.addObject("fecha1",fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
 		mAV.addObject("fecha2",fecha2.getDayOfMonth()+"/"+fecha2.getMonthValue()+"/"+fecha2.getYear());//para que la fecha se muestre "dd/mm/yyyy" y no "yyyy-mm-dd"
 		mAV.addObject("viajes",viajes);
+		mAV.addObject("viajeResumen",viaje);
 		return mAV;
 	}
 	
