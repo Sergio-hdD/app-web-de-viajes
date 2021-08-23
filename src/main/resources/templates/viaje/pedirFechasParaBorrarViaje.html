@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: head(title='Fechas/cliente')"></head>
+<head>
+
+    <head th:replace="fragments/head :: head(title='Borrar viajes')"></head>
+
+</head>
 
 <body>
 
@@ -20,14 +24,16 @@
 
                         <div class="card text-white bg-warning mb-1">
                             <div class="card-header">
-                                <h4 class="card-title" style=color:black>Ver resumen de los viajes entre fechas de un CADETE</h4>
+                                <h4 class="card-title" style=color:black>Fechas para eliminar viajes</h4>
+                                <div class="col">
+                                   <label><h2><span th:text="${mensaje}" /></h2></label>
+                                </div>
                             </div>
                         </div>
 
                         <div class="card-body">
-                            
-                            <form target="_blank" th:action="devolverEmpleadoYFechas" action="#" method="post"
-                                style="padding-top: 10px;" class="formulario" novalidate> <!-- target="_blank"  PERMITE QUE LA VENTANA A LA QUE REDIRIGE EL FORM SE ABRA EN OTRA PESTAï¿½A-->
+                            <form th:action="devolerFechasParaBorrarViajes" action="#" method="post" style="padding-top: 10px;"
+                                class="formulario" novalidate> <!-- target="_blank"  PERMITE QUE LA VENTANA A LA QUE REDIRIGE EL FORM SE ABRA EN OTRA PESTAÑA-->
 
                                 <div class="card-body">
                                     <div class="row">
@@ -80,41 +86,15 @@
                                 </div>
 
 
-                                <div class="card-body">
-
-                                    <div class="row">
-
-                                        <div class="col">
-
-                                            <span><b style=font-size:16px>Elija el cadete: </b>
-
-                                        </div>
-
-                                        <div class="col">
-
-
-                                            <select class="form-control" placeholder="cliente" name="idPersona"
-                                                required>
-                                                <option th:each="e : ${empleados}" th:value="${e.idPersona}"
-                                                    th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
-                                            </select></span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
                                 <br>
 
-                                <a> <button type="submit" class="btn btn-primary">ENVIAR SOLICITUD <i
+                                <a> <button type="submit" class="btn btn-primary"> BORRAR <i
                                             style="padding-left: 5px;" class="now-ui-icons ui-1_send"></i></button></a>
                             </form>
 
                         </div>
 
                     </div>
-
                 </div>
 
                 <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab"></div>
@@ -132,11 +112,11 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">ï¿½</span>
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Seleccione "Logout" a continuaciï¿½n si estï¿½ listo para finalizar su sesiï¿½n actual.</div>
+                    Seleccione "Logout" si est&aacute listo para finalizar su sesi&oacuten actual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <form th:action="@{/logout}" method="post">
@@ -147,7 +127,6 @@
         </div>
     </div>
 
-    <!-- JS, Popper.js, and jQuery -->
     <th:block th:include="fragments/scripts :: scripts"></th:block>
 
     <script type="text/javascript">

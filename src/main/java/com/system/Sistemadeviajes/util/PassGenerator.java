@@ -16,4 +16,4 @@
 //
 //	}
 //}
-////Run as - Java Aplication
+////Seleccionar el archivo PassGenerator.java - clic secundario - Run as - Java Aplication

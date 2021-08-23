@@ -264,6 +264,33 @@ public class ViajeController {
 //---------------------------fin para imprimir/descargar------------------------				
 //------------------------------FIN BLOQUE DE COONSULTAS E IMPRIMIR/DESCARGAR PDF -----------------------------------	
 	
+//consultas para borrar viajes
+	@GetMapping("/fechasBorraViajes")
+	public ModelAndView pedirFechaBorrar() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS_BORRAR);
+		mAV.addObject("mensaje","");
+		return mAV;
+	}	
+
+	@RequestMapping(value = "/devolerFechasParaBorrarViajes", method = RequestMethod.POST)
+	public ModelAndView borrarViajesEntreFechas(@RequestParam("fecha1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha1,
+			@RequestParam("fecha2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha2, Model model) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS_BORRAR);
+		fecha1Global = fecha1;   fecha2Global = fecha2;
+		List<Viaje> viajes = viajeService.viajesEntreFechas(fecha1, fecha2);
+		if(!viajes.isEmpty()){	
+		    for(Viaje viaje: viajes) {
+				//System.out.println(viaje.getIdViaje());
+			    viajeService.remove(viaje.getIdViaje());
+			}
+			mAV.addObject("mensaje","Los viajes han sido borrados correctamente");
+		}else {
+			mAV.addObject("mensaje","No hay viajes para borrar entre las fechas que ha ingresado ");
+		}
+		return mAV;
+	}//TRAVEL_PEDIRFECHAS_BORRAR
+//FIN consultas para borrar viajes
+		
 	@GetMapping("/cantidadViajesEmpleados")
 	@ResponseBody
 	public ArrayList<CantidadViajes> cantidadViajesEmpleados(){

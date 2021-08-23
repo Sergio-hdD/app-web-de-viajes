@@ -7,7 +7,7 @@
 
     <div class="wrapper">
 
-        <th:block th:include="fragments/sidebar :: sidebar"></th:block>
+        <th:block th:include="fragments/sidebarSinBotones :: sidebar"></th:block>
 
         <div class="main-panel" id="main-panel">
 
@@ -33,7 +33,7 @@
                                 <div class="card-header">
                                     <h4 class="card-title">Resultado de la consulta <b>VIAJES DEL CLIENTE ENTRE
                                             FECHAS</b></h4>
-
+                                    <input class="btn btn-secondary" name="button" type="button" onclick="window.close();" value="CERRAR VENTANA" /> 
                                     <a href="/viajes/imprDowlCliente" class="btn btn-secondary" style="float:right"
                                         id="printDownloadButton">
                                         <i class="fas fa-print"></i>

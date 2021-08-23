@@ -16,11 +16,8 @@
                     <i class="fas fa-print"></i><br />IMPRIMIR</button>
                <button class="btn btn-secondary m-4" onclick="descargar()">
                     <i class="fas fa-download"></i><br />DESCARGAR</button>
-                 <form action="#" th:action="@{/home}" method="get"> 
-                   <button class="btn btn-secondary m-4">
-                    <i class="fas fa-times-circle"></i><br />CANCELAR</button>
-                 </form>                   
-                    
+               <button class="btn btn-secondary m-4" onclick="window.close();">
+                    <i class="fas fa-times-circle"></i><br/>CERRAR</button>                                       
           </div>
           <small id="avisoDeCompatibilidad" class="d-none text-danger roboto">
                Para imprimir varias páginas se recomienda Chrome u otro navegador basado en Chromium

@@ -13,46 +13,50 @@
 
         <div class="container-fluid">
 
-            <table class="table table-striped" id="myTable">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Tipo Documento</th>
-                        <th scope="col">Nro Documento</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="table-responsive-lg">
 
-                    <tr th:each="e : ${empleados}">
-                        <td th:text="${e.nombre}"></td>
-                        <td th:text="${e.apellido}"></td>
-                        <td th:text="${e.tipoDocumento}"></td>
-                        <td th:text="${e.nroDocumento}"></td>
-                        <td th:text="${e.direccion}"></td>
-                        <td th:text="${e.telCel}"></td>
-                        <td>
-                            <div class="form-inline">
-
-                                <a class="btn btn-warning btn-edit" href="#"
-                                    th:href="@{/empleados/{id}(id=${e.idPersona})}" style="margin-right: 5px">Editar</a>
-
-
-                                <form action="#" th:action="@{/empleados/delete/{id}(id=${e.idPersona})}" method="post">
-                                    <input class="btn btn-danger btn-delete" href="#"
-                                        th:href="@{/empleados/{id}(id=${e.idPersona})}" type="submit" value="Eliminar">
-                                </form>
-
-                            </div>
-                        </td>
-
-                    </tr>
-
-                </tbody>
-            </table>
+	            <table class="table table-striped" id="myTable">
+	                <thead>
+	                    <tr>
+	                        <th scope="col">Nombre</th>
+	                        <th scope="col">Apellido</th>
+	                        <th scope="col">Tipo Documento</th>
+	                        <th scope="col">Nro Documento</th>
+	                        <th scope="col">Direccion</th>
+	                        <th scope="col">Telefono</th>
+	                        <th scope="col">Acciones</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	
+	                    <tr th:each="e : ${empleados}">
+	                        <td th:text="${e.nombre}"></td>
+	                        <td th:text="${e.apellido}"></td>
+	                        <td th:text="${e.tipoDocumento}"></td>
+	                        <td th:text="${e.nroDocumento}"></td>
+	                        <td th:text="${e.direccion}"></td>
+	                        <td th:text="${e.telCel}"></td>
+	                        <td>
+	                            <div class="form-inline">
+	
+	                                <a class="btn btn-warning btn-edit" href="#"
+	                                    th:href="@{/empleados/{id}(id=${e.idPersona})}" style="margin-right: 5px">Editar</a>
+	
+	
+	                                <form action="#" th:action="@{/empleados/delete/{id}(id=${e.idPersona})}" method="post">
+	                                    <input class="btn btn-danger btn-delete" href="#"
+	                                        th:href="@{/empleados/{id}(id=${e.idPersona})}" type="submit" value="Eliminar">
+	                                </form>
+	
+	                            </div>
+	                        </td>
+	
+	                    </tr>
+	
+	                </tbody>
+	            </table>
+	            
+	        </div>
 
             <div class="form-add">
                 <form action="#" method="post" th:action="@{empleados/add}" novalidate class="formulario">

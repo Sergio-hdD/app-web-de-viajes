@@ -85,6 +85,11 @@ public class ViajeService implements IViajeService{
 		}
 		return viajesResumen;
 	}	
+
+	@Override
+	public List<Viaje> viajesEntreFechas(LocalDate fecha1,LocalDate fecha2){
+		return viajeRepository.viajesEntreFachas(fecha1, fecha2);
+	}	
 	
 	@Override
 	public Viaje totalesResumenViajes(EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2){
@@ -92,7 +97,7 @@ public class ViajeService implements IViajeService{
 		int cantDiasTrabajados = viajeRepository.diasTrabajadosXEmpleEntreFachas(empleado.getIdPersona(), fecha1, fecha2);//traigo la cantidad dias trabajados por el empleado
 		viajeResumen.setDireccion(String.valueOf(cantDiasTrabajados));//Convierto el int a String para poder guardarlo en el atributo detalle y para mostralo
 		int cantViajes = 0;
-		for(Viaje viaje : resumenViajesDelEmpleadoEntreFechas(empleado,fecha1,fecha2)) {
+		for(Viaje viaje : viajeRepository.viajesDelEmpleEntreFachasGroupByClientes(empleado.getIdPersona(),fecha1,fecha2)) {
 			viajeResumen.setImporte(viajeResumen.getImporte()+viaje.getImporte());
 			viajeResumen.setDescuento(viajeResumen.getDescuento()+viaje.getDescuento());
 			viajeResumen.setNeto(viajeResumen.getNeto()+viaje.getNeto());

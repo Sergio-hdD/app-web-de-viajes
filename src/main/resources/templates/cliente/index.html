@@ -15,44 +15,47 @@
 
             <div class="container-fluid">
 
-
-                <table class="table table-striped" id="myTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">Razon social</th>
-                            <th scope="col">Cuit</th>
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr th:each="c : ${clientes}">
-                            <td th:text="${c.razonSocial}"></td>
-                            <td th:text="${c.cuit}"></td>
-                            <td th:text="${c.direccion}"></td>
-                            <td th:text="${c.telCel}"></td>
-                            <td>
-                                <div class="form-inline">
-
-                                    <a class="btn btn-warning btn-edit" href="#"
-                                        th:href="@{/clientes/{id}(id=${c.idPersona})}"
-                                        style="margin-right: 5px">Editar</a>
-
-
-                                    <form action="#" method="post">
-                                        <input class="btn btn-danger btn-delete" type="submit"
-                                            th:href="@{/clientes/{id}(id=${c.idPersona})}" value="Eliminar"></form>
-
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-                </table>
+                <div class="table-responsive-lg">
+                
+	                <table class="table table-striped" id="myTable">
+	                    <thead>
+	                        <tr>
+	                            <th scope="col">Razon social</th>
+	                            <th scope="col">Cuit</th>
+	                            <th scope="col">Direccion</th>
+	                            <th scope="col">Telefono</th>
+	                            <th scope="col">Acciones</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	
+	                        <tr th:each="c : ${clientes}">
+	                            <td th:text="${c.razonSocial}"></td>
+	                            <td th:text="${c.cuit}"></td>
+	                            <td th:text="${c.direccion}"></td>
+	                            <td th:text="${c.telCel}"></td>
+	                            <td>
+	                                <div class="form-inline">
+	
+	                                    <a class="btn btn-warning btn-edit" href="#"
+	                                        th:href="@{/clientes/{id}(id=${c.idPersona})}"
+	                                        style="margin-right: 5px">Editar</a>
+	
+	
+	                                    <form action="#" method="post">
+	                                        <input class="btn btn-danger btn-delete" type="submit"
+	                                            th:href="@{/clientes/{id}(id=${c.idPersona})}" value="Eliminar"></form>
+	
+	
+	                                </div>
+	                            </td>
+	
+	                        </tr>
+	
+	                    </tbody>
+	                </table>
+	                
+	            </div>    
 
                 <div class="form-add">
                     <form action="#" method="post" th:action="@{clientes/create}" novalidate class="formulario">

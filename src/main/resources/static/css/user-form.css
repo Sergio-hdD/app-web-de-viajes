@@ -7,6 +7,15 @@
     color: white;
     z-index:1;
   }
+
+#image2 {
+	background: url(../images/fondoNM.png) no-repeat;
+    background-size: cover;
+    max-width: 100%;
+    position:relative; 
+    color: white;
+    z-index:1;
+  }
   
   #image::after {
     content:"";
