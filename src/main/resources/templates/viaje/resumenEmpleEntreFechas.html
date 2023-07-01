@@ -14,12 +14,11 @@
 
             <div>
 <!-- **************************Membrete********************* -->
-            <div class="container">
-                <div class="mx-auto col-sm-16 main-section" id="myTab" role="tablist">
+            <div class="container-fluid mt-3">
+                <div class="mx-auto main-section" id="myTab" role="tablist">
 
                     <div class="tab-content" id="myTabContent">  
                         <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
-
 
                             <div class="card mb-3" style="background:#CEDDE4">
                                 <div class="card-header">
@@ -45,27 +44,29 @@
                                     <div class="card-body">
                                         <b style='color:red'>TOTALES</b>
                                     </div>
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead class="thead-light">
-                                            <tr>
-                                            	<th scope="col">Dias</th>
-                                                <th scope="col">Viajes</th>
-                                                <th scope="col">Importe</th>
-                                                <th scope="col">Descuento</th>
-                                                <th scope="col">Neto</th>
-                                            </tr>
-
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><span th:text="${viajeResumen.direccion}" /></td>
-                                                <td><span th:text="${viajeResumen.detalle}" /></td>
-                                                <td>$ <span th:text="${#numbers.formatDecimal(viajeResumen.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-                                                <td>$ <span th:text="${#numbers.formatDecimal(viajeResumen.descuento, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-                                                <td>$ <span th:text="${#numbers.formatDecimal(viajeResumen.neto, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="table-responsive">
+	                                    <table class="table table-bordered table-hover table-striped">
+	                                        <thead class="thead-light">
+	                                            <tr>
+	                                            	<th scope="col">Dias</th>
+	                                                <th scope="col">Viajes</th>
+	                                                <th scope="col">Importe</th>
+	                                                <th scope="col">Descuento</th>
+	                                                <th scope="col">Neto</th>
+	                                            </tr>
+	
+	                                        </thead>
+	                                        <tbody>
+	                                            <tr>
+	                                                <td><span th:text="${viajeResumen.direccion}" /></td>
+	                                                <td><span th:text="${viajeResumen.detalle}" /></td>
+	                                                <td>$ <span th:text="${#numbers.formatDecimal(viajeResumen.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+	                                                <td>$ <span th:text="${#numbers.formatDecimal(viajeResumen.descuento, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+	                                                <td>$ <span th:text="${#numbers.formatDecimal(viajeResumen.neto, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+	                                                </tr>
+	                                            </tbody>
+	                                        </table>
+	                                </div>
                                     <br>                        
                                         <b>A continuaci&oacuten se muestra el resumen por cliente</b>
 				                        <p>Pulsando en "Ver Detalle" puede verlos, descargar y/o imprimir el detalle del resumen</p>                               
@@ -78,37 +79,38 @@
             </div>
 <!-- **************************Fin membrete********************* -->
                 <div class="container-fluid">
-
-                    <table class="table table-striped" id="myTable">
-                        <thead>
-                            <tr class="textCenter">
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Cantidad de viajes</th>
-                                <th scope="col">Importe total</th>
-                                <th scope="col">Descuento total</th>
-                                <th scope="col">Neto total</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="textCenter">
-
-                            <tr th:each="v : ${viajes}">
-                                <td th:text="${v.Cliente.razonSocial}"></td>
-                                <td th:text="${v.detalle}"></td>
-                                <td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-	                            <td>$ <span th:text="${#numbers.formatDecimal(v.descuento, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-	                            <td>$ <span th:text="${#numbers.formatDecimal(v.neto, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-                             
-                                 <td>
-                                  <div class="form-inline">
-                                        <a target="_blank" href="#" th:href="@{/viajes/paraConsulta/{id}(id=${v.idViaje})}" style="margin-right: 5px;color:black">
-                                           <button type="submit" class="btn btn-primary">Ver Detalle<i  style="padding-left: 5px;" class="now-ui-icons ui-1_send"></i></button>
-                                        </a> <!-- target="_blank"  PERMITE QUE LA VENTANA A LA QUE REDIRIGE EL "a" SE ABRA EN OTRA PESTAÑA-->
-                                   </div>
-                                </td>
-                            </tr>
-                        </tbody>                     
-                    </table>
+					<div class="table-responsive">
+	                    <table class="table table-striped" id="myTable">
+	                        <thead>
+	                            <tr class="textCenter">
+	                                <th scope="col">Cliente</th>
+	                                <th scope="col">Cantidad de viajes</th>
+	                                <th scope="col">Importe total</th>
+	                                <th scope="col">Descuento total</th>
+	                                <th scope="col">Neto total</th>
+	                                <th scope="col"></th>
+	                            </tr>
+	                        </thead>
+	                        <tbody class="textCenter">
+	
+	                            <tr th:each="v : ${viajes}">
+	                                <td th:text="${v.Cliente.razonSocial}"></td>
+	                                <td th:text="${v.detalle}"></td>
+	                                <td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+		                            <td>$ <span th:text="${#numbers.formatDecimal(v.descuento, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+		                            <td>$ <span th:text="${#numbers.formatDecimal(v.neto, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+	                             
+	                                 <td>
+	                                  <div class="form-inline">
+	                                        <a target="_blank" href="#" th:href="@{/viajes/paraConsulta/{id}(id=${v.idViaje})}" style="margin-right: 5px;color:black">
+	                                           <button type="submit" class="btn btn-primary">Ver Detalle<i  style="padding-left: 5px;" class="now-ui-icons ui-1_send"></i></button>
+	                                        </a> <!-- target="_blank"  PERMITE QUE LA VENTANA A LA QUE REDIRIGE EL "a" SE ABRA EN OTRA PESTAï¿½A-->
+	                                   </div>
+	                                </td>
+	                            </tr>
+	                        </tbody>                     
+	                    </table>
+	                </div>
                     <div class="text-center border font-weight-bold" th:if="${viajes.empty}">
 							 El cadete no posee viajes entre las fechas solicitadas.
 					</div>

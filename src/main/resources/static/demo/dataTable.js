@@ -1,4 +1,5 @@
 $(document).ready( function () {
+	
     $('#myTable').dataTable({
         "oLanguage": {
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -28,5 +29,4 @@ $(document).ready( function () {
         table.search(this.value).draw();
     });
 
-
-} );
+});

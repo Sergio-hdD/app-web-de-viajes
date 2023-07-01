@@ -5,295 +5,306 @@
 
 <body>
 
-    <th:block th:include="fragments/sidebar :: sidebar"></th:block>
+    <div class="wrapper">
 
-    <div class="main-panel" id="main-panel">
 
-        <th:block th:include="fragments/navbar :: navbar"></th:block>
+        <th:block th:include="fragments/sidebar :: sidebar"></th:block>
 
-        <div class="container-fluid">
+        <div class="main-panel" id="main-panel">
 
-            <div class="table-responsive-lg">
+            <th:block th:include="fragments/navbar :: navbar"></th:block>
 
-	            <table class="table table-striped" id="myTable">
-	                <thead>
-	                    <tr>
-	                        <th scope="col">Nombre</th>
-	                        <th scope="col">Apellido</th>
-	                        <th scope="col">Tipo Documento</th>
-	                        <th scope="col">Nro Documento</th>
-	                        <th scope="col">Direccion</th>
-	                        <th scope="col">Telefono</th>
-	                        <th scope="col">Acciones</th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	
-	                    <tr th:each="e : ${empleados}">
-	                        <td th:text="${e.nombre}"></td>
-	                        <td th:text="${e.apellido}"></td>
-	                        <td th:text="${e.tipoDocumento}"></td>
-	                        <td th:text="${e.nroDocumento}"></td>
-	                        <td th:text="${e.direccion}"></td>
-	                        <td th:text="${e.telCel}"></td>
-	                        <td>
-	                            <div class="form-inline">
-	
-	                                <a class="btn btn-warning btn-edit" href="#"
-	                                    th:href="@{/empleados/{id}(id=${e.idPersona})}" style="margin-right: 5px">Editar</a>
-	
-	
-	                                <form action="#" th:action="@{/empleados/delete/{id}(id=${e.idPersona})}" method="post">
-	                                    <input class="btn btn-danger btn-delete" href="#"
-	                                        th:href="@{/empleados/{id}(id=${e.idPersona})}" type="submit" value="Eliminar">
-	                                </form>
-	
-	                            </div>
-	                        </td>
-	
-	                    </tr>
-	
-	                </tbody>
-	            </table>
-	            
-	        </div>
+            <div class="container-fluid">
 
-            <div class="form-add">
-                <form action="#" method="post" th:action="@{empleados/add}" novalidate class="formulario">
-                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add"
-                        role="dialog" tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Agregar Empleado
-                                    </h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
+                <div class="table-responsive">
 
-                                    <div class="form-row">
+                    <table class="table table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Tipo Documento</th>
+                                <th scope="col">Nro Documento</th>
+                                <th scope="col">Direccion</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                        <div class="form-group col-md-6">
-                                            <label for="formGroupExampleInput">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre"
-                                                placeholder="Ingrese nombre" required>
+                            <tr th:each="e : ${empleados}">
+                                <td th:text="${e.nombre}"></td>
+                                <td th:text="${e.apellido}"></td>
+                                <td th:text="${e.tipoDocumento}"></td>
+                                <td th:text="${e.nroDocumento}"></td>
+                                <td th:text="${e.direccion}"></td>
+                                <td th:text="${e.telCel}"></td>
+                                <td>
+                                    <div class="form-inline">
+
+                                        <a class="btn btn-warning btn-edit" href="#"
+                                            th:href="@{/empleados/{id}(id=${e.idPersona})}"
+                                            style="margin-right: 5px">Editar</a>
+
+
+                                        <form action="#" th:action="@{/empleados/delete/{id}(id=${e.idPersona})}"
+                                            method="post">
+                                            <input class="btn btn-danger btn-delete" href="#"
+                                                th:href="@{/empleados/{id}(id=${e.idPersona})}" type="submit"
+                                                value="Eliminar">
+                                        </form>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="form-add">
+                    <form action="#" method="post" th:action="@{empleados/add}" novalidate class="formulario">
+                        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
+                            id="exampleModal-add" role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Agregar Empleado
+                                        </h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-6">
+                                                <label for="formGroupExampleInput">Nombre</label>
+                                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                                    placeholder="Ingrese nombre" required>
+                                                <div class="invalid-feedback">
+                                                    Debe ingresar el nombre
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label for="formGroupExampleInput2">Apellido</label>
+                                                <input type="text" class="form-control" id="apellido" name="apellido"
+                                                    placeholder="Ingrese apellido" required>
+                                                <div class="invalid-feedback">
+                                                    Debe ingresar el apellido
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-5">
+
+                                                <label for="name">Tipo Documento</label>
+
+
+                                                <select class="form-control " name="tipoDocumento" id="tipoDocumento"
+                                                    required>
+                                                    <option value="DNI">DNI</option>
+                                                    <option value="CI">CI</option>
+                                                    <option value="LE">LE</option>
+                                                    <option value="LC">LC</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="form-group col-md-7">
+                                                <label for="formGroupExampleInput2">DNI</label>
+                                                <input type="number" class="form-control" id="nroDocumento"
+                                                    name="nroDocumento" placeholder="Ingrese numero de documento"
+                                                    required>
+                                                <div class="invalid-feedback">
+                                                    Debe ingresar el DNI
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Direccion</label>
+                                            <input type="text" class="form-control" id="direccion" name="direccion"
+                                                placeholder="Ingrese Direccion donde recide" required>
                                             <div class="invalid-feedback">
-                                                Debe ingresar el nombre
+                                                Debe ingresar la direccion
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-6">
-                                            <label for="formGroupExampleInput2">Apellido</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido"
-                                                placeholder="Ingrese apellido" required>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Telefono</label>
+                                            <input type="number" class="form-control" id="telCel" name="telCel"
+                                                placeholder="Ingrese telefono" required>
                                             <div class="invalid-feedback">
-                                                Debe ingresar el apellido
+                                                Debe ingresar el telefono
                                             </div>
                                         </div>
 
                                     </div>
-
-                                    <div class="form-row">
-
-                                        <div class="form-group col-md-5">
-
-                                            <label for="name">Tipo Documento</label>
-
-
-                                            <select class="form-control " name="tipoDocumento" id="tipoDocumento"
-                                                required>
-                                                <option value="DNI">DNI</option>
-                                                <option value="CI">CI</option>
-                                                <option value="LE">LE</option>
-                                                <option value="LC">LC</option>
-                                            </select>
-
-                                        </div>
-
-                                        <div class="form-group col-md-7">
-                                            <label for="formGroupExampleInput2">DNI</label>
-                                            <input type="number" class="form-control" id="nroDocumento"
-                                                name="nroDocumento" placeholder="Ingrese numero de documento" required>
-                                            <div class="invalid-feedback">
-                                                Debe ingresar el DNI
-                                            </div>
-                                        </div>
-
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-dismiss="modal"
+                                            type="button">Cancelar</button>
+                                        <input class="btn btn-success" type="submit" value="Guardar" />
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput2">Direccion</label>
-                                        <input type="text" class="form-control" id="direccion" name="direccion"
-                                            placeholder="Ingrese Direccion donde recide" required>
-                                        <div class="invalid-feedback">
-                                            Debe ingresar la direccion
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput2">Telefono</label>
-                                        <input type="number" class="form-control" id="telCel" name="telCel"
-                                            placeholder="Ingrese telefono" required>
-                                        <div class="invalid-feedback">
-                                            Debe ingresar el telefono
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal"
-                                        type="button">Cancelar</button>
-                                    <input class="btn btn-success" type="submit" value="Guardar" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
-            <div class="form-update">
-                <form action="#" method="post" th:action="@{empleados/update}" novalidate class="formulario">
-                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
-                        role="dialog" tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Editar Empleado
-                                    </h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
+                <div class="form-update">
+                    <form action="#" method="post" th:action="@{empleados/update}" novalidate class="formulario">
+                        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+                            role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Editar Empleado
+                                        </h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
 
-                                    <input type="hidden" name="idPersona" id="idPersona">
+                                        <input type="hidden" name="idPersona" id="idPersona">
 
-                                    <div class="form-row">
+                                        <div class="form-row">
 
-                                        <div class="form-group col-md-6">
-                                            <label for="formGroupExampleInput">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre"
-                                                placeholder="Ingrese nombre" required>
+                                            <div class="form-group col-md-6">
+                                                <label for="formGroupExampleInput">Nombre</label>
+                                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                                    placeholder="Ingrese nombre" required>
+                                                <div class="invalid-feedback">
+                                                    Debe ingresar el nombre
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label for="formGroupExampleInput2">Apellido</label>
+                                                <input type="text" class="form-control" id="apellido" name="apellido"
+                                                    placeholder="Ingrese apellido" required>
+                                                <div class="invalid-feedback">
+                                                    Debe ingresar el apellido
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-5">
+
+                                                <label for="name">Tipo Documento</label>
+
+
+                                                <select class="form-control " name="tipoDocumento" id="tipoDocumento"
+                                                    required>
+                                                    <option value="DNI">DNI</option>
+                                                    <option value="CI">CI</option>
+                                                    <option value="LE">LE</option>
+                                                    <option value="LC">LC</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="form-group col-md-7">
+                                                <label for="formGroupExampleInput2">DNI</label>
+                                                <input type="number" class="form-control" id="nroDocumento"
+                                                    name="nroDocumento" placeholder="Ingrese numero de documento"
+                                                    required>
+                                                <div class="invalid-feedback">
+                                                    Debe ingresar el DNI
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Direccion</label>
+                                            <input type="text" class="form-control" id="direccion" name="direccion"
+                                                placeholder="Ingrese Direccion donde recide" required>
                                             <div class="invalid-feedback">
-                                                Debe ingresar el nombre
+                                                Debe ingresar la direccion
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-6">
-                                            <label for="formGroupExampleInput2">Apellido</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido"
-                                                placeholder="Ingrese apellido" required>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Telefono</label>
+                                            <input type="number" class="form-control" id="telCel" name="telCel"
+                                                placeholder="Ingrese telefono" required>
                                             <div class="invalid-feedback">
-                                                Debe ingresar el apellido
+                                                Debe ingresar el telefono
                                             </div>
                                         </div>
 
-                                    </div>
-
-                                    <div class="form-row">
-
-                                        <div class="form-group col-md-5">
-
-                                            <label for="name">Tipo Documento</label>
-
-
-                                            <select class="form-control " name="tipoDocumento" id="tipoDocumento"
-                                                required>
-                                                <option value="DNI">DNI</option>
-                                                <option value="CI">CI</option>
-                                                <option value="LE">LE</option>
-                                                <option value="LC">LC</option>
-                                            </select>
-
-                                        </div>
-
-                                        <div class="form-group col-md-7">
-                                            <label for="formGroupExampleInput2">DNI</label>
-                                            <input type="number" class="form-control" id="nroDocumento"
-                                                name="nroDocumento" placeholder="Ingrese numero de documento" required>
-                                            <div class="invalid-feedback">
-                                                Debe ingresar el DNI
-                                            </div>
-                                        </div>
 
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput2">Direccion</label>
-                                        <input type="text" class="form-control" id="direccion" name="direccion"
-                                            placeholder="Ingrese Direccion donde recide" required>
-                                        <div class="invalid-feedback">
-                                            Debe ingresar la direccion
-                                        </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-dismiss="modal"
+                                            type="button">Cancelar</button>
+                                        <input class="btn btn-success" type="submit" value="Guardar" />
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="formGroupExampleInput2">Telefono</label>
-                                        <input type="number" class="form-control" id="telCel" name="telCel"
-                                            placeholder="Ingrese telefono" required>
-                                        <div class="invalid-feedback">
-                                            Debe ingresar el telefono
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal"
-                                        type="button">Cancelar</button>
-                                    <input class="btn btn-success" type="submit" value="Guardar" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
-            <div class="form-delete">
-                <form action="#" method="post" th:action="@{/empleados/delete/}" novalidate class="formulario">
-                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
-                        role="dialog" tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar el
-                                        empleado?</h4>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                <div class="form-delete">
+                    <form action="#" method="post" th:action="@{/empleados/delete/}" novalidate class="formulario">
+                        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+                            role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar el
+                                            empleado?</h4>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
 
-                                <div class="modal-body">
+                                    <div class="modal-body">
 
-                                    <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+                                        <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
 
-                                    Tenga en cuenta que si elimina dicho empleado, tambien se removeran los viajes
-                                    asociados.
+                                        Tenga en cuenta que si elimina dicho empleado, tambien se removeran los viajes
+                                        asociados.
 
-                                </div>
+                                    </div>
 
-                                <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal"
-                                        type="button">Cancelar</button>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-dismiss="modal"
+                                            type="button">Cancelar</button>
 
-                                    <input class="btn btn-danger" type="submit" value="Eliminar">
+                                        <input class="btn btn-danger" type="submit" value="Eliminar">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
-            <a href="#" class="btn btn-success btn-icon-split btn-add">
-                <i class="fas fa-plus" style="padding-right:5px;"></i>
-                <span class="text ">Agregar Empleado</span>
-            </a>
+                <a href="#" class="btn btn-success btn-icon-split btn-add">
+                    <i class="fas fa-plus" style="padding-right:5px;"></i>
+                    <span class="text ">Agregar Empleado</span>
+                </a>
+
+            </div>
 
         </div>
 
     </div>
+
 
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

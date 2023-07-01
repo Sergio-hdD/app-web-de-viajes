@@ -5,330 +5,326 @@
 
 <body>
 
-    <div class="wrapper ">
+	<th:block th:include="fragments/sidebar :: sidebar"></th:block>
 
-        <th:block th:include="fragments/sidebar :: sidebar"></th:block>
+	<div class="main-panel" id="main-panel">
 
-        <div class="main-panel" id="main-panel">
+		<th:block th:include="fragments/navbar :: navbar"></th:block>
 
-            <th:block th:include="fragments/navbar :: navbar"></th:block>
+		<div class="container-fluid">
 
-            <div class="container-fluid">
+			<div class="table-responsive-lg">
 
-                <div class="table-responsive-lg">
-                
-	                <table class="table table-striped" id="myTable">
-	                    <thead>
-	                        <tr>
-	                            <th scope="col">Razon social</th>
-	                            <th scope="col">Cuit</th>
-	                            <th scope="col">Direccion</th>
-	                            <th scope="col">Telefono</th>
-	                            <th scope="col">Acciones</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	
-	                        <tr th:each="c : ${clientes}">
-	                            <td th:text="${c.razonSocial}"></td>
-	                            <td th:text="${c.cuit}"></td>
-	                            <td th:text="${c.direccion}"></td>
-	                            <td th:text="${c.telCel}"></td>
-	                            <td>
-	                                <div class="form-inline">
-	
-	                                    <a class="btn btn-warning btn-edit" href="#"
-	                                        th:href="@{/clientes/{id}(id=${c.idPersona})}"
-	                                        style="margin-right: 5px">Editar</a>
-	
-	
-	                                    <form action="#" method="post">
-	                                        <input class="btn btn-danger btn-delete" type="submit"
-	                                            th:href="@{/clientes/{id}(id=${c.idPersona})}" value="Eliminar"></form>
-	
-	
-	                                </div>
-	                            </td>
-	
-	                        </tr>
-	
-	                    </tbody>
-	                </table>
-	                
-	            </div>    
+				<table class="table table-striped" id="myTable">
+					<thead>
+						<tr>
+							<th scope="col">Razon social</th>
+							<th scope="col">Cuit</th>
+							<th scope="col">Direccion</th>
+							<th scope="col">Telefono</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
 
-                <div class="form-add">
-                    <form action="#" method="post" th:action="@{clientes/create}" novalidate class="formulario">
-                        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
-                            id="exampleModal-add" role="dialog" tabindex="-1">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Agregar cliente
-                                        </h5>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
+						<tr th:each="c : ${clientes}">
+							<td th:text="${c.razonSocial}"></td>
+							<td th:text="${c.cuit}"></td>
+							<td th:text="${c.direccion}"></td>
+							<td th:text="${c.telCel}"></td>
+							<td>
+								<div class="form-inline">
 
-                                        <div class="form-row">
-
-                                            <div class="form-group col-md-6">
-                                                <label for="formGroupExampleInput">Razon social</label>
-                                                <input type="text" class="form-control" id="razonSocial"
-                                                    name="razonSocial" placeholder="Ingrese la razon social" required>
-                                                <div class="invalid-feedback">
-                                                    Debe ingresar la razon social
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-md-6">
-                                                <label for="formGroupExampleInput2">Cuit</label>
-                                                <input type="text" class="form-control" id="Cuit" name="Cuit"
-                                                    placeholder="Ingrese el nro de cuit" required>
-                                                <div class="invalid-feedback">
-                                                    Debe ingresar el cuit
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Direccion</label>
-                                            <input type="text" class="form-control" id="direccion" name="direccion"
-                                                placeholder="Ingrese Direccion donde recide" required>
-                                            <div class="invalid-feedback">
-                                                Debe ingresar la direccion
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Telefono</label>
-                                            <input type="number" class="form-control" id="telCel" name="telCel"
-                                                placeholder="Ingrese telefono" required>
-                                            <div class="invalid-feedback">
-                                                Debe ingresar el telefono
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-dismiss="modal"
-                                            type="button">Cancelar</button>
-                                        <input class="btn btn-success" type="submit" value="Guardar" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="form-update">
-                    <form action="#" method="post" th:action="@{clientes/update}" novalidate class="formulario">
-                        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
-                            role="dialog" tabindex="-1">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Editar Cliente
-                                        </h5>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <input type="hidden" name="idPersona" id="idPersona">
-
-                                        <div class="form-row">
-
-                                            <div class="form-group col-md-6">
-                                                <label for="formGroupExampleInput">Razon Social</label>
-                                                <input type="text" class="form-control" id="razonSocial"
-                                                    name="razonSocial" placeholder="Ingrese la razon social" required>
-                                                <div class="invalid-feedback">
-                                                    Debe ingresar la razon social
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-md-6">
-                                                <label for="formGroupExampleInput2">Cuit</label>
-                                                <input type="text" class="form-control" id="cuit" name="cuit"
-                                                    placeholder="Ingrese el nro de cuit" required>
-                                                <div class="invalid-feedback">
-                                                    Debe ingresar el cuit
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Direccion</label>
-                                            <input type="text" class="form-control" id="direccion" name="direccion"
-                                                placeholder="Ingrese Direccion donde recide" required>
-                                            <div class="invalid-feedback">
-                                                Debe ingresar la direccion
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Telefono</label>
-                                            <input type="number" class="form-control" id="telCel" name="telCel"
-                                                placeholder="Ingrese telefono" required>
-                                            <div class="invalid-feedback">
-                                                Debe ingresar el telefono
-                                            </div>
-                                        </div>
+									<a class="btn btn-warning btn-edit" href="#"
+										th:href="@{/clientes/{id}(id=${c.idPersona})}"
+										style="margin-right: 5px">Editar</a>
 
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-dismiss="modal"
-                                            type="button">Cancelar</button>
-                                        <input class="btn btn-success" type="submit" value="Guardar" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="form-delete">
-                    <form action="#" method="post" th:action="@{/clientes/delete/}" novalidate class="formulario">
-                        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
-                            role="dialog" tabindex="-1">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar?</h4>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="modal-body">
+									<form action="#" method="post">
+										<input class="btn btn-danger btn-delete" type="submit"
+											th:href="@{/clientes/{id}(id=${c.idPersona})}" value="Eliminar"></form>
 
 
-                                        <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
-                                        Tenga en cuenta que si elimina dicho cliente, tambien se removeran los viajes
-                                        asociados.
+								</div>
+							</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+
+			<div class="form-add">
+				<form action="#" method="post" th:action="@{clientes/create}" novalidate class="formulario">
+					<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add"
+						role="dialog" tabindex="-1">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Agregar cliente
+									</h5>
+									<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+
+									<div class="form-row">
+
+										<div class="form-group col-md-6">
+											<label for="formGroupExampleInput">Razon social</label>
+											<input type="text" class="form-control" id="razonSocial" name="razonSocial"
+												placeholder="Ingrese la razon social" required>
+											<div class="invalid-feedback">
+												Debe ingresar la razon social
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<label for="formGroupExampleInput2">Cuit</label>
+											<input type="text" class="form-control" id="Cuit" name="Cuit"
+												placeholder="Ingrese el nro de cuit" required>
+											<div class="invalid-feedback">
+												Debe ingresar el cuit
+											</div>
+										</div>
+
+									</div>
+
+									<div class="form-group">
+										<label for="formGroupExampleInput2">Direccion</label>
+										<input type="text" class="form-control" id="direccion" name="direccion"
+											placeholder="Ingrese Direccion donde recide" required>
+										<div class="invalid-feedback">
+											Debe ingresar la direccion
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="formGroupExampleInput2">Telefono</label>
+										<input type="number" class="form-control" id="telCel" name="telCel"
+											placeholder="Ingrese telefono" required>
+										<div class="invalid-feedback">
+											Debe ingresar el telefono
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary" data-dismiss="modal"
+										type="button">Cancelar</button>
+									<input class="btn btn-success" type="submit" value="Guardar" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="form-update">
+				<form action="#" method="post" th:action="@{clientes/update}" novalidate class="formulario">
+					<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+						role="dialog" tabindex="-1">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Editar Cliente
+									</h5>
+									<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+
+									<input type="hidden" name="idPersona" id="idPersona">
+
+									<div class="form-row">
+
+										<div class="form-group col-md-6">
+											<label for="formGroupExampleInput">Razon Social</label>
+											<input type="text" class="form-control" id="razonSocial" name="razonSocial"
+												placeholder="Ingrese la razon social" required>
+											<div class="invalid-feedback">
+												Debe ingresar la razon social
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<label for="formGroupExampleInput2">Cuit</label>
+											<input type="text" class="form-control" id="cuit" name="cuit"
+												placeholder="Ingrese el nro de cuit" required>
+											<div class="invalid-feedback">
+												Debe ingresar el cuit
+											</div>
+										</div>
+
+									</div>
+
+									<div class="form-group">
+										<label for="formGroupExampleInput2">Direccion</label>
+										<input type="text" class="form-control" id="direccion" name="direccion"
+											placeholder="Ingrese Direccion donde recide" required>
+										<div class="invalid-feedback">
+											Debe ingresar la direccion
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="formGroupExampleInput2">Telefono</label>
+										<input type="number" class="form-control" id="telCel" name="telCel"
+											placeholder="Ingrese telefono" required>
+										<div class="invalid-feedback">
+											Debe ingresar el telefono
+										</div>
+									</div>
 
 
-                                    </div>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary" data-dismiss="modal"
+										type="button">Cancelar</button>
+									<input class="btn btn-success" type="submit" value="Guardar" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
 
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-dismiss="modal"
-                                            type="button">Cancelar</button>
+			<div class="form-delete">
+				<form action="#" method="post" th:action="@{/clientes/delete/}" novalidate class="formulario">
+					<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+						role="dialog" tabindex="-1">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar?</h4>
+									<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
 
-                                        <input class="btn btn-danger" type="submit" value="Eliminar">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <a href="#" class="btn btn-success btn-add">
-                    <i class="fas fa-plus" style="padding-right:5px;"></i>
-                    <span class="p">Agregar Cliente</span>
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Seleccione "Logout" si est&aacute listo para finalizar su sesi&oacuten actual.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form th:action="@{/logout}" method="post">
-                        <input class="btn btn-primary" style="cursor: pointer" type="submit" value="Logout" />
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+								<div class="modal-body">
 
 
-    <th:block th:include="fragments/scripts :: scripts"></th:block>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('.btn-add').on('click', function (event) {
-                event.preventDefault();
-                $('.form-add #exampleModal-add').modal();
-            });
-
-            $('.btn-edit').on('click', function (event) {
-                event.preventDefault();
-                var href = $(this).attr('href');
+									<input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+									Tenga en cuenta que si elimina dicho cliente, tambien se removeran los viajes
+									asociados.
 
 
-                $.get(href, function (cliente, status) {
-                    $('.form-update #idPersona').val(cliente.idPersona);
-                    $('.form-update #razonSocial').val(cliente.razonSocial);
-                    $('.form-update #cuit').val(cliente.cuit);
-                    $('.form-update #telCel').val(cliente.telCel);
-                    $('.form-update #direccion').val(cliente.direccion);
+								</div>
 
-                });
+								<div class="modal-footer">
+									<button class="btn btn-secondary" data-dismiss="modal"
+										type="button">Cancelar</button>
 
-                $('.form-update #exampleModal').modal();
+									<input class="btn btn-danger" type="submit" value="Eliminar">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
 
-            });
+			<a href="#" class="btn btn-success btn-add">
+				<i class="fas fa-plus" style="padding-right:5px;"></i>
+				<span class="p">Agregar Cliente</span>
+			</a>
 
-            $('.btn-delete').on('click', function (event) {
-                event.preventDefault();
-                var href = $(this).attr('href');
+		</div>
+
+	</div>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true"><i class="fas fa-times"></i></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Seleccione "Logout" si est&aacute listo para finalizar su sesi&oacuten actual.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<form th:action="@{/logout}" method="post">
+						<input class="btn btn-primary" style="cursor: pointer" type="submit" value="Logout" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-                $.get(href, function (cliente, status) {
-                    $('.form-delete #id').val(cliente.idPersona);
-                    $('.form-delete #exampleModalLabel').html("Realmente quiere eliminar el cliente" + " " + cliente.razonSocial + "?");
+	<th:block th:include="fragments/scripts :: scripts"></th:block>
 
-                });
+	<script type="text/javascript">
+		$(document).ready(function () {
 
-                $('.form-delete #exampleModal').modal();
+			$('.btn-add').on('click', function (event) {
+				event.preventDefault();
+				$('.form-add #exampleModal-add').modal();
+			});
 
-            });
+			$('.btn-edit').on('click', function (event) {
+				event.preventDefault();
+				var href = $(this).attr('href');
 
 
-            (function () {
-                'use strict';
-                window.addEventListener('load', function () {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('formulario');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function (form) {
-                        form.addEventListener('submit', function (event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
+				$.get(href, function (cliente, status) {
+					$('.form-update #idPersona').val(cliente.idPersona);
+					$('.form-update #razonSocial').val(cliente.razonSocial);
+					$('.form-update #cuit').val(cliente.cuit);
+					$('.form-update #telCel').val(cliente.telCel);
+					$('.form-update #direccion').val(cliente.direccion);
 
-        });
-    </script>
+				});
 
-    <script src="demo/dataTable.js"></script>
+				$('.form-update #exampleModal').modal();
+
+			});
+
+			$('.btn-delete').on('click', function (event) {
+				event.preventDefault();
+				var href = $(this).attr('href');
+
+
+				$.get(href, function (cliente, status) {
+					$('.form-delete #id').val(cliente.idPersona);
+					$('.form-delete #exampleModalLabel').html("Realmente quiere eliminar el cliente" + " " + cliente.razonSocial + "?");
+
+				});
+
+				$('.form-delete #exampleModal').modal();
+
+			});
+
+
+			(function () {
+				'use strict';
+				window.addEventListener('load', function () {
+					// Fetch all the forms we want to apply custom Bootstrap validation styles to
+					var forms = document.getElementsByClassName('formulario');
+					// Loop over them and prevent submission
+					var validation = Array.prototype.filter.call(forms, function (form) {
+						form.addEventListener('submit', function (event) {
+							if (form.checkValidity() === false) {
+								event.preventDefault();
+								event.stopPropagation();
+							}
+							form.classList.add('was-validated');
+						}, false);
+					});
+				}, false);
+			})();
+
+		});
+	</script>
+
+	<script src="demo/dataTable.js"></script>
 
 
 </body>

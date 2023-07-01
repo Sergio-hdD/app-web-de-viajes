@@ -48,4 +48,10 @@ public class HomeController {
 		return mAV;
 	}
 	
+	@GetMapping({"/test/template"})
+	public ModelAndView testTemplate() {
+		ModelAndView modelAndView = new ModelAndView("home/testTemplate");	
+		return modelAndView;
+	}
+	
 }//fin class

@@ -5,96 +5,115 @@
 
 <body>
 
-    <th:block th:include="fragments/sidebar :: sidebar"></th:block>
+	<th:block th:include="fragments/sidebar :: sidebar"></th:block>
 
-    <div class="main-panel" id="main-panel">
+	<div class="main-panel" id="main-panel">
 
-        <th:block th:include="fragments/navbarSinSearch:: navbar"></th:block>
+		<th:block th:include="fragments/navbarSinSearch:: navbar"></th:block>
 
-        <div class="mx-auto col-md-12 main-section" id="myTab" role="tablist" style="padding-top: 15px">
+		<div class="mx-auto main-section row" id="myTab" role="tablist">
 
-            <div class="card shadow mb-4 border-bottom-info" style="width: 39%;margin-right: 15px">
+			<div class="col-md-6">
 
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Cantidad de viajes por cadete (Semanal)</h6>
-                </div>
+				<div class="card shadow mb-4 border-bottom-info">
 
-                <div class="card-body bg-white">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-            </div>
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Cantidad de viajes por cadete (Semanal)</h6>
+					</div>
 
+					<div class="card-body bg-white">
+						<canvas id="myPieChart"></canvas>
+					</div>
+				</div>
 
-            <div class="card shadow mb-4 border-bottom-info" style="width: 39%;">
+			</div>
 
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Cantidad de viajes por cliente (Semanal)</h6>
-                </div>
+			<div class="col-md-6">
 
-                <div class="card-body bg-white">
-                    <canvas id="myPieChart-1"></canvas>
-                </div>
+				<div class="card shadow mb-4 border-bottom-info">
 
-            </div>
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">Cantidad de viajes por cliente (Semanal)</h6>
+					</div>
 
-            <div class="alert alert-warning alert-with-icon" data-notify="container">
+					<div class="card-body bg-white">
+						<canvas id="myPieChart-1"></canvas>
+					</div>
 
-                <span data-notify="icon" class="now-ui-icons business_money-coins"></span>
+				</div>
 
-                <b th:text="'Ganancia de la semana actual (del '+ ${inicioSemana}+' al '+ ${finSemana}+' )' "></b>
-                <br>
-                <span data-notify="message" th:text="'$ ' + ${gananciaSemanal}"></span>
+			</div>
 
-            </div>
+			<div class="col-md-12">
 
-            <div class="alert alert-success alert-with-icon" data-notify="container">
+				<div class="alert alert-warning alert-with-icon">
 
-                <span data-notify="icon" class="now-ui-icons business_money-coins"></span>
+					<span data-notify="icon" class="now-ui-icons business_money-coins"></span>
 
-                <b th:text="'Ganancia del mes actual ( ' + ${mes} + ' )'"></b>
-                <br>
-                <span data-notify="message" th:text="'$ ' + ${gananciaMes}"></span>
+					<b th:text="'Ganancia de la semana actual (del '+ ${inicioSemana}+' al '+ ${finSemana}+' )' "></b>
+					<br>
+					<span data-notify="message" th:text="'$ ' + ${gananciaSemanal}"></span>
 
-            </div>
+				</div>
 
-            <div class="alert alert-info alert-with-icon" data-notify="container">
+			</div>
 
-                <span data-notify="icon" class="now-ui-icons business_money-coins"></span>
-                <b> Ganancia Total </b>
-                <br>
-                <span data-notify="message" th:text="'$ ' + ${gananciaTotal}"></span>
+			<div class="col-md-12">
 
-            </div>
+				<div class="alert alert-success alert-with-icon">
 
-        </div>
+					<span data-notify="icon" class="now-ui-icons business_money-coins"></span>
 
-    </div>
+					<b th:text="'Ganancia del mes actual ( ' + ${mes} + ' )'"></b>
+					<br>
+					<span data-notify="message" th:text="'$ ' + ${gananciaMes}"></span>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Seleccione "Logout" si est&aacute listo para finalizar su sesi&oacuten actual.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form th:action="@{/logout}" method="post">
-                        <input class="btn btn-primary" style="cursor: pointer" type="submit" value="Logout" />
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
 
-    <th:block th:include="fragments/scripts :: scripts"></th:block>
-    <script src="demo/dashboard.js"></script>
+			</div>
+
+			<div class="col-md-12">
+
+				<div class="alert alert-info alert-with-icon">
+
+					<span data-notify="icon" class="now-ui-icons business_money-coins"></span>
+					<b> Ganancia Total </b>
+					<br>
+					<span data-notify="message" th:text="'$ ' + ${gananciaTotal}"></span>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true"><i class="fas fa-times"></i></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Seleccione "Logout" si est&aacute listo para finalizar su sesi&oacuten actual.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<form th:action="@{/logout}" method="post">
+						<input class="btn btn-primary" style="cursor: pointer" type="submit" value="Logout" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/scripts :: scripts"></th:block>
+	<script src="demo/dashboard.js"></script>
 
 </body>
 

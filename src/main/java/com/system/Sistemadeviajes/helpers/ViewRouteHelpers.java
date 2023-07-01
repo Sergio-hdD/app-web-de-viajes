@@ -24,7 +24,7 @@ public class ViewRouteHelpers {
 	public final static String TRAVEL_PEDIRFECHAS_EMPLE = "viaje/pedirFechasEmple";
 	public final static String TRAVEL_PEDIRFECHAS_BORRAR = "viaje/pedirFechasParaBorrarViaje";
 	public final static String TRAVEL_CLI_ENTRE_FECHAS = "viaje/viajesDeCliEntreFechas";
-	public final static String TRAVEL_RES_EMPLE_ENTRE_FECHAS = "viaje/resumenEmpleEntreFachas";
+	public final static String TRAVEL_RES_EMPLE_ENTRE_FECHAS = "viaje/resumenEmpleEntreFechas";
 	public final static String TRAVEL_P_D_CLIE_EMPL = "viaje/printDownloadCliEmpl";
 	public final static String TRAVEL_P_D_CLIENTE = "viaje/printDownloadCliente";
 	
