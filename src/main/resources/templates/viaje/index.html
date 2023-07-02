@@ -52,7 +52,7 @@
 	                                <td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
 	                                <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
 	                                <td th:text="${v.Cliente.razonSocial}"></td>
-	                                <td th:text="${v.entregado}"></td>
+	                                <td th:text="${v.entregado ? 'Si' : 'No'}"></td>
 									
 	
 	                                <td>
@@ -199,8 +199,8 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                            <input class="btn btn-success" type="submit" value="Save" />
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Cerrar</button>
+                                            <input class="btn btn-success" type="submit" value="Guardar" />
                                         </div>
                                     </div>
                                 </div>
@@ -538,7 +538,7 @@
                     $('.form-viewPlus #descuento').val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.descuento)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
                     $('.form-viewPlus #neto').val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
                     $('.form-viewPlus #detalle').val(viaje.detalle);
-                    $('.form-viewPlus #contado').val(viaje.contado);             
+                    $('.form-viewPlus #contado').val(viaje.contado ? 'Si' : 'No');             
                 });
 
                 $('.form-viewPlus #exampleModal').modal();

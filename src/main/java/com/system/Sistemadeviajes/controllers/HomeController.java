@@ -44,14 +44,7 @@ public class HomeController {
 		mAV.addObject("gananciaMes", viajeService.getGananciaDelMes());
 		mAV.addObject("gananciaTotal", viajeService.getGananciaViajes());
 		
-		
 		return mAV;
-	}
-	
-	@GetMapping({"/test/template"})
-	public ModelAndView testTemplate() {
-		ModelAndView modelAndView = new ModelAndView("home/testTemplate");	
-		return modelAndView;
 	}
 	
 }//fin class
