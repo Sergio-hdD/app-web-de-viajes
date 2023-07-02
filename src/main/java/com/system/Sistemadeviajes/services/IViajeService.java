@@ -24,6 +24,8 @@ public interface IViajeService {
 	public List<Viaje> resumenViajesDelEmpleadoEntreFechas(EmpleadoModel empleado,LocalDate fecha1,LocalDate fecha2);
 	
 	public List<Viaje> viajesEntreFechas(LocalDate fecha1,LocalDate fecha2);
+	
+	public List<Viaje> viajesDeUltimos5Dias();
 		
 	public Viaje totalesResumenViajes(EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2);
 	

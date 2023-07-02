@@ -92,6 +92,14 @@ public class ViajeService implements IViajeService{
 	}	
 	
 	@Override
+	public List<Viaje> viajesDeUltimos5Dias(){
+		LocalDate fechaHasta = LocalDate.now(); //obtengo la fecha actual
+		LocalDate fechaDesde = fechaHasta.minusDays(5);// 5 días antes de la fecha actual
+		
+		return viajeRepository.viajesEntreFachas(fechaDesde, fechaHasta);
+	}
+	
+	@Override
 	public Viaje totalesResumenViajes(EmpleadoModel empleado, LocalDate fecha1,LocalDate fecha2){
 		Viaje viajeResumen = new Viaje();
 		int cantDiasTrabajados = viajeRepository.diasTrabajadosXEmpleEntreFachas(empleado.getIdPersona(), fecha1, fecha2);//traigo la cantidad dias trabajados por el empleado
