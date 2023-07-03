@@ -320,6 +320,52 @@ public class ViajeController {
 	}
 	
 	
+	/*
+	@RequestMapping(value = "/entreFechas", method = RequestMethod.POST)
+	public ModelAndView traerViajesEntreFechas(
+				@RequestParam("fechaDesde") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde,
+				@RequestParam("fechaHasta") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaHasta, Model model) {
+
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_INDEX);
+
+		List<Viaje> viajes = viajeService.viajesEntreFechas(fechaDesde, fechaHasta);
+		
+		mAV.addObject("fechaDesde", fechaDesde.getDayOfMonth() + "/" + fechaDesde.getMonthValue() + "/" + fechaDesde.getYear());
+		mAV.addObject("fechaHasta", fechaHasta.getDayOfMonth() + "/" + fechaHasta.getMonthValue() + "/" + fechaHasta.getYear());
+		mAV.addObject("viajes", viajes);
+
+		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
+
+		return mAV;
+	}
+	*/
+
+	@GetMapping("/fechasFiltarViajes")
+	public ModelAndView pedirFechaFiltra() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_PEDIRFECHAS_FILTRAR);
+		mAV.addObject("mensaje","");
+		return mAV;
+	}
 	
+	@RequestMapping(value = "/entreFechas", method = RequestMethod.POST)
+	public ModelAndView traerViajesEntreFechas(
+				@RequestParam("fechaDesde") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde,
+				@RequestParam("fechaHasta") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaHasta, Model model) {
+
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_FILTRADOS_ENTRE_FECHAS);
+
+		List<Viaje> viajes = viajeService.viajesEntreFechas(fechaDesde, fechaHasta);
+		
+		mAV.addObject("fechaDesde", fechaDesde.getDayOfMonth() + "/" + fechaDesde.getMonthValue() + "/" + fechaDesde.getYear());
+		mAV.addObject("fechaHasta", fechaHasta.getDayOfMonth() + "/" + fechaHasta.getMonthValue() + "/" + fechaHasta.getYear());
+		mAV.addObject("viajes", viajes);
+
+		mAV.addObject("empleados", empleadoService.getAll());
+		mAV.addObject("clientes", clienteService.getAll());
+
+		return mAV;
+	}	
 	
+
 }//fin class

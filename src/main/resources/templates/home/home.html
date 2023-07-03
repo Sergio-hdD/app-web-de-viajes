@@ -29,6 +29,21 @@
 
         <br>
         <br>
+        
+        <article class="full-width tile">
+            <form id="logoutForm" th:action="@{/logout}" method="post">
+                <a id="logout" class="full-width">
+                    <div class="card mb-3" style="background-color: transparent;">
+                        <div class="tile-text">
+                            <span class="text-condensedLight">
+                                <h4>Salir/Cerrar Sesi&oacuten</h4>
+                            </span>
+                        </div>
+                    </div>
+                    <i class="fas fa-sign-out-alt tile-icon"></i>
+                </a>
+            </form>
+        </article>
 
         <article class="full-width tile">
             <a th:href="@{/viajes}" class="full-width">
@@ -120,8 +135,20 @@
                 <i class="fas fa-calendar-alt tile-icon"></i>
             </a>
         </article>
- 
+
     </section>
+    
+	<script>
+        const logoutLink = document.getElementById('logout');
+        const logoutForm = document.getElementById('logoutForm');
+
+        logoutLink.addEventListener('click', function(e) {
+          e.preventDefault(); // Evita que el enlace siga el enlace original
+            
+          logoutForm.submit(); // Realiza el submit del formulario
+        });
+    </script>
+
 
 </body>
 

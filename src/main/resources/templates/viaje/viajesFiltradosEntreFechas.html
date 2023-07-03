@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: head(title='Viajes')"></head>
+<head th:replace="fragments/head :: head(title='Viajes filtrados entre fechas')"></head>
 
 <body>
-    <div class="wrapper ">
+
+    <div class="wrapper">
 
         <th:block th:include="fragments/sidebar :: sidebar"></th:block>
 
@@ -12,100 +13,60 @@
 
             <th:block th:include="fragments/navbar :: navbar"></th:block>
 
-            <div>
+            <div class="container-fluid mt-3" id=notificacionNegativa>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>NO HAY VIAJES EN EL RANGO DE FECHAS INGRESADAS!</strong>
+                </div>
+            </div>
 
-                <div class="container-fluid">
-					<div style="display: flex;">
-	                    <a href="#" class="btn btn-success btn-add">
-	                        <i class="fas fa-plus" style="padding-right:5px;"></i>
-	                        <span class="p">Agregar Viaje</span>
-	                    </a>
-						<!--                     
-	                    <a href="#" class="btn btn-info btn-between-date" style="margin-left: auto;">
-	                        <i class="fas fa-search" style="padding-right:5px;"></i>
-	                        <span class="p">Ver viajes entre fechas</span>
-	                    </a>
-						-->
-						<a href="#" th:href="@{/viajes/fechasFiltarViajes}" class="btn btn-info btn-between-date" style="margin-left: auto;">
-	                        <i class="fas fa-search" style="padding-right:5px;"></i>
-	                        <span class="p">Ver viajes entre fechas</span>
-	                    </a>
-                    </div>                    
-                    <h4 class="card-title">A continuaci&oacuten puede ver los <b>viajes de los &uacuteltimos 5 d&iacuteas.</b></h4>
+            <div class="container-fluid" id="viajesFiltrados">
+                <div class="mx-auto main-section" id="myTab" role="tablist">
 
-            		<th:block th:include="fragments/listaViajesIndex :: table_responsive(viajes = ${viajes})"></th:block>					
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+
+
+                            <div class="card text-white bg-primary mb-3">
+                                <div class="card-header">
+                                    <h4 class="card-title">Resultado de la consulta <b>viajes entre las fechas:</b>
+                                        <td><span th:text="${fechaDesde}" /></td> y
+                                        <td><span th:text="${fechaHasta}" /></td>
+                                    </h4>
+                                    <a href="#" th:href="@{/viajes}" class="btn btn-secondary mb-2">VOLVER</a>
+                                </div>
+
+                                <div class="card-body">
+                   
+            						<th:block th:include="fragments/listaViajesIndex :: table_responsive(viajes = ${viajes})"></th:block>					
 					
-					
-					<th:block th:include="fragments/listaViajesIndex :: modals_required"></th:block>                                        	
-                    
-					<!-- 
-                    <div class="form-between-date">
-                        <form action="#" method="post" th:action="@{viajes/entreFechas}" novalidate class="formulario">
-                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="modal-between-date" role="dialog" tabindex="-1">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Ver viajes entre fechas
-                                            </h5>
-                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        
-                                        <div class="modal-body">
-
-                                            <div class="form-group">
-
-                                                <label for="formGroupExampleInput">Fecha desde</label>
-
-                                                <input type="date" id="fechaDesde" name="fechaDesde" class="form-control" placeholder="Ingrese la fecha desde" required>
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="formGroupExampleInput">Fecha hasta</label>
-
-                                                <select class="form-control " id="selectFechaHasta" required>
-                                                    <option selected value="Fecha actual">Fecha actual</option>
-                                                    <option  value="Ingresar Fecha distinta a la actual">Ingresar Fecha distinta a la actual</option>
-                                                </select>
-
-                                             </div>
-
-                                            <div class="form-group">
-
-                                                <input type="date" id="fechaHasta" name="fechaHasta" class="form-control" placeholder="Ingrese la fecha hasta" required>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                            <input class="btn btn-success" type="submit" value="Buscar" />
-                                        </div>
-                                    </div>
+				                    									                                
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                        <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab"></div>
+                    	
+						<th:block th:include="fragments/listaViajesIndex :: modals_required"></th:block>
+                    	
                     </div>
-					-->
-
                 </div>
             </div>
 
         </div>
-        
-        <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+    </div>
+
+    <!-- Logout Modal-->
+    	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    	 <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                    </button>
+                <span aria-hidden="true"><i class="fas fa-times"></i></span>
+              </button>
                 </div>
                 <div class="modal-body">
                     Seleccione "Logout" si est&aacute listo para finalizar su sesi&oacuten actual.</div>
@@ -117,13 +78,23 @@
                 </div>
             </div>
         </div>
-    </div>
 
-	<th:block th:include="fragments/scripts :: scripts"></th:block>
-
-    <script type="text/javascript">
+    <th:block th:include="fragments/scripts :: scripts"></th:block>
+    
+    <script>
         $(document).ready(function () {
 
+
+            var element = document.getElementById("viajeConDatos");
+
+            if (typeof (element) != 'undefined' && element != null) { //si tengo viajes
+                $("#notificacionNegativa").hide(); //se esconde la notificación de que no hay viajes entre las fechas
+            } else { //si NO tengo viajes
+                $("#viajesFiltrados").hide(); //se esconde la tabla que es para mostrar los viajes
+                $("#printDownloadButton").hide(); //se esconde el botón Imprimir/Descargar
+            }
+
+            
             $('.btn-add').on('click', function (event) {
                 event.preventDefault();
 
@@ -136,21 +107,7 @@
 
                 $('.form-add #exampleModal-add').modal();
             });
-            
-            /* 
-            $('.btn-between-date').on('click', function (event) {
-                event.preventDefault();
 
-                $('.form-between-date #fechaHasta').hide();
-
-                $('.form-between-date #selectFechaHasta').val("Fecha actual");
-
-                //Seteo la fecha actual al campo input date
-                $('#fechaHasta').val(getCurrentDate());
-
-                $('.form-between-date #modal-between-date').modal();
-            });
-			*/
             
             $('.btn-edit').on('click', function (event) {
                 event.preventDefault();
@@ -174,6 +131,7 @@
                 $('.form-update #exampleModal').modal();
 
             });
+
 
             $('.btn-delete').on('click', function (event) {
                 event.preventDefault();
@@ -208,7 +166,6 @@
 
             });
 
-            
             $('#selectFecha').on('change', function () {
                 //Seteo la fecha actual al campo input date
                 $('#fecha').val(getCurrentDate());
@@ -217,15 +174,6 @@
 
             });
 
-            /*
-            $('#selectFechaHasta').on('change', function () {
-                //Seteo la fecha actual al campo input date
-                $('#fechaHasta').val(getCurrentDate());
-
-                $('#fechaHasta').toggle();
-
-            }); 
-            */
 
             function getCurrentDate() {
                 var d = new Date();
@@ -249,11 +197,41 @@
                     });
                 }, false);
             })();
+            
 
+            $('#myTable').dataTable({
+                "oLanguage": {
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron registros ",
+                    "oPaginate": {
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+
+                },
+                "iDisplayLength": 5,
+                "aLengthMenu": [
+                    [5, 10, 25, -1],
+                    [5, 10, 25, "All"]
+                ],
+
+                "bInfo": false,
+                "bLengthChange": true
+            });
+
+            var table = $('#myTable').DataTable();
+
+            var s = $(".dataTables_wrapper .dataTables_filter");
+            s.hide();
+
+            $('#search').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+
+            
         });
+        
     </script>
-
-    <script src="demo/dataTable.js"></script>
 
 
 </body>
