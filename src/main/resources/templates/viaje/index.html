@@ -201,7 +201,7 @@
                     $('.form-viewPlus #descuento').val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.descuento)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
                     $('.form-viewPlus #neto').val(new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)); // CON "new Intl.NumberFormat('es-AR', {currency: 'ARS', style: 'currency'}).format(viaje.neto)"se establece un formato de divisa ARGENTINA
                     $('.form-viewPlus #detalle').val(viaje.detalle);
-                    $('.form-viewPlus #contado').val(viaje.contado);             
+                    $('.form-viewPlus #contado').val(viaje.contado ? 'Si' : 'No');             
                 });
 
                 $('.form-viewPlus #exampleModal').modal();

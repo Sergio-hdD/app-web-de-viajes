@@ -24,7 +24,7 @@
                 <td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
                 <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
                 <td th:text="${v.Cliente.razonSocial}"></td>
-                <td th:text="${v.entregado}"></td>
+                <td th:text="${v.entregado ? 'Si' : 'No'}"></td>
                 
 
                 <td>
@@ -173,8 +173,8 @@
 	
 	                    </div>
 	                    <div class="modal-footer">
-	                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-	                        <input class="btn btn-success" type="submit" value="Save" />
+ 							<button class="btn btn-secondary" data-dismiss="modal" type="button">Cerrar</button>
+                            <input class="btn btn-success" type="submit" value="Guardar" />
 	                    </div>
 	                </div>
 	            </div>
