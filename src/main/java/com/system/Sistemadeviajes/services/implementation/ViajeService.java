@@ -92,9 +92,9 @@ public class ViajeService implements IViajeService{
 	}	
 	
 	@Override
-	public List<Viaje> viajesDeUltimos5Dias(){
+	public List<Viaje> viajesDeUltimos_X_Dias(){
 		LocalDate fechaHasta = LocalDate.now(); //obtengo la fecha actual
-		LocalDate fechaDesde = fechaHasta.minusDays(5);// 5 días antes de la fecha actual
+		LocalDate fechaDesde = fechaHasta.minusDays(10);// X días antes de la fecha actual
 		
 		return viajeRepository.viajesEntreFachas(fechaDesde, fechaHasta);
 	}

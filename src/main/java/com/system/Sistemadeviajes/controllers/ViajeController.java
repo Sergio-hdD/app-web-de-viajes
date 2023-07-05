@@ -60,7 +60,7 @@ public class ViajeController {
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.TRAVEL_INDEX);
-		mAV.addObject("viajes", viajeService.viajesDeUltimos5Dias());
+		mAV.addObject("viajes", viajeService.viajesDeUltimos_X_Dias());
 		mAV.addObject("empleados", empleadoService.getAll());
 		mAV.addObject("clientes", clienteService.getAll());
 		
