@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.system</groupId>
-	<artifactId>Sistema-de-viajes</artifactId>
+	<artifactId>app-web-de-viajes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Sistema-de-viajes</name>
+	<name>app-web-de-viajes</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

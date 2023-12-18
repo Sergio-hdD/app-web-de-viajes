@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/sistema-de-viajes?serverTimezone=UTC
+    url: jdbc:mysql://localhost/app-web-de-viajes?serverTimezone=UTC
     username: root 
     password: 
     #initialization-mode: always #never
