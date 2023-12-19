@@ -1,420 +1,452 @@
-<div th:fragment="table_responsive" class="table-responsive-lg">
+<div th:fragment="table_responsive" class="table-responsive">
+	
+	<div class="table-responsive-lg">
+		<table class="table table-striped" id="myTable">
+			<thead>
+				<tr class="textCenter">
+					<th scope="col">Id</th>
+					<th scope="col">Fecha</th>
+					<th scope="col">Direccion</th>
+					<th scope="col">Localidad</th>
+					<th scope="col">Importe</th>
+					<th scope="col">Cadete</th>
+					<th scope="col">Cliente</th>
+					<th scope="col">Entregado?</th>
+					<th scope="col">Acciones</th>
+				</tr>
+			</thead>
+			<tbody class="textCenter">
 
-    <table class="table table-striped" id="myTable">
-        <thead>
-            <tr class="textCenter">
-            	<th scope="col">Id</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Localidad</th>
-                <th scope="col">Importe</th>
-                <th scope="col">Cadete</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Entregado?</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody class="textCenter">
+				<tr th:each="v : ${viajes}">
+					<td th:text="${v.idViaje}"></td>
+					<td th:text="${v.fecha}"></td>
+					<td id="viajeConDatos" th:text="${v.direccion}"></td>
+					<td th:text="${v.localidad}"></td>
+					<td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
+					<td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
+					<td th:text="${v.Cliente.razonSocial}"></td>
+					<td th:text="${v.entregado ? 'Si' : 'No'}"></td>
 
-            <tr th:each="v : ${viajes}">
-            	<td th:text="${v.idViaje}"></td>
-                <td th:text="${v.fecha}"></td>
-                <td id="viajeConDatos" th:text="${v.direccion}"></td>
-                <td th:text="${v.localidad}"></td>
-                <td>$ <span th:text="${#numbers.formatDecimal(v.importe, 0, 'POINT', 2, 'COMMA')}">10.00</span></td>
-                <td th:text="${v.Empleado.nombre} + ' ' + ${v.Empleado.apellido}"></td>
-                <td th:text="${v.Cliente.razonSocial}"></td>
-                <td th:text="${v.entregado ? 'Si' : 'No'}"></td>
-                
+					<td>
+						<div class="form-inline">
+							<a class="btn btn-info btn-viewPlus" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}"
+								style="margin-right: 5px">Ver m&aacutes</a>
+							<a class="btn btn-warning btn-edit" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}"
+								style="margin-right: 5px">Editar</a>
+							<a class="btn btn-danger btn-delete" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}"
+								style="margin-right: 5px">Eliminar</a>
+						</div>
+					</td>
+				</tr>
 
-                <td>
-                    <div class="form-inline">
-                        <a class="btn btn-info btn-viewPlus" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Ver m&aacutes</a> 
-                        <a class="btn btn-warning btn-edit" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Editar</a>
-                        <a class="btn btn-danger btn-delete" href="#" th:href="@{/viajes/{id}(id=${v.idViaje})}" style="margin-right: 5px">Eliminar</a>
-                    </div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <div th:fragment="modals_required">
 
 	<div class="form-add">
-	    <form action="#" method="post" th:action="@{viajes/add}" novalidate class="formulario">
-	        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
-	            <div class="modal-dialog" role="document">
-	                <div class="modal-content">
-	                    <div class="modal-header">
-	                        <h5 class="modal-title" id="exampleModalLabel">Agregar Viaje
-	                        </h5>
-	                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-	                <span aria-hidden="true">&times;</span>
-	            </button>
-	                    </div>
-	                    <div class="modal-body">
-	
-	                        <div class="form-group">
-	
-	                            <label for="formGroupExampleInput">Fecha de realizacion del viaje</label>
-	
-	                            <select class="form-control " id="selectFecha" required>
-	                                <option selected value="fecha Actual">fecha Actual</option>
-	                                <option  value="Ingresar Fecha distinta a la actual">Ingresar Fecha distinta a la actual</option>
-	
-	                                
-	
-	                            </select>
-	
-	
-	                        </div>
-	
-	                        <div class="form-group">
-	
-	                            <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha" required>
-	
-	                        </div>
-	
-	                        <div class="form-row">
-	
-	
-	
-	                            <div class="form-group col-md-7">
-	                                <label for="formGroupExampleInput">Direccion</label>
-	                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion" required>
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar la direccion   
-	                       </div>
-	                            </div>
-	
-	                            <div class="form-group col-md-5">
-	                                <label for="formGroupExampleInput2">Localidad</label>
-	                                <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad" required>
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar la localidad
-	                       </div>
-	                            </div>
-	
-	                        </div>
-	
-	                        <div class="form-row">
-	
-	                            <div class="form-group col-md-6">
-	
-	                                <label class="col-form-label" for="name">Cadete</label>
-	
-	
-	                                <select class="form-control " id="empleado" name="empleado.idPersona" required>
-	                                <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
-	
-	                            </select>
-	
-	                            </div>
-	
-	                            <div class="form-group col-md-6">
-	
-	                                <label class="col-form-label" for="name">Cliente</label>
-	
-	                                <select class="form-control " id="cliente" name="cliente.idPersona" required>
-	                    <option th:each="c : ${clientes}" th:value="${c.idPersona}"  th:text="${c.razonSocial}"></option>
-	
-	                </select>
-	
-	                            </div>
-	
-	                        </div>
-	
-	                        <div class="form-row">
-	
-	                            <div class="form-group col-md-6">
-	                                <label for="formGroupExampleInput2">Importe</label>
-	                                <input type="number" class="form-control" id="importe" step="0.01" name="importe" placeholder="Ingrese importe" required> <!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar el importe   
-	                       </div>
-	                            </div>
-	
-	                            <div class="form-group col-md-6">
-	                                <label for="formGroupExampleInput2">Descuento</label>
-	                                <input type="number" class="form-control" id="descuento" step="0.01" name="descuento" placeholder="Ingrese descuento" required> <!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar el descuento   
-	                       </div>
-	                            </div>
-	
-	
-	                            <div class="form-group col-md-6">
-	                                <label for="formGroupExampleInput">Detalle</label>
-	                                <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
-	                            </div>
-	                            
-	                            <div class="form-group col-md-6 mt-4">
-	                            	
-	                            	<div class="form-group">
-	                              <input type="checkbox" name="contado" id="contado">
-	                              <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
-	                          </div>
-	
-	
-	                          <div class="form-group">
-	                              <input type="checkbox" name="entregado" id="entregado">
-	                              <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
-	                          </div>
-	                            	
-	                            
-	                            </div>
-	
-	                        </div>
-	
-	                        
-	
-	                    </div>
-	                    <div class="modal-footer">
- 							<button class="btn btn-secondary" data-dismiss="modal" type="button">Cerrar</button>
-                            <input class="btn btn-success" type="submit" value="Guardar" />
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </form>
+		<form action="#" method="post" th:action="@{viajes/add}" novalidate class="formulario">
+			<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add"
+				role="dialog" tabindex="-1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Agregar Viaje
+							</h5>
+							<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+
+								<label for="formGroupExampleInput">Fecha de realizacion del viaje</label>
+
+								<select class="form-control " id="selectFecha" required>
+									<option selected value="fecha Actual">fecha Actual</option>
+									<option value="Ingresar Fecha distinta a la actual">Ingresar Fecha distinta a la
+										actual</option>
+
+
+
+								</select>
+
+
+							</div>
+
+							<div class="form-group">
+
+								<input type="date" id="fecha" name="fecha" class="form-control"
+									placeholder="Ingrese fecha" required>
+
+							</div>
+
+							<div class="form-row">
+
+
+
+								<div class="form-group col-md-7">
+									<label for="formGroupExampleInput">Direccion</label>
+									<input type="text" class="form-control" id="direccion" name="direccion"
+										placeholder="Ingrese direccion" required>
+									<div class="invalid-feedback">
+										Debe ingresar la direccion
+									</div>
+								</div>
+
+								<div class="form-group col-md-5">
+									<label for="formGroupExampleInput2">Localidad</label>
+									<input type="text" class="form-control" id="localidad" name="localidad"
+										placeholder="Ingrese localidad" required>
+									<div class="invalid-feedback">
+										Debe ingresar la localidad
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-row">
+
+								<div class="form-group col-md-6">
+
+									<label class="col-form-label" for="name">Cadete</label>
+
+
+									<select class="form-control " id="empleado" name="empleado.idPersona" required>
+										<option th:each="e : ${empleados}" th:value="${e.idPersona}"
+											th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+									</select>
+
+								</div>
+
+								<div class="form-group col-md-6">
+
+									<label class="col-form-label" for="name">Cliente</label>
+
+									<select class="form-control " id="cliente" name="cliente.idPersona" required>
+										<option th:each="c : ${clientes}" th:value="${c.idPersona}"
+											th:text="${c.razonSocial}"></option>
+
+									</select>
+
+								</div>
+
+							</div>
+
+							<div class="form-row">
+
+								<div class="form-group col-md-6">
+									<label for="formGroupExampleInput2">Importe</label>
+									<input type="number" class="form-control" id="importe" step="0.01" name="importe"
+										placeholder="Ingrese importe" required>
+									<!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
+									<div class="invalid-feedback">
+										Debe ingresar el importe
+									</div>
+								</div>
+
+								<div class="form-group col-md-6">
+									<label for="formGroupExampleInput2">Descuento</label>
+									<input type="number" class="form-control" id="descuento" step="0.01"
+										name="descuento" placeholder="Ingrese descuento" required>
+									<!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
+									<div class="invalid-feedback">
+										Debe ingresar el descuento
+									</div>
+								</div>
+
+
+								<div class="form-group col-md-6">
+									<label for="formGroupExampleInput">Detalle</label>
+									<textarea rows="" cols="" class="form-control" name="detalle" id="detalle"
+										placeholder="Ingrese detalle (opcional)"></textarea>
+								</div>
+
+								<div class="form-group col-md-6 mt-4">
+
+									<div class="form-group">
+										<input type="checkbox" name="contado" id="contado">
+										<label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+									</div>
+
+
+									<div class="form-group">
+										<input type="checkbox" name="entregado" id="entregado">
+										<label class="form-check-label" for="exampleCheck1">Fue entregado</label>
+									</div>
+
+
+								</div>
+
+							</div>
+
+
+
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-dismiss="modal" type="button">Cerrar</button>
+							<input class="btn btn-success" type="submit" value="Guardar" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
-	
+
 	<div class="form-update">
-	    <form action="#" method="post" th:action="@{viajes/update}" novalidate class="formulario">
-	        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
-	            <div class="modal-dialog" role="document">
-	                <div class="modal-content">
-	                    <div class="modal-header">
-	                        <h5 class="modal-title" id="exampleModalLabel">Editar Viaje
-	                        </h5>
-	                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-	                <span aria-hidden="true">&times;</span>
-	            </button>
-	                    </div>
-	                    <div class="modal-body">
-	
-	                        <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
-	
-	                        <div class="form-group">
-	
-	                            <label for="formGroupExampleInput">Fecha de realizacion del viaje</label>
-	
-	                        </div>
-	
-	                        <div class="form-group">
-	
-	                            <input type="date" id="fecha" name="fecha" class="form-control" placeholder="Ingrese fecha">
-	
-	                        </div>
-	
-	                        <div class="form-row">
-	
-	                            <div class="form-group col-md-7">
-	                                <label for="formGroupExampleInput">Direccion</label>
-	                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese direccion" required>
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar la direccion   
-	                       </div>
-	                            </div>
-	
-	                            <div class="form-group col-md-5">
-	                                <label for="formGroupExampleInput2">Localidad</label>
-	                                <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese localidad" required>
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar la localidad   
-	                       </div>
-	                            </div>
-	
-	                        </div>
-	
-	                        <div class="form-row">
-	
-	                            <div class="form-group col-md-6">
-	
-	                                <label class="col-form-label" for="name">Cadete</label>
-	
-	
-	                                <select class="form-control " id="empleado" name="empleado.idPersona" required>
-	                    <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
-	
-	                </select>
-	
-	                            </div>
-	
-	                            <div class="form-group col-md-6">
-	
-	                                <label class="col-form-label" for="name">Cliente</label>
-	
-	                                <select class="form-control " id="cliente" name="cliente.idPersona" required>
-	                    <option th:each="c : ${clientes}" th:value="${c.idPersona}"  th:text="${c.razonSocial}"></option>
-	
-	                </select>
-	
-	                            </div>
-	
-	                        </div>
-	
-	                        <div class="form-row">
-	
-	                            <div class="form-group col-md-6">
-	                                <label for="formGroupExampleInput2">Importe ($)</label>
-	                                <input type="number" class="form-control" id="importe" step="0.01" name="importe" placeholder="Ingrese importe" required> <!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar el importe
-	                       </div>
-	                            </div>
-	
-	                            <div class="form-group col-md-6">
-	                                <label for="formGroupExampleInput2">Descuento ($)</label>
-	                                <input type="number" class="form-control" id="descuento" step="0.01" name="descuento" placeholder="Ingrese descuento" required> <!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
-	                            	<div class="invalid-feedback">
-	                        	Debe ingresar el descuento   
-	                       </div>
-	                            </div>
-	                            
-	
-	                            <div class="form-group col-md-6">
-	                                <label for="formGroupExampleInput">Detalle</label>
-	                                <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" placeholder="Ingrese detalle (opcional)"></textarea>
-	                            </div>
-	                            
-	                            <div class="form-group col-md-6 mt-4">
-	
-	                          <div class="form-group">
-	                              <input type="checkbox" id="contado" name="contado" >
-	                              <label class="form-check-label" for="exampleCheck1">Paga al contado</label>
-	                          </div>
-	
-	                          <div class="form-group">
-	                              <input type="checkbox" name="entregado" id="entregado" >
-	                              <label class="form-check-label" for="exampleCheck1">Fue entregado</label>
-	                          </div>
-	                        
-	                        </div>
-	
-	                        </div>
-	
-	                    </div>
-	                    <div class="modal-footer">
-	                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
-	                        <input class="btn btn-success" type="submit" value="Guardar" />
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </form>
+		<form action="#" method="post" th:action="@{/viajes/update}" novalidate class="formulario">
+			<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+				role="dialog" tabindex="-1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Editar Viaje
+							</h5>
+							<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<input class="form-control" id="id" name="idViajes" type="hidden" value="" />
+
+							<div class="form-group">
+
+								<label for="formGroupExampleInput">Fecha de realizacion del viaje</label>
+
+							</div>
+
+							<div class="form-group">
+
+								<input type="date" id="fecha" name="fecha" class="form-control"
+									placeholder="Ingrese fecha">
+
+							</div>
+
+							<div class="form-row">
+
+								<div class="form-group col-md-7">
+									<label for="formGroupExampleInput">Direccion</label>
+									<input type="text" class="form-control" id="direccion" name="direccion"
+										placeholder="Ingrese direccion" required>
+									<div class="invalid-feedback">
+										Debe ingresar la direccion
+									</div>
+								</div>
+
+								<div class="form-group col-md-5">
+									<label for="formGroupExampleInput2">Localidad</label>
+									<input type="text" class="form-control" id="localidad" name="localidad"
+										placeholder="Ingrese localidad" required>
+									<div class="invalid-feedback">
+										Debe ingresar la localidad
+									</div>
+								</div>
+
+							</div>
+
+							<div class="form-row">
+
+								<div class="form-group col-md-6">
+
+									<label class="col-form-label" for="name">Cadete</label>
+
+
+									<select class="form-control " id="empleado" name="empleado.idPersona" required>
+										<option th:each="e : ${empleados}" th:value="${e.idPersona}"
+											th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+									</select>
+
+								</div>
+
+								<div class="form-group col-md-6">
+
+									<label class="col-form-label" for="name">Cliente</label>
+
+									<select class="form-control " id="cliente" name="cliente.idPersona" required>
+										<option th:each="c : ${clientes}" th:value="${c.idPersona}"
+											th:text="${c.razonSocial}"></option>
+
+									</select>
+
+								</div>
+
+							</div>
+
+							<div class="form-row">
+
+								<div class="form-group col-md-6">
+									<label for="formGroupExampleInput2">Importe ($)</label>
+									<input type="number" class="form-control" id="importe" step="0.01" name="importe"
+										placeholder="Ingrese importe" required>
+									<!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
+									<div class="invalid-feedback">
+										Debe ingresar el importe
+									</div>
+								</div>
+
+								<div class="form-group col-md-6">
+									<label for="formGroupExampleInput2">Descuento ($)</label>
+									<input type="number" class="form-control" id="descuento" step="0.01"
+										name="descuento" placeholder="Ingrese descuento" required>
+									<!--  el "step="0.01"" es para permitir 2 decimale, para m�s ser�a step="any"  -->
+									<div class="invalid-feedback">
+										Debe ingresar el descuento
+									</div>
+								</div>
+
+
+								<div class="form-group col-md-6">
+									<label for="formGroupExampleInput">Detalle</label>
+									<textarea rows="" cols="" class="form-control" name="detalle" id="detalle"
+										placeholder="Ingrese detalle (opcional)"></textarea>
+								</div>
+
+								<div class="form-group col-md-6 mt-4">
+
+									<div class="form-group">
+										<input type="checkbox" id="contado" name="contado">
+										<label class="form-check-label" for="exampleCheck1">Paga al contado</label>
+									</div>
+
+									<div class="form-group">
+										<input type="checkbox" name="entregado" id="entregado">
+										<label class="form-check-label" for="exampleCheck1">Fue entregado</label>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+							<input class="btn btn-success" type="submit" value="Guardar" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
-	
+
 	<div class="form-delete">
-	    <form action="#" method="post" th:action="@{/viajes/delete}" novalidate class="formulario">
-	        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
-	            <div class="modal-dialog" role="document">
-	                <div class="modal-content">
-	                    <div class="modal-header">
-	                        <h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar el Viaje?</h4>
-	                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-	                <span aria-hidden="true">&times;</span>
-	            </button>
-	                    </div>
-	                    <div class="modal-body">
-	
-	                        <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
-	
-	                        <div class="form-group">
-	
-	                            <label class="col-form-label" for="name">Del Cadete</label>
-	                            <select class="form-control " id="empleado" name="empleado.idPersona" disabled="true">
-	                         <option th:each="e : ${empleados}" th:value="${e.idPersona}"  th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
-	
-	                       </select>
-	
-	                        </div>
-	
-	
-	                        <div class="form-group">
-	
-	                            <label for="formGroupExampleInput">De la fecha</label>
-	
-	                        </div>
-	
-	                        <div class="form-group">
-	
-	                            <input type="date" id="fecha" name="fecha" class="form-control" readonly="readonly">
-	
-	                        </div>
-	
-	                        <div class="form-group">
-	                            <label for="formGroupExampleInput">Direccion</label>
-	                            <input type="text" class="form-control" id="direccion" name="direccion" readonly="readonly">
-	                        </div>
-	
-	                        <div class="form-group">
-	                            <label for="formGroupExampleInput2">Localidad</label>
-	                            <input type="text" class="form-control" id="localidad" name="localidad" readonly="readonly">
-	                        </div>
-	
-	
-	                    </div>
-	                    <div class="modal-footer">
-	                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
-	
-	                        <input class="btn btn-danger" type="submit" value="Eliminar">
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </form>
+		<form action="#" method="post" th:action="@{/viajes/delete}" novalidate class="formulario">
+			<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+				role="dialog" tabindex="-1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="exampleModalLabel">Realmente quiere eliminar el Viaje?</h4>
+							<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<input class="form-control" id="id" name="idViajes" type="hidden" value="" />
+
+							<div class="form-group">
+
+								<label class="col-form-label" for="name">Del Cadete</label>
+								<select class="form-control " id="empleado" name="empleado.idPersona" disabled="true">
+									<option th:each="e : ${empleados}" th:value="${e.idPersona}"
+										th:text="${e.nombre} + ' ' + ${e.apellido}"></option>
+
+								</select>
+
+							</div>
+
+
+							<div class="form-group">
+
+								<label for="formGroupExampleInput">De la fecha</label>
+
+							</div>
+
+							<div class="form-group">
+
+								<input type="date" id="fecha" name="fecha" class="form-control" readonly="readonly">
+
+							</div>
+
+							<div class="form-group">
+								<label for="formGroupExampleInput">Direccion</label>
+								<input type="text" class="form-control" id="direccion" name="direccion"
+									readonly="readonly">
+							</div>
+
+							<div class="form-group">
+								<label for="formGroupExampleInput2">Localidad</label>
+								<input type="text" class="form-control" id="localidad" name="localidad"
+									readonly="readonly">
+							</div>
+
+
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+
+							<input class="btn btn-danger" type="submit" value="Eliminar">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
-	
+
 	<div class="form-viewPlus">
-	        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
-	            <div class="modal-dialog" role="document">
-	                <div class="modal-content">
-	                    <div class="modal-header">
-	                        <h4 class="modal-title" id="exampleModalLabel">Se muestran mas datos del Viaje</h4>
-	                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-	                <span aria-hidden="true">&times;</span>
-	            </button>
-	                    </div>
-	                    <div class="modal-body">
-	
-	                        <input class="form-control" id="id" name="idViajes" type="hidden" value="" />
-	
-	                        <div class="form-group">
-	
-	                            <label class="col-form-label" for="name">Descuento</label>                                              
-	                             <input type="text" class="form-control" id="descuento" name="descuento" readonly="readonly">
-	                        </div>
-	                        
-	                        
-	                        
-	                       <div class="form-group">
-	                            <label class="col-form-label" for="name">Neto</label>                                              
-	                          <input type="text" class="form-control" id="neto" name="neto" readonly="readonly">
-	                        </div>
-	
-	
-	                        <div class="form-group">
-	                            <label for="formGroupExampleInput">Detalle</label>
-	                            <textarea rows="" cols="" class="form-control" name="detalle" id="detalle" readonly="readonly"></textarea>
-	                        </div>
-	
-	                        <div class="form-group">
-	                            <label for="formGroupExampleInput2">Se paga al contado?</label>
-	                            <input type="text" class="form-control" id="contado" name="contado" readonly="readonly">
-	                        </div>
-	
-	
-	                    </div>
-	                    <div class="modal-footer">
-	                        <button class="btn btn-secondary" data-dismiss="modal" type="button">CERRAR</button>      
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
+		<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog"
+			tabindex="-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="exampleModalLabel">Se muestran mas datos del Viaje</h4>
+						<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<input class="form-control" id="id" name="idViajes" type="hidden" value="" />
+
+						<div class="form-group">
+
+							<label class="col-form-label" for="name">Descuento</label>
+							<input type="text" class="form-control" id="descuento" name="descuento" readonly="readonly">
+						</div>
+
+
+
+						<div class="form-group">
+							<label class="col-form-label" for="name">Neto</label>
+							<input type="text" class="form-control" id="neto" name="neto" readonly="readonly">
+						</div>
+
+
+						<div class="form-group">
+							<label for="formGroupExampleInput">Detalle</label>
+							<textarea rows="" cols="" class="form-control" name="detalle" id="detalle"
+								readonly="readonly"></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="formGroupExampleInput2">Se paga al contado?</label>
+							<input type="text" class="form-control" id="contado" name="contado" readonly="readonly">
+						</div>
+
+
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal" type="button">CERRAR</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </div>

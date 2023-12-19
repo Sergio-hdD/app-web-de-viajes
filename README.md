@@ -12,3 +12,5 @@ en tu directorio de trabajo para bajar y fusionar luego mediante el pull request
 
 <strong>[Tareas a realizar]</strong> 
 
+
+Este proyecto cambió el nombre (antes era Sistema-de-viajes) y va a continuar en otro repositorio privado (https://github.com/Sergio-hdD/Sistema-de-viajes) debido a que se pasa producción
